@@ -6,6 +6,8 @@
   --bg-side-bar: #e5ddc7;
   --bg-control-music: #d5b87c;
   --text-color: #a5826f;
+  --white: #fff;
+  --black: #000;
 }
 html {
   font-size: 62.5%;

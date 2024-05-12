@@ -1,7 +1,9 @@
 import {
   faClockRotateLeft,
+  faCompactDisc,
   faHeart,
   faHouse,
+  faListOl,
   faMusic,
   faRecordVinyl,
   faSquarePlus,
@@ -68,6 +70,12 @@ export function SongFavoriteIcon() {
 }
 export function AddIcon() {
   return <FontAwesomeIcon icon={faSquarePlus} />;
+}
+export function PlaylistIcon() {
+  return <FontAwesomeIcon icon={faListOl} />;
+}
+export function AlbumIcon() {
+  return <FontAwesomeIcon icon={faCompactDisc} />;
 }
 export function RandomIcon() {
   return (

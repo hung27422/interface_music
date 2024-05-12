@@ -1,8 +1,10 @@
 .wrapper {
+  z-index: 99;
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   height: 90px;
   border: 1px solid greenyellow;
+  background-color: green;
 }

@@ -6,10 +6,18 @@ interface Props {
   title: string;
   href: string;
   icon: any;
+  onClick: any;
+  active: string;
+  id: string;
 }
-function MenuItems({ title, href, icon }: Props) {
+function MenuItems({ title, href, icon, onClick, active, id }: Props) {
   return (
-    <Link href={href} className={cx("menu-item")}>
+    <Link
+      id={id}
+      href={href}
+      className={cx("menu-item", id === active ? "active" : "")}
+      onClick={onClick}
+    >
       <span className={cx("menu-icon")}>{icon}</span>
       <span className={cx("title")}>{title}</span>
     </Link>
