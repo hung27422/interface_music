@@ -11,8 +11,7 @@ const cx = classNames.bind(styles);
 export default function Home() {
   return (
     <div className={cx("wrapper")}>
-      <Navbar />
-      <div className={cx("page")}></div>
+      <div className={cx("page")}>Trang chủ</div>
     </div>
   );
 }

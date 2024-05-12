@@ -1,6 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+:root {
+  --bg-homepage: #efe9d9;
+  --bg-side-bar: #e5ddc7;
+  --bg-control-music: #d5b87c;
+  --text-color: #a5826f;
+}
 html {
   font-size: 62.5%;
   --scroll-thumb-bg: hsla(0, 0%, 100%, 0.3);
@@ -27,7 +33,10 @@ html ::-webkit-scrollbar-track {
   -webkit-box-shadow: inset #fff;
   border-radius: 4px;
 }
-
+@font-face {
+  font-family: Inter;
+  src: url(../assets/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2pL7SUc.woff2);
+}
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

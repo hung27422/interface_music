@@ -2,6 +2,13 @@
   position: fixed;
   left: 0;
   width: 240px;
+  margin-top: -76px;
   border: 1px solid red;
   height: calc(100vh - 90px);
+  background-color: var(--bg-side-bar);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

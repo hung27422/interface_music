@@ -18,6 +18,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className={cx("layout")}>
+          <Navbar />
           <div className={cx("content")}>
             <Sidebar></Sidebar>
             <div className={cx("homepage")}>{children}</div>

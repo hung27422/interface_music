@@ -1,0 +1,21 @@
+.menu-item {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  line-height: 20px;
+  padding: 12px 32px;
+  border-left: 4px solid transparent;
+}
+// .active {
+//   background-color: #c3d4c2;
+//   border-color: var(--text-color);
+// }
+.title {
+  margin-left: 12px;
+  font-weight: 600;
+}
+.menu-icon {
+  width: 15px;
+  height: 15px;
+}
