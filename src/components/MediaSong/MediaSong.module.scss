@@ -5,6 +5,12 @@
   padding: 6px 8px;
   border-radius: 4px;
 }
+.wrapper.control {
+  width: fit-content;
+}
+.wrapper.control:hover {
+  background-color: transparent;
+}
 .wrapper:hover {
   background-color: hsla(0, 11%, 61%, 0.102);
   cursor: pointer;
@@ -15,6 +21,9 @@
 .media-left {
   display: flex;
   align-items: center;
+}
+.media-left.control {
+  width: fit-content;
 }
 .box-media {
   height: 50px;
@@ -34,6 +43,9 @@
   font-size: 1.6rem;
   color: var(--white);
   position: absolute;
+}
+.icon-play.control {
+  display: none;
 }
 .name-song {
   font-size: 1.4rem;
@@ -57,11 +69,16 @@
   align-items: center;
   display: none;
 }
+.media-right.control {
+  display: block;
+  margin-left: 12px;
+}
 .level-item {
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   padding: 12px;
   cursor: pointer;
+  outline: none;
 }
 .level-item:hover {
   border-radius: 50%;

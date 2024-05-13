@@ -4,7 +4,56 @@
   bottom: 0;
   left: 0;
   right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
   height: 90px;
-  border: 1px solid greenyellow;
-  background-color: green;
+  background-color: var(--bg-control-music);
+}
+.control-left {
+  width: 30%;
+}
+.control-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  max-width: 40vw;
+  .control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .control-input {
+    width: 345px;
+    height: 15px;
+    margin: 0 12px;
+  }
+  .control-duration {
+    display: flex;
+    align-items: center;
+  }
+  input[type="range"] {
+    accent-color: var(--text-color);
+  }
+}
+.control-btn-item {
+  padding: 3px;
+  margin: 0 7px;
+}
+.control-right {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.btn-sound {
+  display: flex;
+  align-items: center;
+}
+.control-sound {
+  width: 70px;
+  height: 4px;
 }
