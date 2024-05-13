@@ -1,0 +1,70 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+.wrapper:hover {
+  background-color: hsla(0, 11%, 61%, 0.102);
+  cursor: pointer;
+}
+.wrapper:hover .media-right {
+  display: block;
+}
+.media-left {
+  display: flex;
+  align-items: center;
+}
+.box-media {
+  height: 50px;
+  width: 50px;
+}
+.media-info {
+  margin-left: 8px;
+}
+.image-song {
+  display: block;
+  border-radius: 6px;
+}
+.icon-play {
+  top: 64px;
+  left: 33.5px;
+  display: block;
+  font-size: 1.6rem;
+  color: var(--white);
+  position: absolute;
+}
+.name-song {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.name-singer {
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+.name-song:hover {
+  color: var(--text-color);
+  cursor: pointer;
+}
+.name-singer:hover {
+  color: var(--text-color);
+  opacity: 0.6;
+  cursor: pointer;
+}
+.media-right {
+  display: flex;
+  align-items: center;
+  display: none;
+}
+.level-item {
+  width: 16px;
+  height: 16px;
+  padding: 12px;
+  cursor: pointer;
+}
+.level-item:hover {
+  border-radius: 50%;
+  color: var(--text-color);
+  background-color: var(--secondary);
+}

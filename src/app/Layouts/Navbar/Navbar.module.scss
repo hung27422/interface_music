@@ -1,8 +1,97 @@
 .wrapper {
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 76px;
   margin-left: 240px;
-  border: 1px solid rebeccapurple;
+  background-color: var(--bg-homepage);
+  padding: 16px 60px;
+}
+.title-result {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+.icon-arrow {
+  font-size: 2rem;
+  margin-right: 24px;
+  color: var(--text-color);
+}
+.icon-arrow + .icon-arrow {
+  opacity: 0.6;
+}
+.search {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 20px;
+  width: 400px;
+}
+.icon-search {
+  width: 16px;
+  height: 16px;
+  padding: 8px 12px;
+  color: var(--text-color);
+}
+.search-input {
+  padding: 12px 12px 12px 0;
+  margin-left: 4px;
+  margin-right: 4px;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  caret-color: var(--text-color);
+}
+.result-search {
+  margin-top: 6px;
+  width: 400px;
+  background-color: var(--white);
+  border-radius: 8px;
+  padding: 8px;
+}
+.css-wudn58 {
+  border: 1px solid;
+  padding: 8px 0;
+  background-color: #fff;
+}
+.search-input::-webkit-search-cancel-button {
+  background-color: red !important; /* Thay đổi màu thành màu đỏ */
+}
+.icon-list {
+  display: flex;
+  align-items: center;
+}
+.icon-item {
+  display: block;
+  background-color: #d5b87c;
+  border-radius: 50%;
+  color: var(--white);
+  cursor: pointer;
+  font-size: 2rem;
+  height: 38px;
+  line-height: 3.8rem;
+  margin-left: 14px;
+  opacity: 0.9;
+  text-align: center;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+}
+.avt-user {
+  margin-left: 14px;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border: 0.5px solid var(--text-color);
 }

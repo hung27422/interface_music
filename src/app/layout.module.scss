@@ -10,3 +10,16 @@
   margin-left: 240px;
   width: 100%;
 }
+.tippy-box {
+  background-color: rgba(84, 84, 84, 0.92);
+  font-size: 12px;
+}
+.tippy-content {
+  padding: 5px 9px;
+  position: relative;
+  z-index: 99;
+}
+.tippy-arrow {
+  background-color: transparent;
+  color: rgba(84, 84, 84, 0.92);
+}

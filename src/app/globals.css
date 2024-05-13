@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 :root {
+  --secondary: #c3d4c2;
   --bg-homepage: #efe9d9;
   --bg-side-bar: #e5ddc7;
   --bg-control-music: #d5b87c;
@@ -38,6 +39,20 @@ html ::-webkit-scrollbar-track {
 @font-face {
   font-family: Inter;
   src: url(../assets/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2pL7SUc.woff2);
+}
+/* Tippy */
+.tippy-box {
+  background-color: rgba(84, 84, 84, 0.92);
+  font-size: 12px;
+}
+.tippy-content {
+  padding: 5px 9px;
+  position: relative;
+  z-index: 99;
+}
+.tippy-arrow {
+  background-color: transparent;
+  color: rgba(84, 84, 84, 0.92);
 }
 /* :root {
   --foreground-rgb: 0, 0, 0;

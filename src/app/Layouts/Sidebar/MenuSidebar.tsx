@@ -85,14 +85,6 @@ function MenuSidebar() {
           <AdvertisementVIP />
           <MenuItems
             href="/Pages/Library"
-            id={"7"}
-            title="Nghe gần đây"
-            icon={<ListenNearIcon />}
-            active={active}
-            onClick={(e: any) => handleActive(e.currentTarget.id)}
-          ></MenuItems>
-          <MenuItems
-            href="/Pages/Library"
             id={"8"}
             title="Yêu thích"
             icon={<SongFavoriteIcon />}
