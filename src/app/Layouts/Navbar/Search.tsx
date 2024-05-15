@@ -35,7 +35,12 @@ export default function Search() {
           />
         </div>
       </button>
-      <Popper id={id} open={open} anchorEl={anchorEl}>
+      <Popper
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        className={cx("box-search")}
+      >
         <div className={cx("result-search")}>
           <h3 className={cx("title-result")}>Gợi ý kết quả</h3>
           <div className={cx("item-result")}>

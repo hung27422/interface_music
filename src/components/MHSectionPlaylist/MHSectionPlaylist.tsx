@@ -1,0 +1,77 @@
+import classNames from "classnames/bind";
+import styles from "./MHSectionPlaylist.module.scss";
+import Image from "next/image";
+import Tippy from "@tippyjs/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { InfoSong, ISectionPlaylist } from "@/Interfaces/Interface";
+import { useEffect } from "react";
+import { url } from "inspector";
+const cx = classNames.bind(styles);
+interface MHSectionPlaylistProps {
+  dataSectionPlaylist: ISectionPlaylist;
+}
+function MHSectionPlaylist({ dataSectionPlaylist }: MHSectionPlaylistProps) {
+  useEffect(() => {
+    console.log("section", dataSectionPlaylist);
+  }, [dataSectionPlaylist]);
+  return (
+    <div className={cx("wrapper")}>
+      <div className={cx("mh-section-header")}>
+        <h2 className={cx("title")}>{dataSectionPlaylist.title}</h2>
+        <button className={cx("btn-all")}>Tất cả {`>`}</button>
+      </div>
+      <div className={cx("mh-container")}>
+        {dataSectionPlaylist?.items
+          ?.slice(0, 5)
+          .map((item: ISectionPlaylist, index: number) => {
+            return (
+              <div key={index} className={cx("body")}>
+                <div className={cx("img-hover")}>
+                  <div className={cx("size-image")}>
+                    <div
+                      className={cx("avatar")}
+                      style={{
+                        backgroundImage: `url(${item?.thumbnail})`,
+                      }}
+                    ></div>
+                  </div>
+                  <div className={cx("action")}>
+                    <Tippy content="Thêm vào thư viện">
+                      <button className={cx("btn-heart", "btn-icon")}>
+                        <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                      </button>
+                    </Tippy>
+                    <button className={cx("btn-play", "btn-icon")}>
+                      <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                    </button>
+                    <Tippy content="Khác">
+                      <button className={cx("btn-menu", "btn-icon")}>
+                        <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
+                      </button>
+                    </Tippy>
+                  </div>
+                </div>
+                <div className={cx("description")}>
+                  {item.sortDescription !== "" ? (
+                    <span className={cx("content-des")}>
+                      {item?.sortDescription}
+                    </span>
+                  ) : (
+                    <div className={cx("info-des")}>
+                      <span className={cx("content-des")}>{item?.title}</span>
+                      <span className={cx("content-des")}>
+                        {item?.artistsNames}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+      </div>
+    </div>
+  );
+}
+
+export default MHSectionPlaylist;

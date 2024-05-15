@@ -1,0 +1,50 @@
+.wrapper {
+  margin-top: 48px;
+}
+.title {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.btn-section-page {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.btn-section-list {
+  display: flex;
+  align-items: center;
+}
+.btn-all {
+  padding: 4px 24px;
+  color: var(--back);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.btn-all:hover {
+  color: var(--text-color);
+}
+.btn-section {
+  padding: 4px 24px;
+  font-size: 1.2rem;
+  margin-right: 15px;
+  font-weight: 500;
+  border: 1px solid var(--text-color);
+  border-radius: 16px;
+  background-color: var(--white);
+}
+.btn-section.active {
+  background-color: var(--text-color);
+  color: var(--white);
+}
+.list-song-all {
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tạo ra 3 cột bằng nhau */
+  grid-gap: 20px;
+}

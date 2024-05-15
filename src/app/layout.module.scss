@@ -8,7 +8,7 @@
 }
 .homepage {
   margin-left: 240px;
-  width: 100%;
+  width: calc(100% - 240px);
 }
 .tippy-box {
   background-color: rgba(84, 84, 84, 0.92);
