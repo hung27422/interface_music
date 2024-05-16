@@ -26,15 +26,15 @@ export default function Home() {
   const playlist = data?.data.items.filter(
     (item: ISectionPlaylist) => item.sectionType === "playlist"
   );
-  useEffect(() => {
-    const playlist = data?.data.items.filter(
-      (item: IHome) => item.sectionType === "playlist"
-    );
-    playlist?.map((item: IHomeProps) => {
-      return console.log("item", item.items);
-    });
-    console.log("playlist", playlist);
-  }, [data, newRelease]);
+  // useEffect(() => {
+  //   const playlist = data?.data.items.filter(
+  //     (item: IHome) => item.sectionType === "playlist"
+  //   );
+  //   playlist?.map((item: IHomeProps) => {
+  //     return console.log("item", item.items);
+  //   });
+  //   console.log("playlist", playlist);
+  // }, [data, newRelease]);
 
   return (
     <div className={cx("wrapper")}>

@@ -50,7 +50,7 @@
   align-items: center;
   position: absolute;
   top: 40%;
-  left: 55%;
+  left: 50%;
   right: auto;
   bottom: auto;
   transform: translateX(-50%) translateY(-50%);
@@ -110,7 +110,9 @@
 .btn-play {
   width: 45px !important;
   height: 45px !important;
+  border-radius: 50%;
   font-size: 3rem !important;
+  color: var(--white);
   border: 1px solid var(--white);
 }
 .btn-icon {

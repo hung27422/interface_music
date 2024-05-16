@@ -12,9 +12,9 @@ interface MHSectionPlaylistProps {
   dataSectionPlaylist: ISectionPlaylist;
 }
 function MHSectionPlaylist({ dataSectionPlaylist }: MHSectionPlaylistProps) {
-  useEffect(() => {
-    console.log("section", dataSectionPlaylist);
-  }, [dataSectionPlaylist]);
+  // useEffect(() => {
+  //   console.log("section", dataSectionPlaylist);
+  // }, [dataSectionPlaylist]);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("mh-section-header")}>
@@ -42,7 +42,7 @@ function MHSectionPlaylist({ dataSectionPlaylist }: MHSectionPlaylistProps) {
                         <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                       </button>
                     </Tippy>
-                    <button className={cx("btn-play", "btn-icon")}>
+                    <button className={cx("btn-play")}>
                       <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
                     </button>
                     <Tippy content="Khác">
