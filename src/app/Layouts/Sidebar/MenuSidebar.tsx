@@ -23,7 +23,6 @@ function MenuSidebar() {
   const [active, setActive] = useState("1");
   const handleActive = (id: string) => {
     setActive(id);
-    console.log(id);
   };
   return (
     <div className={cx("sidebar-wrapper")}>
@@ -59,9 +58,9 @@ function MenuSidebar() {
       <div className={cx("sidebar-scroll")}>
         <Menu>
           <MenuItems
-            href="/Pages/Library"
+            href="/Pages/BXHNewSong"
             id={"4"}
-            title="Top100"
+            title="BXH Nhạc Mới"
             icon={<Top100Icon />}
             active={active}
             onClick={(e: any) => handleActive(e.currentTarget.id)}

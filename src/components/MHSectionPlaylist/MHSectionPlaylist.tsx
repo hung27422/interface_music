@@ -10,17 +10,25 @@ import { url } from "inspector";
 const cx = classNames.bind(styles);
 interface MHSectionPlaylistProps {
   dataSectionPlaylist: ISectionPlaylist;
+  show?: boolean;
+  hide?: boolean;
 }
-function MHSectionPlaylist({ dataSectionPlaylist }: MHSectionPlaylistProps) {
+function MHSectionPlaylist({
+  dataSectionPlaylist,
+  show,
+  hide,
+}: MHSectionPlaylistProps) {
   // useEffect(() => {
   //   console.log("section", dataSectionPlaylist);
   // }, [dataSectionPlaylist]);
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("mh-section-header")}>
-        <h2 className={cx("title")}>{dataSectionPlaylist.title}</h2>
-        <button className={cx("btn-all")}>Tất cả {`>`}</button>
-      </div>
+      {!hide && (
+        <div className={cx("mh-section-header")}>
+          <h2 className={cx("title")}>{dataSectionPlaylist?.title}</h2>
+          <button className={cx("btn-all")}>Tất cả {`>`}</button>
+        </div>
+      )}
       <div className={cx("mh-container")}>
         {dataSectionPlaylist?.items
           ?.slice(0, 5)

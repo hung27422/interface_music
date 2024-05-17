@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { IHome, ITrending, InfoSong } from "@/Interfaces/Interface";
 import useDataTrending from "@/components/hooks/useDataTrending";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";
+import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 const cx = classNames.bind(styles);
 function Trending() {
   const { data: dataTrending } = useDataTrending();
@@ -16,14 +17,24 @@ function Trending() {
   const rtChart = dataHome?.data.items.filter(
     (item: ITrending) => item.sectionType === "RTChart"
   );
-  useEffect(() => {
-    const trending = dataTrending?.data.items;
-    console.log("trending", trending);
-    const rtChart = dataHome?.data.items.filter(
-      (item: ITrending) => item.sectionType === "RTChart"
-    );
-    console.log("rtChart", rtChart);
-  }, [dataHome?.data.items, dataTrending]);
+  const top100 = dataHome?.data.items.filter(
+    (item: ITrending) =>
+      item.sectionType === "playlist" && item?.title === "Top 100"
+  );
+  const albumHot = dataHome?.data.items.filter(
+    (item: ITrending) =>
+      item.sectionType === "playlist" && item?.title === "Album Hot"
+  );
+  // useEffect(() => {
+  //   const albumHot = dataHome?.data.items.filter(
+  //     (item: ITrending) =>
+  //       item.sectionType === "playlist" && item?.title === "Top 100"
+  //   );
+  //   albumHot?.map((itemA: ITrending) => {
+  //     return console.log("itemAlbum", itemA.items);
+  //   });
+  //   console.log("album", albumHot);
+  // }, [dataHome]);
   return (
     <div className={cx("wrapper")}>
       {/* <div className={cx("mh-trending-title")}>#zingchart</div> */}
@@ -61,13 +72,33 @@ function Trending() {
             })}
         </div>
       </div>
-      <div className={cx("btn-top100")}>Xem top 100</div>
+      <div className={cx("btn-top100")}>Xem BXH Nhạc Mới</div>
       <div className={cx("mh-top5-hot")}>
-        <h2 className={cx("mh-top5-title")}>Top 5 BXH</h2>
+        <h2 className={cx("mh-top-title", "mh-top5-title")}>Top 5 BXH</h2>
         {rtChart?.map((item: ITrending, index: number) => {
           return (
             <div key={index}>
               <SliderTrending data={item} />
+            </div>
+          );
+        })}
+      </div>
+      <div className={cx("mh-top-top100")}>
+        <h2 className={cx("mh-top-title")}>Danh sách Top 100 Bài Hát Hot</h2>
+        {top100?.map((item: ITrending, index: number) => {
+          return (
+            <div key={index} className={"mh-section-playlist"}>
+              <MHSectionPlaylist dataSectionPlaylist={item} hide />
+            </div>
+          );
+        })}
+      </div>
+      <div className={cx("mh-top-album")}>
+        <h2 className={cx("mh-top-title")}>Danh sách Top Album Hot</h2>
+        {albumHot?.map((item: ITrending, index: number) => {
+          return (
+            <div key={index} className={"mh-section-playlist"}>
+              <MHSectionPlaylist dataSectionPlaylist={item} hide />
             </div>
           );
         })}
