@@ -46,4 +46,10 @@ export interface IChartHome {
   hour: number;
   counter: number;
   time: number;
+  encodeId: string;
+  title: string;
+  artistsNames: string;
+  thumbnail: string;
+  sortDescription: string;
+  thumbnailM: string;
 }

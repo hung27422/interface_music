@@ -17,10 +17,18 @@ interface MediaSongProps {
   data: InfoSong;
   control?: string;
   trending?: boolean;
+  zingChart?: string;
 }
-function MediaSong({ data, control, trending }: MediaSongProps) {
+function MediaSong({ data, control, trending, zingChart }: MediaSongProps) {
   return (
-    <div className={cx("wrapper", { control }, trending && "trending")}>
+    <div
+      className={cx(
+        "wrapper",
+        { control },
+        { zingChart },
+        trending && "trending"
+      )}
+    >
       <div className={cx("media-left", { control }, trending && "trending")}>
         <div className={cx("box-media")}>
           <Image

@@ -7,6 +7,10 @@
   width: 376px;
   border: 1px solid var(--text-color);
 }
+.wrapper.zingChart {
+  width: fit-content !important;
+  background-color: var(--text-color);
+}
 .wrapper.trending {
   width: 100%;
   padding: 0 8px !important;
