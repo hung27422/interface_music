@@ -15,7 +15,11 @@ import { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Sidebar.module.scss";
 import { Flavors } from "next/font/google";
-import { AlbumIcon, PlaylistIcon } from "@/components/Icons/Icons";
+import {
+  AlbumIcon,
+  PlaylistIcon,
+  ZingchartIcon,
+} from "@/components/Icons/Icons";
 import AdvertisementVIP from "./AdvertisementVIP";
 const cx = classNames.bind(styles);
 
@@ -33,6 +37,14 @@ function MenuSidebar() {
             id={"1"}
             title="Trang chủ"
             icon={<HomeIcon />}
+            active={active}
+            onClick={(e: any) => handleActive(e.currentTarget.id)}
+          ></MenuItems>
+          <MenuItems
+            href="/Pages/ZingChart"
+            id={"11"}
+            title="Xu hướng"
+            icon={<ZingchartIcon />}
             active={active}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>

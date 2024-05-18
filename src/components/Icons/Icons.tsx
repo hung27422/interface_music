@@ -1,4 +1,5 @@
 import {
+  faChartLine,
   faClockRotateLeft,
   faCompactDisc,
   faHeart,
@@ -76,6 +77,9 @@ export function PlaylistIcon() {
 }
 export function AlbumIcon() {
   return <FontAwesomeIcon icon={faCompactDisc} />;
+}
+export function ZingchartIcon() {
+  return <FontAwesomeIcon icon={faChartLine} />;
 }
 export function RandomIcon() {
   return (

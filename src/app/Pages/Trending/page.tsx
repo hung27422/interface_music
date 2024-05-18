@@ -6,7 +6,7 @@ import images from "@/assets/images/images";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import useDataHome from "@/components/hooks/useDataHome";
 import { useEffect } from "react";
-import { IHome, ITrending, InfoSong } from "@/Interfaces/Interface";
+import { ITrending, InfoSong } from "@/Interfaces/Interface";
 import useDataTrending from "@/components/hooks/useDataTrending";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
@@ -25,19 +25,9 @@ function Trending() {
     (item: ITrending) =>
       item.sectionType === "playlist" && item?.title === "Album Hot"
   );
-  // useEffect(() => {
-  //   const albumHot = dataHome?.data.items.filter(
-  //     (item: ITrending) =>
-  //       item.sectionType === "playlist" && item?.title === "Top 100"
-  //   );
-  //   albumHot?.map((itemA: ITrending) => {
-  //     return console.log("itemAlbum", itemA.items);
-  //   });
-  //   console.log("album", albumHot);
-  // }, [dataHome]);
+
   return (
     <div className={cx("wrapper")}>
-      {/* <div className={cx("mh-trending-title")}>#zingchart</div> */}
       <div className={cx("mh-trending-title")}>
         <Image
           className={cx("mh-trending-img")}

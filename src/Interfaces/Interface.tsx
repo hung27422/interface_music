@@ -42,3 +42,8 @@ export interface ITrending {
   promotes?: [];
   releaseDate: number;
 }
+export interface IChartHome {
+  hour: number;
+  counter: number;
+  time: number;
+}
