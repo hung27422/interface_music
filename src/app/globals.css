@@ -44,17 +44,28 @@ html ::-webkit-scrollbar-track {
   font-family: Inter;
   src: url(../assets/font/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa2pL7SUc.woff2);
 }
-/* Tippy */
-.tippy-box {
-  background-color: rgba(84, 84, 84, 0.92);
-  font-size: 12px;
+/* // Title Text box color */
+.title-text-box-color {
+  text-align: left;
+  background: radial-gradient(
+      50% 124.93% at 95.86% -10%,
+      #3efad9 0,
+      hsla(0, 0%, 100%, 0) 100%
+    ),
+    linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
 }
-.tippy-content {
-  padding: 5px 9px;
-  position: relative;
-  z-index: 99;
-}
-.tippy-arrow {
-  background-color: transparent;
-  color: rgba(84, 84, 84, 0.92);
+.title-btn-icon-play {
+  background-color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 38px;
+  margin-left: 12px;
 }

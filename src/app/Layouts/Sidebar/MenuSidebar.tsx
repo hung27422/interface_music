@@ -43,7 +43,7 @@ function MenuSidebar() {
           <MenuItems
             href="/Pages/ZingChart"
             id={"11"}
-            title="Xu hướng"
+            title="ZingChart"
             icon={<ZingchartIcon />}
             active={active}
             onClick={(e: any) => handleActive(e.currentTarget.id)}

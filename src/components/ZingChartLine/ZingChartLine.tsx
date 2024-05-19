@@ -35,11 +35,12 @@ function ZingChartLine() {
           backgroundColor: color,
           fill: false,
           tension: 0.4,
-          pointRadius: 5,
+          pointRadius: 7,
           pointBackgroundColor: color,
           pointBorderColor: "#fff",
-          pointHoverRadius: 7,
-          pointHoverBorderWidth: 4,
+          pointHoverRadius: 10,
+          pointHoverBorderWidth: 5,
+          hoverRadius: 4,
         };
       })
     : [];
@@ -49,10 +50,20 @@ function ZingChartLine() {
     datasets,
   };
 
-  const options = {
+  const options: ChartOptions<"line"> = {
+    animations: {
+      tension: {
+        duration: 1000,
+        easing: "linear",
+        from: 1,
+        to: 0,
+        loop: true,
+      },
+    },
     responsive: true,
     aspectRatio: 4,
     maintainAspectRatio: false,
+
     plugins: {
       legend: {
         display: false,
@@ -98,16 +109,13 @@ function ZingChartLine() {
             setTooltipState(newTooltipData);
         },
       },
-      hover: {
-        mode: "dataset", //index
-        intersect: false,
-      },
     },
     scales: {
       x: {
-        ticks: { display: true, color: "black" },
+        ticks: { display: true, color: "white" },
         grid: { color: "transparent" },
       },
+
       y: {
         display: true,
         ticks: { display: false },
@@ -116,6 +124,10 @@ function ZingChartLine() {
         max: chart?.maxScore,
         border: { dash: [3, 4] },
       },
+    },
+    hover: {
+      mode: "dataset", //index
+      intersect: false,
     },
   };
 

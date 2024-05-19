@@ -1,18 +1,24 @@
 .wrapper {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 1000px;
 }
 .mh-chart {
-  box-sizing: border-box;
-  display: block;
   height: 300px;
   width: 1178px;
 }
-.mh-chart-hour {
-  height: 300px;
+.mh-chart-title {
+  display: flex;
+  // align-items: center;
 }
-.mh-chart-zing {
-  height: 300px;
-  width: 1178px;
+.title-icon {
+  margin-top: 16px;
+}
+.title {
+  margin-top: 10px;
+  padding-bottom: 40px;
+}
+.zing-chart {
+  background-image: url("https://media.istockphoto.com/id/1203781524/vi/anh/vinyl-ghi-l%E1%BA%A1i-n%E1%BB%81n-%C3%A2m-nh%E1%BA%A1c-k%E1%BA%BFt-c%E1%BA%A5u-nh%E1%BB%AFng-n%C4%83m-80-%C4%91%E1%BB%93-c%C5%A9-retro-%C3%A2m-thanh-t%C3%A1m-m%C6%B0%C6%A1i-v%C5%A9-tr%C6%B0%E1%BB%9Dng-m%C3%A0u-s%E1%BA%AFc.jpg?s=1024x1024&w=is&k=20&c=UdrtqsohOCVG9Yl2O0gXACgZ0OcO5i-3MZOLUPHv6EA=");
+  border-radius: 12px;
 }
