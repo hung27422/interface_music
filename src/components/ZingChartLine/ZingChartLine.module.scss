@@ -1,8 +1,19 @@
 .wrapper {
   height: 300px;
   position: relative;
-  margin: 0 auto;
 }
 .tooltip {
   position: absolute;
+  padding: 10px;
 }
+
+// .zing-chart-before {
+//   position: absolute;
+//   content: "";
+//   width: 20px;
+//   height: 20px;
+//   border-color: var(--text-color) transparent transparent transparent;
+//   border-width: 16px;
+//   top: -20px;
+//   left: -16px;
+// }

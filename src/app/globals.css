@@ -69,3 +69,15 @@ html ::-webkit-scrollbar-track {
   line-height: 38px;
   margin-left: 12px;
 }
+.title-btn-icon-play-s {
+  background-color: var(--white);
+  width: 26px;
+  height: 26px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 28px;
+  margin-left: 12px;
+}
+.ontop-one {
+  -webkit-text-stroke: 2px #4a90e2;
+}

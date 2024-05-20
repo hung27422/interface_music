@@ -52,4 +52,7 @@ export interface IChartHome {
   thumbnail: string;
   sortDescription: string;
   thumbnailM: string;
+  data?: InfoSong;
+  type?: string;
+  items?: IChartHome;
 }

@@ -18,18 +18,33 @@ interface MediaSongProps {
   control?: string;
   trending?: boolean;
   zingChart?: string;
+  weekly?: boolean;
 }
-function MediaSong({ data, control, trending, zingChart }: MediaSongProps) {
+function MediaSong({
+  data,
+  control,
+  trending,
+  zingChart,
+  weekly,
+}: MediaSongProps) {
   return (
     <div
       className={cx(
         "wrapper",
         { control },
         { zingChart },
-        trending && "trending"
+        trending && "trending",
+        weekly && "weekly"
       )}
     >
-      <div className={cx("media-left", { control }, trending && "trending")}>
+      <div
+        className={cx(
+          "media-left",
+          { control },
+          trending && "trending",
+          weekly && "weeklyL"
+        )}
+      >
         <div className={cx("box-media")}>
           <Image
             src={data?.thumbnailM}
@@ -39,23 +54,25 @@ function MediaSong({ data, control, trending, zingChart }: MediaSongProps) {
             className={cx("image-song", trending && "trending")}
           ></Image>
           <div className={cx("icon-play", { control })}>
-            {/* <FontAwesomeIcon icon={faPlay} /> */}
+            <FontAwesomeIcon icon={faPlay} />
             <div className={cx("space")}></div>
-            <Image
+            {/* <Image
               src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
               alt="icon-play"
               width={16}
               height={16}
-            ></Image>
+            ></Image> */}
             <div className={cx("space")}></div>
           </div>
         </div>
         <div className={cx("media-info")}>
           <h3 className={cx("name-song")}>{data?.title}</h3>
-          <span className={cx("name-singer")}>{data?.artistsNames}</span>
+          <span className={cx("name-singer", weekly && "hide")}>
+            {data?.artistsNames}
+          </span>
         </div>
       </div>
-      {trending && (
+      {trending && !weekly && (
         <div className={cx("media-middle")}>
           <span>{data?.artistsNames}</span>
         </div>
@@ -63,16 +80,18 @@ function MediaSong({ data, control, trending, zingChart }: MediaSongProps) {
       {trending ? (
         <>
           <span className={cx("media-duration")}>2:55</span>
-          <div className={cx("media-right", { control })}>
+          <div className={cx("media-right", { control }, weekly && "weekly")}>
             <Tippy content="Xem lời bài hát">
               <FontAwesomeIcon
                 className={cx("level-item")}
                 icon={faMicrophone}
               />
             </Tippy>
-            <Tippy content="Thêm vào thư viện">
-              <FontAwesomeIcon className={cx("level-item")} icon={faHeart} />
-            </Tippy>
+            {!weekly && (
+              <Tippy content="Thêm vào thư viện">
+                <FontAwesomeIcon className={cx("level-item")} icon={faHeart} />
+              </Tippy>
+            )}
             <Tippy content="Khác">
               <FontAwesomeIcon className={cx("level-item")} icon={faEllipsis} />
             </Tippy>

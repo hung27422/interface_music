@@ -71,8 +71,11 @@ function ZingChartLine() {
           color: "red",
         },
       },
+
       tooltip: {
         enabled: false,
+        position: "nearest",
+        yAlign: "center",
         external: (tooltip: any) => {
           const tooltipModel = tooltip.tooltip;
           if (!chartRef || !chartRef.current) return;
@@ -149,6 +152,7 @@ function ZingChartLine() {
               }}
             >
               <MediaSong data={item} zingChart="zingChart" />
+              <div className={cx("zing-chart-before")}></div>
             </div>
           );
       })}

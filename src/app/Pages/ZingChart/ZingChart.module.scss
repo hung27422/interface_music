@@ -1,24 +1,91 @@
 .wrapper {
   display: flex;
   justify-content: center;
-  height: 1000px;
+  height: fit-content;
 }
 .mh-chart {
-  height: 300px;
   width: 1178px;
+  height: fit-content;
 }
 .mh-chart-title {
   display: flex;
-  // align-items: center;
-}
-.title-icon {
-  margin-top: 16px;
 }
 .title {
   margin-top: 10px;
   padding-bottom: 40px;
 }
+.title-icon {
+  margin-top: 16px;
+}
 .zing-chart {
   background-image: url("https://media.istockphoto.com/id/1203781524/vi/anh/vinyl-ghi-l%E1%BA%A1i-n%E1%BB%81n-%C3%A2m-nh%E1%BA%A1c-k%E1%BA%BFt-c%E1%BA%A5u-nh%E1%BB%AFng-n%C4%83m-80-%C4%91%E1%BB%93-c%C5%A9-retro-%C3%A2m-thanh-t%C3%A1m-m%C6%B0%C6%A1i-v%C5%A9-tr%C6%B0%E1%BB%9Dng-m%C3%A0u-s%E1%BA%AFc.jpg?s=1024x1024&w=is&k=20&c=UdrtqsohOCVG9Yl2O0gXACgZ0OcO5i-3MZOLUPHv6EA=");
   border-radius: 12px;
+}
+.list-song-zingchart {
+  width: 100%;
+  padding-top: 16px;
+}
+.list-song-zingchart-item {
+  display: flex;
+  align-items: center;
+}
+.mh-trending-space {
+  width: 30px;
+  text-align: center;
+  -webkit-text-stroke: 2px var(--text-color);
+  opacity: 0.7;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  color: transparent;
+  font-family: "Roboto", sans-serif;
+  white-space: nowrap;
+  margin-right: 15px;
+  margin-left: 5px;
+}
+.mh-trending_NO {
+  width: 60px;
+  text-align: center;
+  opacity: 1;
+  min-width: 38px;
+  -webkit-text-stroke: 2px var(--text-color);
+  opacity: 0.7;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  color: transparent;
+  font-family: "Roboto", sans-serif;
+  white-space: nowrap;
+}
+.mh-trending_NO.ontop-one {
+  -webkit-text-stroke: 2px #4a90e2;
+}
+.mh-trending_NO.ontop-two {
+  -webkit-text-stroke: 2px #50e3c2;
+}
+.mh-trending_NO.ontop-three {
+  -webkit-text-stroke: 2px #e35050;
+}
+.button-show-hide {
+  width: fit-content;
+  border-radius: 999px;
+  border: 1.5px solid var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.43;
+  text-align: center;
+  color: var(--text-item-hover);
+  background-color: var(--white);
+  padding: 8px 25px;
+  margin: 20px auto 0 auto;
+  cursor: pointer;
+  user-select: none;
+}
+.button-show-hide:hover {
+  background-color: hsla(0, 11%, 61%, 0.102);
+}
+.weekly-zingchart {
+  margin-top: 30px;
 }
