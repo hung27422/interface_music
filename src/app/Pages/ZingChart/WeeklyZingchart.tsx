@@ -3,9 +3,11 @@ import styles from "./WeeklyZingchart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import useDataChartHome from "@/components/hooks/useDataChartHome";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { IChartHome } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
+import Link from "next/link";
+import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 interface IResult {
   items: any;
@@ -14,6 +16,7 @@ interface IResult {
 }
 function WeeklyZingchart() {
   const { data } = useDataChartHome();
+  const { setTypeWeekly } = useContext(MusicContext);
   const weekly = data?.data.weekChart;
   const result: IResult[] = [];
   for (let i = 0; i < 3; i++) {
@@ -25,16 +28,9 @@ function WeeklyZingchart() {
       });
     }
   }
-  useEffect(() => {
-    // const weekly = data?.data.weekChart.vn?.map(
-    //   (item: IChartHome, index: number) => {
-    //     return console.log("weekly", item);
-    //   }
-    // );
-    console.log("result", result);
-
-    console.log(weekly);
-  }, [data, result, weekly]);
+  const handleGetDataWeekly = (id: string) => {
+    setTypeWeekly(id);
+  };
   return (
     <div className={cx("wrapper")}>
       <h2 className={cx("weekly-title")}>Bảng xếp hạng tuần</h2>
@@ -43,11 +39,16 @@ function WeeklyZingchart() {
           return (
             <div key={index} className={cx("weekly-content")}>
               <div className={cx("weekly-content-title")}>
-                <h4 className={cx("content-title")}>
+                <Link
+                  href={"/Pages/ZingChart/ZingChartWeekly"}
+                  className={cx("content-title")}
+                  id={item.type}
+                  onClick={(e) => handleGetDataWeekly(e.currentTarget.id)}
+                >
                   {item.type === "vn" && "Việt Nam"}
                   {item.type === "us" && "US-UK"}
                   {item.type === "korea" && "K-POP"}
-                </h4>
+                </Link>
                 <div className={cx("title-btn-icon-play", "btn-icon-play")}>
                   <FontAwesomeIcon className={cx("btn-play")} icon={faPlay} />
                 </div>

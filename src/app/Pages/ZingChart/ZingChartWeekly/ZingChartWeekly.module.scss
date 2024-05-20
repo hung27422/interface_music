@@ -1,0 +1,64 @@
+.title {
+  font-size: 4rem;
+  cursor: pointer;
+  color: inherit;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  text-transform: capitalize;
+  font-weight: 800;
+  color: var(--text-color);
+  padding: 4px 12px;
+  margin-bottom: 20px;
+}
+.menu {
+  display: flex;
+  align-items: center;
+}
+.btn-menu {
+  font-weight: 700;
+  font-size: 2.4rem;
+  padding: 10px 0;
+  margin-right: 40px;
+  color: var(--text-color);
+}
+.active {
+  border-bottom: 3px solid var(--text-color);
+}
+.list-song {
+  margin-top: 20px;
+}
+.item-song {
+  display: flex;
+  align-items: center;
+}
+.weekly-top_NO {
+  width: 20px;
+  text-align: center;
+  opacity: 1;
+  min-width: 38px;
+  -webkit-text-stroke: 2px var(--text-color);
+  opacity: 0.7;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  color: transparent;
+  font-family: "Roboto", sans-serif;
+  white-space: nowrap;
+}
+.weekly-top-space {
+  width: 10px;
+  text-align: center;
+  -webkit-text-stroke: 2px var(--text-color);
+  opacity: 0.7;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  color: transparent;
+  font-family: "Roboto", sans-serif;
+  white-space: nowrap;
+  margin-right: 15px;
+  margin-left: 10px;
+}

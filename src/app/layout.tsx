@@ -9,6 +9,7 @@ import classNames from "classnames/bind";
 import styles from "./layout.module.scss";
 import ControlMusic from "./Layouts/ControlMusic/ControlMusic";
 const cx = classNames.bind(styles);
+import ContextMusic from "@/components/ContextMusic/ContextMusic";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -16,16 +17,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className={cx("layout")}>
-          <Navbar />
-          <div className={cx("content")}>
-            <Sidebar></Sidebar>
-            <div className={cx("homepage")}>{children}</div>
+      <ContextMusic>
+        <body className={inter.className}>
+          <div className={cx("layout")}>
+            <Navbar />
+            <div className={cx("content")}>
+              <Sidebar></Sidebar>
+              <div className={cx("homepage")}>{children}</div>
+            </div>
+            <ControlMusic></ControlMusic>
           </div>
-          <ControlMusic></ControlMusic>
-        </div>
-      </body>
+        </body>
+      </ContextMusic>
     </html>
   );
 }

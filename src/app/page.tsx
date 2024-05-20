@@ -11,7 +11,6 @@ import {
   IHome,
   ISectionPlaylist,
   ITypeNewRelease,
-  InfoSong,
 } from "@/Interfaces/Interface";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 interface IHomeProps {
@@ -26,16 +25,6 @@ export default function Home() {
   const playlist = data?.data.items.filter(
     (item: ISectionPlaylist) => item.sectionType === "playlist"
   );
-  // useEffect(() => {
-  //   const playlist = data?.data.items.filter(
-  //     (item: IHome) => item.sectionType === "playlist"
-  //   );
-  //   playlist?.map((item: IHomeProps) => {
-  //     return console.log("item", item.items);
-  //   });
-  //   console.log("playlist", playlist);
-  // }, [data, newRelease]);
-
   return (
     <div className={cx("wrapper")}>
       <div className={cx("slider")}>
