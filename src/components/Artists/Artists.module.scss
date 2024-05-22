@@ -1,0 +1,93 @@
+.size-image {
+  overflow: hidden;
+  border-radius: 4px;
+  text-align: center;
+  width: 215px;
+  height: 215px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.avatar {
+  display: block;
+  padding-top: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top center;
+  border-radius: 4px;
+  transition-duration: 0.7s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+  transition-property: transform;
+  border-radius: 50%;
+}
+.img-hover {
+  position: relative;
+  &:hover .action {
+    display: flex;
+  }
+  &:hover .avatar {
+    transform: scale(1.1) translateZ(0);
+  }
+}
+.action {
+  display: none;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+}
+.btn-shuffle {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50%;
+  font-size: 3rem !important;
+  color: var(--white);
+  border: 2px solid var(--white);
+}
+.info-artist {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 16px auto 0 auto;
+  color: var(--text-color);
+}
+.artist-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.artist-follow {
+  font-size: 1.4rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+.btn-follow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 24px auto 0 auto;
+  color: var(--text-color);
+  font-size: 1.4rem;
+  font-weight: 600;
+  border: 1px solid var(--text-color);
+  padding: 6px 12px;
+  width: fit-content;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: var(--back-ground-color-button);
+}
+.btn-follow:hover {
+  opacity: 0.8;
+}
+.btn-follow span {
+  margin-left: 6px;
+}
+// .info-artist span {
+//   display: block;
+// }

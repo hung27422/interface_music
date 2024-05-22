@@ -59,6 +59,7 @@
   margin-bottom: 20px;
 }
 .avatar {
+  display: block;
   padding-top: 100%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -84,7 +85,6 @@
   text-align: center;
   width: 214px;
   max-height: 40px;
-  // white-space: nowrap;
   overflow: hidden;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;

@@ -4,7 +4,7 @@ import styles from "./page.module.scss";
 const cx = classNames.bind(styles);
 
 import useDataHome from "@/components/hooks/useDataHome";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SliderItem from "@/components/Slider/Slider";
 import NewRelease from "@/components/NewRelease/NewRelease";
 import {
@@ -13,11 +13,14 @@ import {
   ITypeNewRelease,
 } from "@/Interfaces/Interface";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
+import { MusicContext } from "@/components/ContextMusic/ContextMusic";
+import { log } from "console";
 interface IHomeProps {
   items: ITypeNewRelease;
 }
 export default function Home() {
   const { data } = useDataHome();
+
   //Api
   const newRelease = data?.data.items.filter(
     (item: IHome) => item.sectionType === "new-release"
@@ -25,6 +28,7 @@ export default function Home() {
   const playlist = data?.data.items.filter(
     (item: ISectionPlaylist) => item.sectionType === "playlist"
   );
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("slider")}>

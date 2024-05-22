@@ -26,6 +26,7 @@ export interface ISectionPlaylist {
   sortDescription: string;
   dataSectionPlaylist?: object;
   items?: [];
+  data: IArtist;
 }
 export interface ITrending {
   map(
@@ -55,4 +56,13 @@ export interface IChartHome {
   data?: InfoSong;
   type?: string;
   items?: IChartHome;
+}
+export interface IArtist {
+  id: string;
+  name: string;
+  playlistId: string;
+  thumbnail: string;
+  thumbnailM: string;
+  totalFollow: number;
+  link: string;
 }

@@ -38,10 +38,10 @@
   width: 120px;
 }
 .wrapper.trending:hover .name-song {
-  width: auto;
-  white-space: normal;
-  overflow: visible;
-  text-overflow: clip;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
 }
 .wrapper.trending:hover .media-duration {
   display: none;
@@ -77,6 +77,13 @@
 .media-left.trending {
   width: 40%;
 }
+.media-left.trending .name-song {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+}
+
 .media-left.control {
   width: fit-content;
 }
@@ -153,6 +160,7 @@
   align-self: center;
   width: 0;
 }
+
 .media-duration {
   display: flex;
   flex-basis: auto;

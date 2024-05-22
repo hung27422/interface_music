@@ -4,14 +4,14 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { ITrending } from "@/Interfaces/Interface";
-import FuncDate from "../hooks/useFormatDate";
+import useFormatDate from "../hooks/useFormatDate";
 const cx = classNames.bind(styles);
 interface ItemSliderProps {
   data: ITrending;
   NO: number;
 }
 function ItemSlider({ data, NO }: ItemSliderProps) {
-  const dateNow = FuncDate(data?.releaseDate);
+  const dateNow = useFormatDate(data?.releaseDate);
   return (
     <div className={cx("wrapper-item")}>
       <div className={cx("slider-item-content")}>

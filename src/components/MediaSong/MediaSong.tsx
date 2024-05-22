@@ -73,7 +73,7 @@ function MediaSong({
         </div>
       </div>
       {trending && !weekly && (
-        <div className={cx("media-middle")}>
+        <div className={cx("media-middle", trending && "trending")}>
           <span>{data?.artistsNames}</span>
         </div>
       )}

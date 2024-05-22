@@ -1,4 +1,4 @@
-function FuncDate(releaseDate: number) {
+function useFormatDate(releaseDate: number) {
   var releaseDateInSeconds = releaseDate * 1000;
   var releaseDateObj = new Date(releaseDateInSeconds);
   var day = releaseDateObj.getDate();
@@ -8,4 +8,4 @@ function FuncDate(releaseDate: number) {
   return formattedDate;
 }
 
-export default FuncDate;
+export default useFormatDate;

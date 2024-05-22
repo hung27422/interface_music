@@ -5,8 +5,10 @@ import Tippy from "@tippyjs/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { InfoSong, ISectionPlaylist } from "@/Interfaces/Interface";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { url } from "inspector";
+import { MusicContext } from "../ContextMusic/ContextMusic";
+import Link from "next/link";
 const cx = classNames.bind(styles);
 interface MHSectionPlaylistProps {
   dataSectionPlaylist: ISectionPlaylist;
@@ -18,9 +20,14 @@ function MHSectionPlaylist({
   show,
   hide,
 }: MHSectionPlaylistProps) {
+  const { setEncodeIdPlaylist } = useContext(MusicContext);
+
   // useEffect(() => {
   //   console.log("section", dataSectionPlaylist);
   // }, [dataSectionPlaylist]);
+  const handleGetEncodeId = (encodeId: string) => {
+    setEncodeIdPlaylist(encodeId);
+  };
   return (
     <div className={cx("wrapper")}>
       {!hide && (
@@ -37,12 +44,15 @@ function MHSectionPlaylist({
               <div key={index} className={cx("body")}>
                 <div className={cx("img-hover")}>
                   <div className={cx("size-image")}>
-                    <div
+                    <Link
+                      href={"/Pages/Album"}
+                      id={item.encodeId}
+                      onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
                       className={cx("avatar")}
                       style={{
                         backgroundImage: `url(${item?.thumbnail})`,
                       }}
-                    ></div>
+                    ></Link>
                   </div>
                   <div className={cx("action")}>
                     <Tippy content="Thêm vào thư viện">
