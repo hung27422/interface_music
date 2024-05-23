@@ -14,15 +14,15 @@
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tạo ra 3 cột bằng nhau */
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
-  //   width: 80%;
 }
 .weekly-content {
   display: flex;
   align-self: center;
   justify-content: center;
   flex-direction: column;
+  max-width: fit-content;
 }
 .weekly-content-list-song {
   border: 1px solid var(--text-color);
@@ -36,13 +36,13 @@
 }
 
 .weekly-top_NO {
-  width: 20px;
+  width: 10px;
   text-align: center;
   opacity: 1;
-  min-width: 38px;
+  min-width: 28px;
   -webkit-text-stroke: 2px var(--text-color);
   opacity: 0.7;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 900;
   line-height: 1;
   text-align: center;

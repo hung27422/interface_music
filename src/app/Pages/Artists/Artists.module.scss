@@ -1,0 +1,133 @@
+.artist-list-info {
+  background: rgb(165, 130, 111);
+  background: radial-gradient(
+    circle,
+    rgba(165, 130, 111, 1) 0%,
+    rgba(229, 221, 199, 1) 0%,
+    rgba(213, 184, 124, 1) 100%
+  );
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  padding: 42px 24px 0 24px;
+  border-radius: 16px;
+}
+.avt-artist {
+  border-radius: 50%;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+.artist-item-info {
+  margin-left: 24px;
+}
+.artist-name {
+  display: flex;
+  align-items: center;
+}
+.artist-name span {
+  font-size: 6rem;
+  font-weight: 700;
+  color: var(--black);
+}
+.btn-play {
+  font-size: 3rem;
+  margin-top: 8px;
+  margin-left: 4px;
+}
+.artist-follow {
+  display: flex;
+  align-items: center;
+}
+.artist-follow span {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+.btn-follow {
+  margin-left: 16px;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+  border: 1px solid var(--text-color);
+  padding: 4px 10px;
+  width: fit-content;
+  border-radius: 12px;
+  cursor: pointer;
+  background-color: var(--back-ground-color-button);
+}
+.btn-follow:hover {
+  opacity: 0.8;
+}
+.btn-follow span {
+  margin-left: 6px;
+}
+.container {
+  margin-top: 30px;
+}
+.song-feature-tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.song-feature-tile h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.btn-all {
+  font-size: 1.6rem;
+  font-weight: 500;
+  opacity: 0.7;
+  &:hover {
+    color: var(--text-color);
+    opacity: 1;
+  }
+}
+.song-feature-list {
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tạo ra 3 cột bằng nhau */
+  grid-gap: 20px;
+}
+.footer-info {
+  margin-top: 32px;
+}
+.footer-info h2 {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.footer-info-artist {
+  display: flex;
+}
+.avatar {
+  display: block;
+  width: 350px;
+  padding-top: 30%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 8px;
+}
+.des-artist {
+  margin-left: 16px;
+  text-align: justify;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.des-artist span {
+  font-size: 1.6rem;
+  line-height: 1.4;
+  font-style: normal;
+}
+.des-artist span:nth-child(2) {
+  margin-top: 16px;
+  font-weight: 700;
+  font-size: 2rem;
+}

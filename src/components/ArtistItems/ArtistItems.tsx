@@ -1,26 +1,31 @@
 import classNames from "classnames/bind";
-import styles from "./Artists.module.scss";
+import styles from "./ArtistItems.module.scss";
 import Tippy from "@tippyjs/react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShuffle, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { IArtist } from "@/Interfaces/Interface";
 import useFormatNumber from "../hooks/useFormatNumber";
+import { useContext } from "react";
+import { MusicContext } from "../ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 interface IArtistProps {
   data: IArtist;
 }
-function Artists({ data }: IArtistProps) {
+function ArtistItems({ data }: IArtistProps) {
   const totalFollow = useFormatNumber(data?.totalFollow);
-
+  const { setAliasArtist } = useContext(MusicContext);
+  const handleGetAliasArtist = (alias: string) => {
+    setAliasArtist(alias);
+  };
   return (
     <div className={cx("wrapper")}>
       <div className={cx("img-hover")}>
         <div className={cx("size-image")}>
           <Link
-            href={"/Pages/Album"}
-            // id={item.encodeId}
-            // onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
+            href={"/Pages/Artists"}
+            id={data?.alias}
+            onClick={(e) => handleGetAliasArtist(e.currentTarget.id)}
             className={cx("avatar")}
             style={{
               backgroundImage: `url(${data?.thumbnail})`,
@@ -47,4 +52,4 @@ function Artists({ data }: IArtistProps) {
   );
 }
 
-export default Artists;
+export default ArtistItems;

@@ -10,6 +10,7 @@ import { ITrending, InfoSong } from "@/Interfaces/Interface";
 import useDataTrending from "@/components/hooks/useDataTrending";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
+import Link from "next/link";
 const cx = classNames.bind(styles);
 function Trending() {
   const { data: dataTrending } = useDataTrending();
@@ -62,7 +63,9 @@ function Trending() {
             })}
         </div>
       </div>
-      <div className={cx("btn-top100")}>Xem BXH Nhạc Mới</div>
+      <Link href={"/Pages/BXHNewSong"} className={cx("btn-top100")}>
+        Xem BXH Nhạc Mới
+      </Link>
       <div className={cx("mh-top5-hot")}>
         <h2 className={cx("mh-top-title", "mh-top5-title")}>Top 5 BXH</h2>
         {rtChart?.map((item: ITrending, index: number) => {

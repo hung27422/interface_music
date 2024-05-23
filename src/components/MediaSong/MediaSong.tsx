@@ -12,6 +12,7 @@ import Tippy from "@tippyjs/react";
 import { ITrending, InfoSong } from "../../Interfaces/Interface";
 import { useEffect } from "react";
 import { Span } from "next/dist/trace";
+import useFormatDuration from "../hooks/useFormatDuration";
 const cx = classNames.bind(styles);
 interface MediaSongProps {
   data: InfoSong;
@@ -27,6 +28,7 @@ function MediaSong({
   zingChart,
   weekly,
 }: MediaSongProps) {
+  const duration = useFormatDuration(data?.duration);
   return (
     <div
       className={cx(
@@ -42,15 +44,15 @@ function MediaSong({
           "media-left",
           { control },
           trending && "trending",
-          weekly && "weeklyL"
+          weekly && "weekly"
         )}
       >
         <div className={cx("box-media")}>
           <Image
             src={data?.thumbnailM}
             alt="image-song"
-            width={trending ? 40 : 60}
-            height={trending ? 40 : 60}
+            width={trending || weekly ? 40 : 60}
+            height={trending || weekly ? 40 : 60}
             className={cx("image-song", trending && "trending")}
           ></Image>
           <div className={cx("icon-play", { control })}>
@@ -79,7 +81,7 @@ function MediaSong({
       )}
       {trending ? (
         <>
-          <span className={cx("media-duration")}>2:55</span>
+          <span className={cx("media-duration")}>{duration}</span>
           <div className={cx("media-right", { control }, weekly && "weekly")}>
             <Tippy content="Xem lời bài hát">
               <FontAwesomeIcon

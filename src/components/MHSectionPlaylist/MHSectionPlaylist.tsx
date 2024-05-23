@@ -50,7 +50,7 @@ function MHSectionPlaylist({
                       onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
                       className={cx("avatar")}
                       style={{
-                        backgroundImage: `url(${item?.thumbnail})`,
+                        backgroundImage: `url(${item?.thumbnailM})`,
                       }}
                     ></Link>
                   </div>

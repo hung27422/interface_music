@@ -8,6 +8,7 @@ export interface InfoSong {
   thumbnail: string;
   sortDescription: string;
   thumbnailM: string;
+  duration: number;
 }
 export interface ITypeNewRelease {
   all?: InfoSong[];
@@ -23,10 +24,10 @@ export interface ISectionPlaylist {
   title: string;
   artistsNames: string;
   thumbnail: string;
+  thumbnailM: string;
   sortDescription: string;
   dataSectionPlaylist?: object;
   items?: [];
-  data: IArtist;
 }
 export interface ITrending {
   map(
@@ -65,4 +66,7 @@ export interface IArtist {
   thumbnailM: string;
   totalFollow: number;
   link: string;
+  alias: string;
+  title: string;
+  sectionType: string;
 }

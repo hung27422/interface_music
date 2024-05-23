@@ -31,18 +31,18 @@
   text-overflow: ellipsis;
 }
 .wrapper.weekly:hover .name-singer {
-  // display: block;
+  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 120px;
+  width: 100px;
 }
-.wrapper.trending:hover .name-song {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 200px;
-}
+// .wrapper.trending:hover .name-song {
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+//   width: 200px;
+// }
 .wrapper.trending:hover .media-duration {
   display: none;
 }
@@ -70,7 +70,14 @@
   display: flex;
   align-items: center;
 }
-.media-left.weeklyL {
+.media-left .name-song,
+.name-singer {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 200px;
+}
+.media-left.weekly {
   width: 80% !important;
 }
 
@@ -83,7 +90,12 @@
   white-space: nowrap;
   width: 200px;
 }
-
+.media-left.weekly .name-song {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100px;
+}
 .media-left.control {
   width: fit-content;
 }
@@ -98,6 +110,7 @@
 .media-info {
   margin-left: 8px;
 }
+
 .image-song {
   display: block;
   border-radius: 6px;

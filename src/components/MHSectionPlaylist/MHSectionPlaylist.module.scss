@@ -7,14 +7,16 @@
   justify-content: space-between;
 }
 .btn-all {
-  padding: 4px 24px;
+  padding: 4px 0 0 24px;
   color: var(--back);
-  font-size: 1.6rem;
-  font-weight: 600;
   margin-bottom: 20px;
+  font-size: 1.6rem;
+  font-weight: 500;
+  opacity: 0.7;
 }
 .btn-all:hover {
   color: var(--text-color);
+  opacity: 1;
 }
 .title {
   margin-bottom: 20px;

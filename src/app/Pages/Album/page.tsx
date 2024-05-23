@@ -11,7 +11,7 @@ import useFormatDate from "@/components/hooks/useFormatDate";
 import { IArtist, InfoSong } from "@/Interfaces/Interface";
 import useFormatTime from "@/components/hooks/useFormatTime";
 import useFormatNumber from "@/components/hooks/useFormatNumber";
-import Artists from "@/components/Artists/Artists";
+import ArtistItems from "@/components/ArtistItems/ArtistItems";
 const cx = classNames.bind(styles);
 function Album() {
   const { data } = useGetDetailPlaylist();
@@ -21,10 +21,7 @@ function Album() {
   const listArtist = data?.data?.artists;
   const totalDuration = useFormatTime(infoPlaylist?.song.totalDuration);
   const like = useFormatNumber(infoPlaylist?.like);
-  useEffect(() => {
-    console.log("111", data);
-    console.log("info", infoPlaylist);
-  }, [data]);
+
   return (
     <div className={cx("wrapper")}>
       <div className={cx("album-container")}>
@@ -120,7 +117,7 @@ function Album() {
           {listArtist?.map((item: IArtist, index: number) => {
             return (
               <div key={index} className={cx("album-detail-item-artist")}>
-                <Artists data={item} />
+                <ArtistItems data={item} />
               </div>
             );
           })}
