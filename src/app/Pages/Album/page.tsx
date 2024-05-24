@@ -21,6 +21,7 @@ function Album() {
   const listArtist = data?.data?.artists;
   const totalDuration = useFormatTime(infoPlaylist?.song.totalDuration);
   const like = useFormatNumber(infoPlaylist?.like);
+  console.log("infoPlaylist", infoPlaylist);
 
   return (
     <div className={cx("wrapper")}>
@@ -79,9 +80,11 @@ function Album() {
             </div>
           </div>
           <div className={cx("album-detail-playlist-right")}>
-            <h3 className={cx("album-detail-playlist-right-title")}>
-              <span>Lời tựa:</span> {infoPlaylist?.description}
-            </h3>
+            {infoPlaylist?.description !== "" && (
+              <h3 className={cx("album-detail-playlist-right-title")}>
+                <span>Lời tựa:</span> {infoPlaylist?.description}
+              </h3>
+            )}
 
             <div className={cx("album-detail-playlist-right-info")}>
               <div className={cx("album-detail-playlist-right-info-header")}>
@@ -109,20 +112,22 @@ function Album() {
           </div>
         </div>
       </div>
-      <div className={cx("album-detail-artist")}>
-        <h2 className={cx("album-detail-artist-title")}>
-          Danh Sách Nghệ Sĩ Tham Gia
-        </h2>
-        <div className={cx("album-detail-list-artist")}>
-          {listArtist?.map((item: IArtist, index: number) => {
-            return (
-              <div key={index} className={cx("album-detail-item-artist")}>
-                <ArtistItems data={item} />
-              </div>
-            );
-          })}
+      {listArtist?.length > 1 && (
+        <div className={cx("album-detail-artist")}>
+          <h2 className={cx("album-detail-artist-title")}>
+            Danh Sách Nghệ Sĩ Tham Gia
+          </h2>
+          <div className={cx("album-detail-list-artist")}>
+            {listArtist?.map((item: IArtist, index: number) => {
+              return (
+                <div key={index} className={cx("album-detail-item-artist")}>
+                  <ArtistItems data={item} />
+                </div>
+              );
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

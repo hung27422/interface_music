@@ -59,6 +59,7 @@ export interface IChartHome {
   items?: IChartHome;
 }
 export interface IArtist {
+  map(arg0: (result: IArtist) => IArtist): unknown;
   id: string;
   name: string;
   playlistId: string;
@@ -69,4 +70,5 @@ export interface IArtist {
   alias: string;
   title: string;
   sectionType: string;
+  items: [];
 }

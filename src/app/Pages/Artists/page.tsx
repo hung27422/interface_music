@@ -10,9 +10,11 @@ import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import useGetDataArtist from "@/components/hooks/useGetDataArtist";
 import { IArtist, ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
+import ArtistItems from "@/components/ArtistItems/ArtistItems";
+import { ifError } from "assert";
+import { constant } from "lodash";
 const cx = classNames.bind(styles);
 function Artists() {
-  const { aliasArtist } = useContext(MusicContext);
   const { data } = useGetDataArtist();
   const result = data?.data;
   const sectionArtist = data?.data?.sections;
@@ -22,12 +24,18 @@ function Artists() {
   const playlistArtist = sectionArtist?.filter((item: IArtist) => {
     return item?.sectionType === "playlist";
   });
+  const maylikeArtist = sectionArtist?.filter((item: IArtist) => {
+    return item?.sectionType === "artist";
+  });
+  const flatMaylikeArtist = maylikeArtist?.flatMap(
+    (item: IArtist) => item.items ?? []
+  );
 
-  useEffect(() => {
-    console.log("artists", data);
-    console.log("alias", aliasArtist);
-    console.log("result", result);
-  }, [aliasArtist, data, result]);
+  // useEffect(() => {
+  //   console.log("artists", data);
+  //   console.log("maylikeArtist", maylikeArtist);
+  //   console.log("flattenedItems", flatMaylikeArtist);
+  // }, [maylikeArtist, data, flatMaylikeArtist]);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
@@ -84,6 +92,18 @@ function Artists() {
               </div>
             );
           })}
+        </div>
+        <div className={cx("may-like-artist")}>
+          <h2>Bạn có thể thích</h2>
+          <div className={cx("may-like-artist-list")}>
+            {flatMaylikeArtist?.map((result: any, index: number) => {
+              return (
+                <div key={index}>
+                  <ArtistItems data={result} />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
       <div className={cx("footer-info")}>

@@ -13,6 +13,7 @@
   padding: 42px 24px 0 24px;
   border-radius: 16px;
 }
+
 .avt-artist {
   border-radius: 50%;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
@@ -130,4 +131,19 @@
   margin-top: 16px;
   font-weight: 700;
   font-size: 2rem;
+}
+.may-like-artist {
+  margin: 30px 0;
+}
+.may-like-artist h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.may-like-artist-list {
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Tạo ra 3 cột bằng nhau */
+  grid-gap: 20px;
 }
