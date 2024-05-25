@@ -42,6 +42,14 @@
   padding: 0 12px 0 12px;
   cursor: pointer;
 }
+.img-hover {
+  &:hover .action {
+    display: flex;
+  }
+  &:hover .avatar {
+    transform: scale(1.1) translateZ(0);
+  }
+}
 .size-image {
   width: 214px;
   overflow: hidden;
@@ -72,14 +80,7 @@
   transition-delay: 0s;
   transition-property: transform;
 }
-.img-hover {
-  &:hover .action {
-    display: flex;
-  }
-  &:hover .avatar {
-    transform: scale(1.1) translateZ(0);
-  }
-}
+
 .description {
   margin-top: 12px;
   font-size: 1.4rem;

@@ -8,6 +8,44 @@
   text-align: center;
 }
 //section playlist
-.mh-section-playlist {
+.mh-top5-title {
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+.mh-top-title {
+  text-align: center;
+  // margin-bottom: 10px;
+  background: radial-gradient(
+      50% 124.93% at 95.86% -10%,
+      #3efad9 0,
+      hsla(0, 0%, 100%, 0) 100%
+    ),
+    linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+.radio {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.radio-list {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+}
+.radio-title {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: 700;
 }

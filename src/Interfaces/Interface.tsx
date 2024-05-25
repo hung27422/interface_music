@@ -72,3 +72,15 @@ export interface IArtist {
   sectionType: string;
   items: [];
 }
+export interface IRadio {
+  thumbnailM: string;
+  thumbnail: string;
+  title: string;
+  name: string;
+  encodeId: string;
+  host?: IRadio;
+  program: IRadio;
+  activeUsers: number;
+  startTime: number;
+  endTime: number;
+}
