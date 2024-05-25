@@ -19,11 +19,12 @@ import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import { log } from "console";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import RadioItem from "@/components/RadioItem/RadioItem";
+import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 interface IHomeProps {
   items: ITypeNewRelease;
 }
 export default function Home() {
-  const { data } = useDataHome();
+  const { data, isLoading } = useDataHome();
 
   //Api
   const newRelease = data?.data.items.filter(
@@ -38,53 +39,58 @@ export default function Home() {
   const rtChart = data?.data.items.filter(
     (item: ITrending) => item.sectionType === "RTChart"
   );
-  console.log(radios);
 
   return (
     <div className={cx("wrapper")}>
-      <div className={cx("slider")}>
-        <SliderItem></SliderItem>
-      </div>
-      <div className={cx("container")}>
-        {newRelease?.map((item: IHomeProps, index: number) => (
-          <div key={index} className={cx("new-release")}>
-            <NewRelease
-              dataAll={item.items.all}
-              dataVietnamese={item.items.vPop}
-              dataOthers={item.items.others}
-            />
+      {isLoading ? (
+        <SpinnerLoading />
+      ) : (
+        <>
+          <div className={cx("slider")}>
+            <SliderItem></SliderItem>
           </div>
-        ))}
-        {playlist?.map((item: ISectionPlaylist, index: number) => (
-          <div key={index} className={cx("mh-section-playlist")}>
-            <MHSectionPlaylist dataSectionPlaylist={item} />
-          </div>
-        ))}
-        <div className={cx("top-5-bxh")}>
-          <h2 className={cx("mh-top-title", "mh-top5-title")}>Top 5 BXH</h2>
-          {rtChart?.map((item: ITrending, index: number) => {
-            return (
-              <div key={index}>
-                <SliderTrending data={item} />
+          <div className={cx("container")}>
+            {newRelease?.map((item: IHomeProps, index: number) => (
+              <div key={index} className={cx("new-release")}>
+                <NewRelease
+                  dataAll={item.items.all}
+                  dataVietnamese={item.items.vPop}
+                  dataOthers={item.items.others}
+                />
               </div>
-            );
-          })}
-        </div>
-        <div className={cx("radio")}>
-          <h2 className={cx("radio-title")}>Radio Nổi bật</h2>
-          <div className={cx("radio-list")}>
-            {radios?.map((data: any) => {
-              return data?.items.map((item: IRadio, index: number) => {
+            ))}
+            {playlist?.map((item: ISectionPlaylist, index: number) => (
+              <div key={index} className={cx("mh-section-playlist")}>
+                <MHSectionPlaylist dataSectionPlaylist={item} />
+              </div>
+            ))}
+            <div className={cx("top-5-bxh")}>
+              <h2 className={cx("mh-top-title", "mh-top5-title")}>Top 5 BXH</h2>
+              {rtChart?.map((item: ITrending, index: number) => {
                 return (
                   <div key={index}>
-                    <RadioItem data={item} />
+                    <SliderTrending data={item} />
                   </div>
                 );
-              });
-            })}
+              })}
+            </div>
+            <div className={cx("radio")}>
+              <h2 className={cx("radio-title")}>Radio Nổi bật</h2>
+              <div className={cx("radio-list")}>
+                {radios?.map((data: any) => {
+                  return data?.items.map((item: IRadio, index: number) => {
+                    return (
+                      <div key={index}>
+                        <RadioItem data={item} />
+                      </div>
+                    );
+                  });
+                })}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 }
