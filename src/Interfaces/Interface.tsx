@@ -9,6 +9,7 @@ export interface InfoSong {
   sortDescription: string;
   thumbnailM: string;
   duration: number;
+  streamingStatus: number;
 }
 export interface ITypeNewRelease {
   all?: InfoSong[];

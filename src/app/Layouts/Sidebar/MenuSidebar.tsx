@@ -17,6 +17,7 @@ import styles from "./Sidebar.module.scss";
 import { Flavors } from "next/font/google";
 import {
   AlbumIcon,
+  BXHIcon,
   PlaylistIcon,
   ZingchartIcon,
 } from "@/components/Icons/Icons";
@@ -73,12 +74,12 @@ function MenuSidebar() {
             href="/Pages/BXHNewSong"
             id={"4"}
             title="BXH Nhạc Mới"
-            icon={<Top100Icon />}
+            icon={<BXHIcon />}
             active={active}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
-            href="/Pages/Library"
+            href="/Pages/Hub"
             id={"5"}
             title="Chủ đề và thể loại"
             icon={<TopicOptionsIcon />}
@@ -86,10 +87,10 @@ function MenuSidebar() {
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
-            href="/Pages/Library"
+            href="/Pages/Top100"
             id={"6"}
-            title="Nghe gần đây"
-            icon={<ListenNearIcon />}
+            title="Top 100"
+            icon={<Top100Icon />}
             active={active}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>

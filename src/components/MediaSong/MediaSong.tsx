@@ -68,7 +68,12 @@ function MediaSong({
           </div>
         </div>
         <div className={cx("media-info")}>
-          <h3 className={cx("name-song")}>{data?.title}</h3>
+          <div className={cx("premium")}>
+            <div className={cx("name-song")}>{data?.title}</div>
+            {data?.streamingStatus === 2 && (
+              <span className={cx("premium-name")}>PREMIUM</span>
+            )}
+          </div>
           <span className={cx("name-singer", weekly && "hide")}>
             {data?.artistsNames}
           </span>

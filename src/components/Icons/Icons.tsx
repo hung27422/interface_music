@@ -78,9 +78,13 @@ export function PlaylistIcon() {
 export function AlbumIcon() {
   return <FontAwesomeIcon icon={faCompactDisc} />;
 }
+export function BXHIcon() {
+  return <FontAwesomeIcon icon={faMusic} />;
+}
 export function ZingchartIcon() {
   return <FontAwesomeIcon icon={faChartLine} />;
 }
+
 export function RandomIcon() {
   return (
     <svg
