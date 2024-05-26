@@ -1,0 +1,67 @@
+.wrapper {
+  margin-top: 20px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.btn-icon {
+  background-color: var(--white);
+  width: 36px;
+  height: 36px;
+  border-radius: 50px;
+  text-align: center;
+  line-height: 38px;
+  margin-left: 12px;
+}
+.btn-play {
+  font-size: 1.8rem;
+  margin-left: 3px;
+  margin-top: 4px;
+}
+.title {
+  // margin-bottom: 10px;
+  background: radial-gradient(
+      50% 124.93% at 95.86% -10%,
+      #3efad9 0,
+      hsla(0, 0%, 100%, 0) 100%
+    ),
+    linear-gradient(91.56deg, #ff9357 1.54%, #9100ff 98.71%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+.btn-section-list {
+  display: flex;
+  align-items: center;
+}
+.btn-all {
+  display: block;
+  padding: 4px 24px;
+  color: var(--back);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+.btn-all:hover {
+  color: var(--text-color);
+}
+.btn-section {
+  padding: 4px 24px;
+  font-size: 1.2rem;
+  margin-right: 15px;
+  font-weight: 500;
+  border: 1px solid var(--text-color);
+  border-radius: 16px;
+  background-color: var(--white);
+}
+.btn-section.active {
+  background-color: var(--text-color);
+  color: var(--white);
+}
+.list-song-all {
+  margin-top: 20px;
+}

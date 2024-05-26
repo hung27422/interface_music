@@ -12,6 +12,7 @@ export interface InfoSong {
   streamingStatus: number;
 }
 export interface ITypeNewRelease {
+  items?: any;
   all?: InfoSong[];
   vPop?: InfoSong[];
   others?: InfoSong[];

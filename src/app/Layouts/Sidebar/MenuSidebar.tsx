@@ -22,10 +22,13 @@ import {
   ZingchartIcon,
 } from "@/components/Icons/Icons";
 import AdvertisementVIP from "./AdvertisementVIP";
+import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
 
 function MenuSidebar() {
   const [active, setActive] = useState("1");
+  const notify = () =>
+    toast("Trang này chưa được phát triển, bạn quay lại sau nhé ^.^");
   const handleActive = (id: string) => {
     setActive(id);
   };
@@ -58,12 +61,12 @@ function MenuSidebar() {
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
-            href="/Pages/Library"
+            href=""
             id={"3"}
             title="Thư viện"
             icon={<LibraryIcon />}
             active={active}
-            onClick={(e: any) => handleActive(e.currentTarget.id)}
+            onClick={notify}
           ></MenuItems>
         </Menu>
       </div>
@@ -96,28 +99,28 @@ function MenuSidebar() {
           ></MenuItems>
           <AdvertisementVIP />
           <MenuItems
-            href="/Pages/Library"
+            href=""
             id={"8"}
             title="Yêu thích"
             icon={<SongFavoriteIcon />}
             active={active}
-            onClick={(e: any) => handleActive(e.currentTarget.id)}
+            onClick={notify}
           ></MenuItems>
           <MenuItems
-            href="/Pages/Library"
+            href=""
             id={"9"}
             title="Playlist"
             icon={<PlaylistIcon />}
             active={active}
-            onClick={(e: any) => handleActive(e.currentTarget.id)}
+            onClick={notify}
           ></MenuItems>
           <MenuItems
-            href="/Pages/Library"
+            href=""
             id={"10"}
             title="Album"
             icon={<AlbumIcon />}
             active={active}
-            onClick={(e: any) => handleActive(e.currentTarget.id)}
+            onClick={notify}
           ></MenuItems>
         </Menu>
       </div>

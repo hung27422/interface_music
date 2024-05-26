@@ -29,6 +29,8 @@
 .icon-arrow + .icon-arrow {
   opacity: 0.6;
 }
+.box-search {
+}
 .search {
   display: flex;
   align-items: center;
@@ -60,6 +62,16 @@
   background-color: var(--white);
   border-radius: 8px;
   padding: 8px;
+  max-height: calc(100vh - 140px);
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.item-song {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .css-wudn58 {
   border: 1px solid;
@@ -88,6 +100,7 @@
   padding: 10px;
   width: 20px;
   height: 20px;
+  outline: none;
 }
 .avt-user {
   margin-left: 14px;
@@ -98,4 +111,30 @@
 }
 .box-search {
   z-index: 99;
+}
+.top-suggest {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--text-color);
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  &:hover {
+    background-color: hsla(0, 11%, 61%, 0.102);
+  }
+}
+.img-suggest {
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+    rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.info-top-suggest {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+.suggest-title {
+  font-size: 1.4rem;
+  font-weight: 700;
 }

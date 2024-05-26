@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 import useDataHome from "@/components/hooks/useDataHome";
 import { useContext, useEffect, useRef, useState } from "react";
 import SliderItem from "@/components/Slider/Slider";
-import NewRelease from "@/components/NewRelease/NewRelease";
+import NewReleaseItem from "@/components/NewReleaseItem/NewReleaseItem";
 import {
   IHome,
   IRadio,
@@ -52,7 +52,7 @@ export default function Home() {
           <div className={cx("container")}>
             {newRelease?.map((item: IHomeProps, index: number) => (
               <div key={index} className={cx("new-release")}>
-                <NewRelease
+                <NewReleaseItem
                   dataAll={item.items.all}
                   dataVietnamese={item.items.vPop}
                   dataOthers={item.items.others}

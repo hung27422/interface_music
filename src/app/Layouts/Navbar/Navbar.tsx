@@ -1,6 +1,8 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./Navbar.module.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowLeft,
@@ -16,6 +18,8 @@ import images from "@/assets/images/images";
 import Search from "./Search";
 const cx = classNames.bind(styles);
 function Navbar() {
+  const notify = () =>
+    toast("Chức năng chưa phát triển. Bạn quay lại sau nhé ^.^");
   return (
     <div className={cx("wrapper")}>
       <div className={cx("navbar-left")}>
@@ -28,10 +32,18 @@ function Navbar() {
       <div className={cx("navbar-right")}>
         <div className={cx("icon-list")}>
           <Tippy content="Tải về">
-            <FontAwesomeIcon className={cx("icon-item")} icon={faDownload} />
+            <FontAwesomeIcon
+              onClick={notify}
+              className={cx("icon-item")}
+              icon={faDownload}
+            />
           </Tippy>
           <Tippy content="Cài đặt">
-            <FontAwesomeIcon className={cx("icon-item")} icon={faGear} />
+            <FontAwesomeIcon
+              onClick={notify}
+              className={cx("icon-item")}
+              icon={faGear}
+            />
           </Tippy>
           <Image
             className={cx("avt-user")}

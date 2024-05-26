@@ -1,9 +1,10 @@
 import classNames from "classnames/bind";
-import styles from "./NewRelease.module.scss";
+import styles from "./NewReleaseItem.module.scss";
 import MediaSong from "../MediaSong/MediaSong";
 const cx = classNames.bind(styles);
 import { InfoSong, ITypeNewRelease } from "../../Interfaces/Interface";
 import { useState } from "react";
+import Link from "next/link";
 function NewRelease({ dataAll, dataVietnamese, dataOthers }: ITypeNewRelease) {
   const [activeId, setActiveId] = useState("1");
   const handleChangeSection = (id: string) => {
@@ -37,7 +38,9 @@ function NewRelease({ dataAll, dataVietnamese, dataOthers }: ITypeNewRelease) {
           </button>
         </div>
         <div>
-          <button className={cx("btn-all")}>Tất cả {`>`}</button>
+          <Link href={"/Pages/NewRelease"} className={cx("btn-all")}>
+            Tất cả {`>`}
+          </Link>
         </div>
       </div>
       <div className={cx("list-song")}>
