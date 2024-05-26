@@ -13,14 +13,18 @@ import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import useGetDataSearch from "@/components/hooks/useGetDataSearch";
 import { InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Search() {
   const { data } = useGetDataSearch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { resultSearch, setResultSearch } = React.useContext(MusicContext);
+  const { setEncodeIdPlaylist } = React.useContext(MusicContext);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
   const popperRef = React.useRef<HTMLDivElement>(null);
   const handleClickOutside = (event: MouseEvent) => {
     if (
@@ -41,13 +45,13 @@ export default function Search() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [anchorEl]);
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
 
   const handleValueSearch = (value: string) => {
     setResultSearch(value);
   };
-
+  const handleSearchChangPage = (encodeId: string) => {
+    setEncodeIdPlaylist(encodeId);
+  };
   return (
     <div className={cx("box-search")}>
       <button aria-describedby={id} type="button" onClick={handleClick}>
@@ -97,7 +101,14 @@ export default function Search() {
                 .map((item: InfoSong, index: number) => {
                   return (
                     <div key={index}>
-                      <div className={cx("top-suggest")}>
+                      <Link
+                        id={item?.encodeId}
+                        href={"/Pages/Album"}
+                        onClick={(e) =>
+                          handleSearchChangPage(e.currentTarget.id)
+                        }
+                        className={cx("top-suggest")}
+                      >
                         <Image
                           src={item?.thumbnailM}
                           alt="img-top-suggest"
@@ -113,7 +124,7 @@ export default function Search() {
                             {item?.artistsNames}
                           </span>
                         </div>
-                      </div>
+                      </Link>
                     </div>
                   );
                 })}

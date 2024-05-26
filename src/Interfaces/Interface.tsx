@@ -2,6 +2,7 @@ export interface IHome {
   sectionType: string;
 }
 export interface InfoSong {
+  album: any;
   encodeId: string;
   title: string;
   artistsNames: string;

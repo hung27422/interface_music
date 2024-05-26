@@ -96,7 +96,7 @@ function Album() {
                     className={cx("album-detail-playlist-right-info-header")}
                   >
                     <span>BÀI HÁT</span>
-                    <span>ALBUM</span>
+                    <span style={{ marginLeft: "70px" }}>ALBUM</span>
                     <span>THỜI GIAN</span>
                   </div>
                   <div className={cx("album-detail-playlist-right-list-song")}>

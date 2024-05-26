@@ -31,7 +31,7 @@ function Artists() {
   const flatMaylikeArtist = maylikeArtist?.flatMap(
     (item: IArtist) => item.items ?? []
   );
-
+  const biography = result?.biography.replace(/<br>/g, "");
   return (
     <div className={cx("wrapper")}>
       {isLoading ? (
@@ -116,7 +116,7 @@ function Artists() {
                 }}
               ></div>
               <div className={cx("des-artist")}>
-                <span>{result?.biography}</span>
+                <span>{biography}</span>
                 <span>{result?.totalFollow}</span>
                 <span>người quan tâm</span>
               </div>
