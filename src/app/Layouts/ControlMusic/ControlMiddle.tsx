@@ -14,16 +14,25 @@ import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import { PauseIcon } from "@/components/Icons/Icons";
 import useGetDataInfoSong from "@/components/hooks/useGetDataInfoSong";
 import { toast } from "react-toastify";
+import useFormatDuration from "@/components/hooks/useFormatDuration";
 
 const cx = classNames.bind(styles);
 function ControlMiddle() {
-  const { activePlay, setActivePlay } = useContext(MusicContext);
-  const { encodeIdSong, setEncodeIdSong } = useContext(MusicContext);
-  const { indexSong, setIndexSong } = useContext(MusicContext);
-  const { playlistContext, setPlaylistContext } = useContext(MusicContext);
   const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
-
   const { data } = useGetDataInfoSong();
+  const duration = useFormatDuration(data?.data?.duration);
+  const {
+    activePlay,
+    setActivePlay,
+    setEncodeIdSong,
+    indexSong,
+    setIndexSong,
+    playlistContext,
+    audioCurrentTime,
+    audioSeek,
+    audioRef,
+    audioDuration,
+  } = useContext(MusicContext);
 
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
@@ -45,6 +54,12 @@ function ControlMiddle() {
     }
     setEncodeIdSong(playlistContext[prevIndex].encodeId);
     setIndexSong(prevIndex);
+  };
+  const handleChangeSeek = (value: number) => {
+    const audio = audioRef.current;
+    if (audio !== null && audio !== undefined) {
+      audio.currentTime = (audioDuration / 100) * value;
+    }
   };
   useEffect(() => {
     if (data?.data?.streamingStatus === 2) {
@@ -84,7 +99,7 @@ function ControlMiddle() {
         </Tippy>
       </div>
       <div className={cx("control-duration")}>
-        <span className={cx("time-start")}>0:00</span>
+        <span className={cx("time-start")}>{formatTime(audioCurrentTime)}</span>
         <input
           className={cx("control-input")}
           type="range"
@@ -92,11 +107,18 @@ function ControlMiddle() {
           id="duration"
           min="0"
           max="100"
+          value={audioSeek}
+          onChange={(e) => handleChangeSeek(parseFloat(e.target.value))}
         />
-        <span className={cx("time-end")}>1:00</span>
+        <span className={cx("time-end")}>{duration}</span>
       </div>
     </div>
   );
 }
 
 export default ControlMiddle;
+const formatTime = (time: any) => {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+};
