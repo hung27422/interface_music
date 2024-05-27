@@ -9,10 +9,11 @@ import {
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import Tippy from "@tippyjs/react";
-import { ITrending, InfoSong } from "../../Interfaces/Interface";
-import { useEffect } from "react";
-import { Span } from "next/dist/trace";
+import { InfoSong } from "../../Interfaces/Interface";
+import { useContext, useEffect, useState } from "react";
 import useFormatDuration from "../hooks/useFormatDuration";
+import { MusicContext } from "../ContextMusic/ContextMusic";
+import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
 interface MediaSongProps {
   data: InfoSong;
@@ -20,6 +21,8 @@ interface MediaSongProps {
   trending?: boolean;
   zingChart?: string;
   weekly?: boolean;
+  index?: number;
+  playlist?: InfoSong[];
 }
 function MediaSong({
   data,
@@ -27,8 +30,25 @@ function MediaSong({
   trending,
   zingChart,
   weekly,
+  index,
+  playlist,
 }: MediaSongProps) {
   const duration = useFormatDuration(data?.duration);
+  const { encodeIdSong, setEncodeIdSong } = useContext(MusicContext);
+  const { activePlay, setActivePlay } = useContext(MusicContext);
+  const { indexSong, setIndexSong } = useContext(MusicContext);
+  const { playlistContext, setPlaylistContext } = useContext(MusicContext);
+  const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
+  const handlePlayMusic = (encodeId: string) => {
+    if (data?.streamingStatus === 2) {
+      notify();
+    } else {
+      setEncodeIdSong(encodeId);
+      setActivePlay(!activePlay);
+      setIndexSong(index ?? 0);
+      setPlaylistContext(playlist ?? []);
+    }
+  };
   return (
     <div
       className={cx(
@@ -55,15 +75,28 @@ function MediaSong({
             height={trending || weekly ? 40 : 60}
             className={cx("image-song", trending && "trending")}
           ></Image>
-          <div className={cx("icon-play", { control })}>
-            <FontAwesomeIcon icon={faPlay} />
+          <div
+            id={data?.encodeId}
+            onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+            className={cx(
+              "btn-icon-play",
+              { control },
+              activePlay && encodeIdSong === data?.encodeId && "icon-play"
+            )}
+          >
+            {activePlay && encodeIdSong === data?.encodeId ? (
+              <Image
+                src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+                alt="icon-play"
+                width={26}
+                height={26}
+                // className={cx("icon-play")}
+              ></Image>
+            ) : (
+              <FontAwesomeIcon className={cx("icon-pause")} icon={faPlay} />
+            )}
+
             <div className={cx("space")}></div>
-            {/* <Image
-              src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
-              alt="icon-play"
-              width={16}
-              height={16}
-            ></Image> */}
             <div className={cx("space")}></div>
           </div>
         </div>

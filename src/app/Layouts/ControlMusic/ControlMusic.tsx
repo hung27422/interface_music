@@ -14,13 +14,15 @@ import {
 } from "@/components/Icons";
 import Tippy from "@tippyjs/react";
 import ControlMiddle from "./ControlMiddle";
+import useGetDataInfoSong from "@/components/hooks/useGetDataInfoSong";
 
 const cx = classNames.bind(styles);
 function ControlMusic() {
+  const { data } = useGetDataInfoSong();
   return (
     <div className={cx("wrapper")}>
       <div className={cx("control-left")}>
-        <MediaSong control={"control"} />
+        <MediaSong data={data?.data} control={"control"} />
       </div>
       <div>
         <ControlMiddle />

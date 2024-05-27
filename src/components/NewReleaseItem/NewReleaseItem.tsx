@@ -49,7 +49,7 @@ function NewRelease({ dataAll, dataVietnamese, dataOthers }: ITypeNewRelease) {
             if (activeId === "1") {
               return (
                 <div key={index}>
-                  <MediaSong data={item} />
+                  <MediaSong data={item} index={index} playlist={dataAll} />
                 </div>
               );
             }
@@ -58,7 +58,11 @@ function NewRelease({ dataAll, dataVietnamese, dataOthers }: ITypeNewRelease) {
             if (activeId === "2") {
               return (
                 <div key={index}>
-                  <MediaSong data={item} />
+                  <MediaSong
+                    data={item}
+                    index={index}
+                    playlist={dataVietnamese}
+                  />
                 </div>
               );
             }
@@ -67,7 +71,7 @@ function NewRelease({ dataAll, dataVietnamese, dataOthers }: ITypeNewRelease) {
             if (activeId === "3") {
               return (
                 <div key={index}>
-                  <MediaSong data={item} />
+                  <MediaSong data={item} index={index} playlist={dataOthers} />
                 </div>
               );
             }

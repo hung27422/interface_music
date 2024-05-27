@@ -25,6 +25,7 @@
   background-color: hsla(0, 11%, 61%, 0.102);
   cursor: pointer;
 }
+
 .wrapper:hover .name-song {
   max-width: 200px;
   white-space: nowrap;
@@ -48,13 +49,16 @@
 .wrapper.trending:hover .media-duration {
   display: none;
 }
-.wrapper:hover .icon-play {
+.wrapper:hover .btn-icon-play {
   display: flex;
 }
 .wrapper:hover .media-right {
   display: flex;
 }
 .wrapper.trending:hover .media-right {
+  display: flex;
+}
+.wrapper.control:hover .media-right {
   display: flex;
 }
 .wrapper.control {
@@ -64,21 +68,21 @@
 .wrapper.control:hover {
   background-color: transparent;
 }
-.wrapper.control:hover .icon-play {
-  display: none;
+.wrapper.control:hover .icon-pause {
+  display: flex;
 }
 // Media Left
 .media-left {
   display: flex;
   align-items: center;
 }
-// .media-left .name-song,
-// .name-singer {
-//   overflow: hidden;
-//   text-overflow: ellipsis;
-//   white-space: nowrap;
-//   width: 200px;
-// }
+.media-left .name-song,
+.name-singer {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+}
 .media-left.weekly {
   width: 80% !important;
 }
@@ -99,7 +103,7 @@
   max-width: 100px;
 }
 .media-left.control {
-  width: fit-content;
+  width: fit-content !important;
 }
 .box-media {
   display: flex;
@@ -119,7 +123,7 @@
   border-radius: 6px;
   margin: 0 auto;
 }
-.icon-play {
+.btn-icon-play {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -132,6 +136,13 @@
   justify-content: center;
   align-items: center;
 }
+.btn-icon-play.icon-play {
+  display: block;
+}
+.icon-pause {
+  font-size: 2rem;
+  color: var(--white);
+}
 .space {
   visibility: hidden;
   opacity: 0;
@@ -140,7 +151,7 @@
   user-select: none;
   pointer-events: none;
 }
-.icon-play.control {
+.btn-icon-play.control {
   display: none;
 }
 .premium {
@@ -210,14 +221,15 @@
 .media-right {
   display: none;
   align-items: center;
+  cursor: pointer;
 }
 .media-right.weekly {
   width: 20%;
   margin-right: 10px;
 }
 .media-right.control {
-  display: block;
-  margin-left: 12px;
+  cursor: pointer;
+  display: flex;
 }
 .level-item {
   width: 12px;
@@ -230,4 +242,5 @@
   border-radius: 50%;
   color: var(--text-color);
   background-color: var(--secondary);
+  cursor: pointer;
 }

@@ -11,6 +11,7 @@ export interface InfoSong {
   thumbnailM: string;
   duration: number;
   streamingStatus: number;
+  // artists:
 }
 export interface ITypeNewRelease {
   items?: any;

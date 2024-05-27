@@ -11,6 +11,7 @@ import ControlMusic from "./Layouts/ControlMusic/ControlMusic";
 const cx = classNames.bind(styles);
 import ContextMusic from "@/components/ContextMusic/ContextMusic";
 import { ToastContainer } from "react-toastify";
+import Audio from "./Music/Audio";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,6 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <ContextMusic>
         <body className={inter.className}>
+          <Audio />
           <ToastContainer />
           <div className={cx("layout")}>
             <Navbar />
