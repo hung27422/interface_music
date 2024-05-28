@@ -1,4 +1,4 @@
-import { IChartHome } from "@/Interfaces/Interface";
+import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import useDataChartHome from "../hooks/useDataChartHome";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
@@ -139,7 +139,7 @@ function ZingChartLine() {
       {labels && datasets.length > 0 && (
         <Line ref={chartRef} data={chartData} options={options} />
       )}
-      {listSong?.map((item: IChartHome, index: number) => {
+      {listSong?.map((item: InfoSong, index: number) => {
         if (item.encodeId === selectedEncodeId)
           return (
             <div
@@ -151,7 +151,11 @@ function ZingChartLine() {
                 opacity: tooltipState.opacity,
               }}
             >
-              <MediaSong data={item} zingChart="zingChart" />
+              <MediaSong
+                data={item}
+                zingChart="zingChart"
+                playlist={listSong}
+              />
               <div className={cx("zing-chart-before")}></div>
             </div>
           );

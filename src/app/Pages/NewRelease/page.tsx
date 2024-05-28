@@ -67,7 +67,7 @@ function NewRelease() {
             return data?.map((item: InfoSong, index: number) => {
               return (
                 <div key={index}>
-                  <MediaSong trending={true} data={item} />
+                  <MediaSong trending={true} data={item} playlist={dataAll} />
                 </div>
               );
             });
@@ -78,7 +78,11 @@ function NewRelease() {
             return data?.map((item: InfoSong, index: number) => {
               return (
                 <div key={index}>
-                  <MediaSong trending={true} data={item} />
+                  <MediaSong
+                    trending={true}
+                    data={item}
+                    playlist={dataVietnamese}
+                  />
                 </div>
               );
             });
@@ -89,7 +93,11 @@ function NewRelease() {
             return data?.map((item: InfoSong, index: number) => {
               return (
                 <div key={index}>
-                  <MediaSong trending={true} data={item} />
+                  <MediaSong
+                    trending={true}
+                    data={item}
+                    playlist={dataOthers}
+                  />
                 </div>
               );
             });

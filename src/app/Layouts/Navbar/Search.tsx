@@ -87,7 +87,7 @@ export default function Search() {
                   .map((item: InfoSong, index: number) => {
                     return (
                       <div className={cx("item-song")} key={index}>
-                        <MediaSong data={item} />
+                        <MediaSong data={item} playlist={data?.data} />
                       </div>
                     );
                   })}

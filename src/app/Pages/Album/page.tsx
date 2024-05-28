@@ -13,6 +13,7 @@ import useFormatTime from "@/components/hooks/useFormatTime";
 import useFormatNumber from "@/components/hooks/useFormatNumber";
 import ArtistItems from "@/components/ArtistItems/ArtistItems";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
+import { list } from "postcss";
 const cx = classNames.bind(styles);
 function Album() {
   const { data, isLoading } = useGetDetailPlaylist();
@@ -108,7 +109,11 @@ function Album() {
                             "album-detail-playlist-right-item-song"
                           )}
                         >
-                          <MediaSong data={item} trending={true} />
+                          <MediaSong
+                            data={item}
+                            trending={true}
+                            playlist={listSong}
+                          />
                         </div>
                       );
                     })}

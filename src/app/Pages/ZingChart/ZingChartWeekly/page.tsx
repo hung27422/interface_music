@@ -88,7 +88,11 @@ function ZingChartWeekly() {
                       {nO}
                     </span>
                     <span className={cx("weekly-top-space")}>-</span>
-                    <MediaSong data={item} trending={true} />
+                    <MediaSong
+                      data={item}
+                      trending={true}
+                      playlist={dataWeeklyVN}
+                    />
                   </div>
                 );
               })}
@@ -108,7 +112,11 @@ function ZingChartWeekly() {
                       {nO}
                     </span>
                     <span className={cx("weekly-top-space")}>-</span>
-                    <MediaSong data={item} trending={true} />
+                    <MediaSong
+                      data={item}
+                      trending={true}
+                      playlist={dataWeeklyUSUK}
+                    />
                   </div>
                 );
               })}
@@ -128,7 +136,11 @@ function ZingChartWeekly() {
                       {nO}
                     </span>
                     <span className={cx("weekly-top-space")}>-</span>
-                    <MediaSong data={item} trending={true} />
+                    <MediaSong
+                      data={item}
+                      trending={true}
+                      playlist={dataWeeklyKorea}
+                    />
                   </div>
                 );
               })}

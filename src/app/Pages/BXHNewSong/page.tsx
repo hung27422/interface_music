@@ -11,7 +11,6 @@ const cx = classNames.bind(styles);
 
 function Top100() {
   const { data: dataTrending, isLoading } = useDataTrending();
-
   return (
     <div className={cx("wrapper")}>
       {isLoading ? (
@@ -42,7 +41,12 @@ function Top100() {
                         {nO}
                       </span>
                       <span className={cx("mh-trending-space")}>-</span>
-                      <MediaSong key={index} trending={true} data={item} />
+                      <MediaSong
+                        key={index}
+                        trending={true}
+                        data={item}
+                        playlist={dataTrending?.data.items}
+                      />
                     </div>
                   );
                 }

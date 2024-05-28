@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import useDataChartHome from "@/components/hooks/useDataChartHome";
 import { useContext, useEffect } from "react";
-import { IChartHome } from "@/Interfaces/Interface";
+import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import Link from "next/link";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
@@ -56,7 +56,7 @@ function WeeklyZingchart() {
               <div className={cx("weekly-content-list-song")}>
                 {item.items
                   ?.slice(0, 5)
-                  .map((itemI: IChartHome, index: number) => {
+                  .map((itemI: InfoSong, index: number) => {
                     const nO = index + 1;
                     return (
                       <div key={index} className={cx("weekly-content-item")}>
@@ -71,7 +71,12 @@ function WeeklyZingchart() {
                           {nO}
                         </span>
                         <span className={cx("weekly-top-space")}>-</span>
-                        <MediaSong data={itemI} trending={true} weekly={true} />
+                        <MediaSong
+                          data={itemI}
+                          trending={true}
+                          weekly={true}
+                          playlist={item.items}
+                        />
                       </div>
                     );
                   })}

@@ -63,7 +63,12 @@ function Trending() {
                         {nO}
                       </span>
                       <span className={cx("mh-trending-space")}>-</span>
-                      <MediaSong key={index} trending={true} data={item} />
+                      <MediaSong
+                        key={index}
+                        trending={true}
+                        data={item}
+                        playlist={dataTrending?.data.items}
+                      />
                     </div>
                   );
                 })}

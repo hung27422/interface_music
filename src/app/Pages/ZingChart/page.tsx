@@ -61,7 +61,11 @@ function ZingChart() {
                             {nO}
                           </span>
                           <span className={cx("mh-trending-space")}>-</span>
-                          <MediaSong data={item} trending={true} />
+                          <MediaSong
+                            data={item}
+                            trending={true}
+                            playlist={listSong}
+                          />
                         </div>
                       );
                     })
@@ -83,7 +87,11 @@ function ZingChart() {
                           {nO}
                         </span>
                         <span className={cx("mh-trending-space")}>-</span>
-                        <MediaSong data={item} trending={true} />
+                        <MediaSong
+                          data={item}
+                          trending={true}
+                          playlist={listSong}
+                        />
                       </div>
                     );
                   })}

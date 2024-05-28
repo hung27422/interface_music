@@ -77,7 +77,7 @@ function Artists() {
                     .map((item: InfoSong, index: number) => {
                       return (
                         <div key={index}>
-                          <MediaSong data={item} />
+                          <MediaSong data={item} playlist={songFeature} />
                         </div>
                       );
                     });
