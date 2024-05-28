@@ -2,21 +2,22 @@
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import useGetDataInfoSong from "@/components/hooks/useGetDataInfoSong";
 import useGetDataSong from "@/components/hooks/useGetDataSong";
-import { useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect, useRef } from "react";
 
 function Audio() {
   const { data } = useGetDataSong();
   const audioPlay = data?.data?.["128"];
   const {
+    activePlay,
     audioCurrentTime,
     setAudioCurrentTime,
     audioDuration,
     setAudioDuration,
     setAudioSeek,
     audioRef,
+    audioRepeatSong,
   } = useContext(MusicContext);
-
-  const { activePlay } = useContext(MusicContext);
+  //Handle Play, Pause Song
   useEffect(() => {
     if (audioRef.current && audioPlay) {
       if (activePlay) {
@@ -28,6 +29,15 @@ function Audio() {
       }
     }
   }, [activePlay, audioPlay, audioRef]);
+  // Handle Repeat Song
+  const handleEnded = () => {
+    if (audioRepeatSong) {
+      if (audioRef.current !== null && audioRef.current !== undefined) {
+        audioRef.current.play();
+      }
+    }
+  };
+
   const handleTimeUpdate = () => {
     setAudioCurrentTime(audioRef.current?.currentTime ?? 0);
     const percent = Math.floor((audioCurrentTime / audioDuration) * 100);
@@ -37,11 +47,12 @@ function Audio() {
     <div>
       <audio
         ref={audioRef}
+        src={audioPlay}
         onTimeUpdate={handleTimeUpdate}
         onLoadedData={(e) => {
           setAudioDuration(parseFloat(e.currentTarget.duration.toFixed(2)));
         }}
-        src={audioPlay}
+        onEnded={handleEnded}
       ></audio>
     </div>
   );

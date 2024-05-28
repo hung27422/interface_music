@@ -9,7 +9,7 @@ import {
   RepeatIcon,
 } from "@/components/Icons";
 import Tippy from "@tippyjs/react";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import { PauseIcon } from "@/components/Icons/Icons";
 import useGetDataInfoSong from "@/components/hooks/useGetDataInfoSong";
@@ -24,6 +24,7 @@ function ControlMiddle() {
   const {
     activePlay,
     setActivePlay,
+    encodeIdSong,
     setEncodeIdSong,
     indexSong,
     setIndexSong,
@@ -32,34 +33,54 @@ function ControlMiddle() {
     audioSeek,
     audioRef,
     audioDuration,
+    audioRepeatSong,
+    setAudioRepeatSong,
+    audioRandomSong,
+    setAudioRandomSong,
   } = useContext(MusicContext);
-
+  const [history, setHistory] = useState<string[]>([]);
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
   };
+  console.log("htr", history);
 
   const handleNextSong = () => {
-    let nextIndex = indexSong + 1;
-    if (nextIndex >= playlistContext.length) {
-      nextIndex = playlistContext.length - 1;
+    let nextIndex = 0;
+    if (audioRandomSong) {
+      nextIndex =
+        Math.floor(Math.random() * playlistContext.length) %
+        playlistContext.length;
+    } else {
+      nextIndex = indexSong + 1;
     }
+    if (nextIndex >= playlistContext.length) {
+      nextIndex = 0;
+    }
+    setHistory((prev) => [...prev, playlistContext[indexSong]?.encodeId]);
     setEncodeIdSong(playlistContext[nextIndex]?.encodeId);
     setIndexSong(nextIndex);
   };
   const handlePrevSong = () => {
-    let prevIndex = indexSong - 1;
-    if (prevIndex === 0) {
-      prevIndex = 0;
+    if (history.length > 0) {
+      const prevEncodeId = history[history.length - 1];
+      setHistory((prev) => prev.slice(0, -1));
+      setEncodeIdSong(prevEncodeId);
     }
-    setEncodeIdSong(playlistContext[prevIndex].encodeId);
-    setIndexSong(prevIndex);
   };
   const handleChangeSeek = (value: number) => {
     const audio = audioRef.current;
     if (audio !== null && audio !== undefined) {
       audio.currentTime = (audioDuration / 100) * value;
     }
+  };
+  const handleRepeatSong = () => {
+    setAudioRepeatSong(!audioRepeatSong);
+    setAudioRandomSong(false);
+  };
+  const handleRandomSong = () => {
+    setAudioRandomSong(!audioRandomSong);
+    setAudioRepeatSong(false);
   };
   useEffect(() => {
     if (data?.data?.streamingStatus === 2) {
@@ -70,18 +91,27 @@ function ControlMiddle() {
 
       return () => clearTimeout(next);
     }
-  }, [data?.data?.streamingStatus]); //
+  }, [data?.data?.streamingStatus, encodeIdSong]); //
   return (
     <div className={cx("control-middle")}>
       <div className={cx("control-btn")}>
+        {/* Random */}
         <Tippy content="Phát ngẫu nhiên">
-          <button className={cx("control-btn-item")}>
+          <button
+            onClick={handleRandomSong}
+            className={cx("control-btn-item", audioRandomSong && "active")}
+          >
             <RandomIcon></RandomIcon>
           </button>
         </Tippy>
-        <button onClick={handlePrevSong} className={cx("control-btn-item")}>
+        {/* Prev */}
+        <button
+          onClick={handlePrevSong}
+          className={cx("control-btn-item", history.length === 0 && "disabled")}
+        >
           <PrevIcon></PrevIcon>
         </button>
+        {/* Play & Pause */}
         <button
           id={data?.data?.encodeId}
           onClick={(e) => handlePlayMusic(e.currentTarget.id)}
@@ -89,11 +119,16 @@ function ControlMiddle() {
         >
           {activePlay ? <PauseIcon /> : <PlayIcon></PlayIcon>}
         </button>
+        {/* Next */}
         <button onClick={handleNextSong} className={cx("control-btn-item")}>
           <NextIcon></NextIcon>
         </button>
+        {/* Repeat */}
         <Tippy content="Lặp lại bài hát">
-          <button className={cx("control-btn-item")}>
+          <button
+            onClick={handleRepeatSong}
+            className={cx("control-btn-item", audioRepeatSong && "active")}
+          >
             <RepeatIcon></RepeatIcon>
           </button>
         </Tippy>

@@ -57,3 +57,16 @@
   width: 70px;
   height: 4px;
 }
+.active {
+  border: 3px solid var(--text-color);
+  border-radius: 50%;
+  width: 41px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

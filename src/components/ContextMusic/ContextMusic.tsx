@@ -28,6 +28,10 @@ interface MusicContextType {
   audioSeek: number;
   setAudioSeek: React.Dispatch<React.SetStateAction<number>>;
   audioRef: React.RefObject<HTMLAudioElement>;
+  audioRepeatSong: boolean;
+  setAudioRepeatSong: React.Dispatch<React.SetStateAction<boolean>>;
+  audioRandomSong: boolean;
+  setAudioRandomSong: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Provide a default value for the context
@@ -55,9 +59,14 @@ const defaultValue: MusicContextType = {
   audioSeek: 0,
   setAudioSeek: () => {},
   audioRef: { current: null } as React.RefObject<HTMLAudioElement>,
+  audioRepeatSong: false,
+  setAudioRepeatSong: () => {},
+  audioRandomSong: false,
+  setAudioRandomSong: () => {},
 };
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [typeWeekly, setTypeWeekly] = useState<string>("");
   const [encodeIdPlaylist, setEncodeIdPlaylist] = useState<string>("");
   const [aliasArtist, setAliasArtist] = useState<string>("");
@@ -69,7 +78,8 @@ function ContextMusic({ children }: Props) {
   const [audioCurrentTime, setAudioCurrentTime] = useState<number>(0);
   const [audioDuration, setAudioDuration] = useState<number>(0);
   const [audioSeek, setAudioSeek] = useState<number>(0);
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const [audioRepeatSong, setAudioRepeatSong] = useState<boolean>(false);
+  const [audioRandomSong, setAudioRandomSong] = useState<boolean>(false);
 
   const contextValue = {
     typeWeekly,
@@ -95,6 +105,10 @@ function ContextMusic({ children }: Props) {
     audioSeek,
     setAudioSeek,
     audioRef,
+    audioRepeatSong,
+    setAudioRepeatSong,
+    audioRandomSong,
+    setAudioRandomSong,
   };
   return (
     <MusicContext.Provider value={contextValue}>
