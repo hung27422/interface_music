@@ -33,6 +33,10 @@ interface MusicContextType {
   setAudioRepeatSong: React.Dispatch<React.SetStateAction<boolean>>;
   audioRandomSong: boolean;
   setAudioRandomSong: React.Dispatch<React.SetStateAction<boolean>>;
+  audioVolume: number;
+  setAudioVolume: React.Dispatch<React.SetStateAction<number>>;
+  audioMute: boolean;
+  setAudioMute: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 // Provide a default value for the context
@@ -65,6 +69,10 @@ const defaultValue: MusicContextType = {
   setAudioRepeatSong: () => {},
   audioRandomSong: false,
   setAudioRandomSong: () => {},
+  audioVolume: 1,
+  setAudioVolume: () => {},
+  audioMute: false,
+  setAudioMute: () => {},
 };
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
@@ -83,6 +91,8 @@ function ContextMusic({ children }: Props) {
   const [audioSeek, setAudioSeek] = useState<number>(0);
   const [audioRepeatSong, setAudioRepeatSong] = useState<boolean>(false);
   const [audioRandomSong, setAudioRandomSong] = useState<boolean>(false);
+  const [audioVolume, setAudioVolume] = useState<number>(1);
+  const [audioMute, setAudioMute] = useState<boolean>(false);
 
   const contextValue = {
     audioRef,
@@ -113,6 +123,10 @@ function ContextMusic({ children }: Props) {
     setAudioRepeatSong,
     audioRandomSong,
     setAudioRandomSong,
+    audioVolume,
+    setAudioVolume,
+    audioMute,
+    setAudioMute,
   };
   return (
     <MusicContext.Provider value={contextValue}>

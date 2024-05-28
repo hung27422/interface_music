@@ -15,6 +15,7 @@ import {
 import Tippy from "@tippyjs/react";
 import ControlMiddle from "./ControlMiddle";
 import useGetDataInfoSong from "@/components/hooks/useGetDataInfoSong";
+import ControlRight from "./ControlRight";
 
 const cx = classNames.bind(styles);
 function ControlMusic() {
@@ -28,25 +29,7 @@ function ControlMusic() {
         <ControlMiddle />
       </div>
       <div className={cx("control-right")}>
-        <Tippy content="MV">
-          <button className={cx("control-btn-item")}>
-            <MVIcon></MVIcon>
-          </button>
-        </Tippy>
-        <Tippy content="Xem lời bài hát">
-          <button className={cx("control-btn-item")}>
-            <MicroIcon></MicroIcon>
-          </button>
-        </Tippy>
-        <button className={cx("btn-sound", "control-btn-item")}>
-          <SoundIcon></SoundIcon>
-          <input
-            className={cx("control-sound")}
-            type="range"
-            name="sound"
-            id="sound"
-          />
-        </button>
+        <ControlRight />
       </div>
     </div>
   );

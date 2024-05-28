@@ -17,6 +17,10 @@ function Audio() {
     audioRef,
     audioRepeatSong,
     autoClick,
+    audioVolume,
+    setAudioVolume,
+    audioMute,
+    setAudioMute,
   } = useContext(MusicContext);
   //Handle Play, Pause Song
   useEffect(() => {
@@ -30,6 +34,16 @@ function Audio() {
       }
     }
   }, [activePlay, audioPlay, audioRef]);
+  // Handle Change Volume
+  useEffect(() => {
+    if (audioRef.current) {
+      if (!audioMute) {
+        audioRef.current.volume = audioVolume;
+      } else {
+        audioRef.current.volume = 0;
+      }
+    }
+  }, [audioMute, audioRef, audioVolume, setAudioVolume]);
   // Handle Repeat Song
   const handleEnded = () => {
     if (audioRepeatSong) {
@@ -40,7 +54,6 @@ function Audio() {
       autoClick.current?.click();
     }
   };
-
   const handleTimeUpdate = () => {
     setAudioCurrentTime(audioRef.current?.currentTime ?? 0);
     const percent = Math.floor((audioCurrentTime / audioDuration) * 100);

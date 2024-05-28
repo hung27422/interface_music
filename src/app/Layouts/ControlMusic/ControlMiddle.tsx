@@ -44,8 +44,6 @@ function ControlMiddle() {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
   };
-  console.log("htr", history);
-
   const handleNextSong = () => {
     let nextIndex = 0;
     if (audioRandomSong) {
