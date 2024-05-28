@@ -1,10 +1,12 @@
 "use client";
 import { InfoSong } from "@/Interfaces/Interface";
-import { createContext, useState, ReactNode, useRef } from "react";
+import React, { createContext, useState, ReactNode, useRef } from "react";
 interface Props {
   children: ReactNode;
 }
 interface MusicContextType {
+  audioRef: React.RefObject<HTMLAudioElement>;
+  autoClick: React.RefObject<HTMLButtonElement>;
   typeWeekly: string;
   setTypeWeekly: React.Dispatch<React.SetStateAction<string>>;
   encodeIdPlaylist: string;
@@ -27,7 +29,6 @@ interface MusicContextType {
   setAudioDuration: React.Dispatch<React.SetStateAction<number>>;
   audioSeek: number;
   setAudioSeek: React.Dispatch<React.SetStateAction<number>>;
-  audioRef: React.RefObject<HTMLAudioElement>;
   audioRepeatSong: boolean;
   setAudioRepeatSong: React.Dispatch<React.SetStateAction<boolean>>;
   audioRandomSong: boolean;
@@ -36,6 +37,8 @@ interface MusicContextType {
 
 // Provide a default value for the context
 const defaultValue: MusicContextType = {
+  audioRef: { current: null } as React.RefObject<HTMLAudioElement>,
+  autoClick: { current: null },
   typeWeekly: "",
   setTypeWeekly: () => {},
   encodeIdPlaylist: "",
@@ -58,7 +61,6 @@ const defaultValue: MusicContextType = {
   setAudioDuration: () => {},
   audioSeek: 0,
   setAudioSeek: () => {},
-  audioRef: { current: null } as React.RefObject<HTMLAudioElement>,
   audioRepeatSong: false,
   setAudioRepeatSong: () => {},
   audioRandomSong: false,
@@ -67,6 +69,7 @@ const defaultValue: MusicContextType = {
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const autoClick = useRef<HTMLButtonElement>(null);
   const [typeWeekly, setTypeWeekly] = useState<string>("");
   const [encodeIdPlaylist, setEncodeIdPlaylist] = useState<string>("");
   const [aliasArtist, setAliasArtist] = useState<string>("");
@@ -82,6 +85,8 @@ function ContextMusic({ children }: Props) {
   const [audioRandomSong, setAudioRandomSong] = useState<boolean>(false);
 
   const contextValue = {
+    audioRef,
+    autoClick,
     typeWeekly,
     setTypeWeekly,
     encodeIdPlaylist,
@@ -104,7 +109,6 @@ function ContextMusic({ children }: Props) {
     setAudioDuration,
     audioSeek,
     setAudioSeek,
-    audioRef,
     audioRepeatSong,
     setAudioRepeatSong,
     audioRandomSong,

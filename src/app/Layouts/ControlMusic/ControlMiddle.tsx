@@ -37,6 +37,7 @@ function ControlMiddle() {
     setAudioRepeatSong,
     audioRandomSong,
     setAudioRandomSong,
+    autoClick,
   } = useContext(MusicContext);
   const [history, setHistory] = useState<string[]>([]);
   const handlePlayMusic = (encodeId: string) => {
@@ -120,7 +121,11 @@ function ControlMiddle() {
           {activePlay ? <PauseIcon /> : <PlayIcon></PlayIcon>}
         </button>
         {/* Next */}
-        <button onClick={handleNextSong} className={cx("control-btn-item")}>
+        <button
+          ref={autoClick}
+          onClick={handleNextSong}
+          className={cx("control-btn-item")}
+        >
           <NextIcon></NextIcon>
         </button>
         {/* Repeat */}

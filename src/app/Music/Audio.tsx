@@ -16,6 +16,7 @@ function Audio() {
     setAudioSeek,
     audioRef,
     audioRepeatSong,
+    autoClick,
   } = useContext(MusicContext);
   //Handle Play, Pause Song
   useEffect(() => {
@@ -35,6 +36,8 @@ function Audio() {
       if (audioRef.current !== null && audioRef.current !== undefined) {
         audioRef.current.play();
       }
+    } else {
+      autoClick.current?.click();
     }
   };
 
