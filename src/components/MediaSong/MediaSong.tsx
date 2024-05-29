@@ -34,11 +34,16 @@ function MediaSong({
   playlist,
 }: MediaSongProps) {
   const duration = useFormatDuration(data?.duration);
-  const { encodeIdSong, setEncodeIdSong } = useContext(MusicContext);
-  const { activePlay, setActivePlay } = useContext(MusicContext);
-  const { indexSong, setIndexSong } = useContext(MusicContext);
-  const { playlistContext, setPlaylistContext } = useContext(MusicContext);
   const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
+  const {
+    encodeIdSong,
+    setEncodeIdSong,
+    activePlay,
+    setActivePlay,
+    setIndexSong,
+    setPlaylistContext,
+  } = useContext(MusicContext);
+
   const handlePlayMusic = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
       notify();

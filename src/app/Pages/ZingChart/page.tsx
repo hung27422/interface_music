@@ -10,6 +10,7 @@ import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import WeeklyZingchart from "./WeeklyZingchart";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
+import TitlePage from "@/components/TitlePage/TitlePage";
 
 const cx = classNames.bind(styles);
 
@@ -29,12 +30,7 @@ function ZingChart() {
         <div className={cx("wrapper")}>
           <div className={cx("mh-chart")}>
             <div className={cx("mh-chart-title")}>
-              <h2 className={cx("title", "title-text-box-color")}>
-                #ZingChart
-              </h2>
-              <div className={cx("title-btn-icon-play", "title-icon")}>
-                <FontAwesomeIcon className={cx("btn-play")} icon={faPlay} />
-              </div>
+              <TitlePage data={listSong} title="ZingChart" show />
             </div>
             <div className={cx("zing-chart")}>
               <ZingChartLine />

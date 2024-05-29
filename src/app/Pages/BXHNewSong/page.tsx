@@ -7,6 +7,7 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { InfoSong } from "@/Interfaces/Interface";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
+import TitlePage from "@/components/TitlePage/TitlePage";
 const cx = classNames.bind(styles);
 
 function Top100() {
@@ -18,10 +19,11 @@ function Top100() {
       ) : (
         <>
           <div className={cx("header")}>
-            <h2 className={cx("title")}>BHX Nhạc Mới</h2>
-            <div className={cx("btn-icon")}>
-              <FontAwesomeIcon className={cx("btn-play")} icon={faPlay} />
-            </div>
+            <TitlePage
+              title="BXH Nhạc Mới"
+              show
+              data={dataTrending?.data.items}
+            />
           </div>
           <div className={cx("container")}>
             <div className={cx("content")}>

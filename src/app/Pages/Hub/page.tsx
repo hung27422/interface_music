@@ -6,6 +6,7 @@ import useDataHome from "@/components/hooks/useDataHome";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 import HubHotItem from "@/components/HubHotItem/HubHotItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
+import TitlePage from "@/components/TitlePage/TitlePage";
 const cx = classNames.bind(styles);
 function Hub() {
   const { data, isLoading } = useDataHome();
@@ -19,7 +20,7 @@ function Hub() {
         <SpinnerLoading />
       ) : (
         <div className={cx("wrapper")}>
-          <h2 className={cx("title-text-box-color")}>Chủ đề & Thể loại</h2>
+          <TitlePage title="Chủ đề và Thể loại" data={playlist} />
           <div className={cx("hub-hot")}>
             <h2>Nổi bật</h2>
             <div className={cx("list-hot-hub")}>

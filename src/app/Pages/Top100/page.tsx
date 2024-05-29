@@ -7,6 +7,7 @@ import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist"
 import Image from "next/image";
 import images from "@/assets/images/images";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
+import TitlePage from "@/components/TitlePage/TitlePage";
 const cx = classNames.bind(styles);
 
 function Top100() {
@@ -29,9 +30,7 @@ function Top100() {
             width={1178}
             height={400}
           ></Image>
-          <h2 className={cx("title-text-box-color", "banner-title")}>
-            Nổi bật
-          </h2>
+          <TitlePage title="Nổi bật" data={top100} />
           <div className={cx("box-top100")}>
             {top100?.map((item: ISectionPlaylist, index: number) => (
               <div key={index} className={cx("mh-section-playlist")}>
