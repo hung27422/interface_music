@@ -53,9 +53,9 @@ export default function Home() {
             {newRelease?.map((item: IHomeProps, index: number) => (
               <div key={index} className={cx("new-release")}>
                 <NewReleaseItem
-                  dataAll={item.items.all}
-                  dataVietnamese={item.items.vPop}
-                  dataOthers={item.items.others}
+                  dataAll={item.items?.all}
+                  dataVietnamese={item.items?.vPop}
+                  dataOthers={item.items?.others}
                 />
               </div>
             ))}

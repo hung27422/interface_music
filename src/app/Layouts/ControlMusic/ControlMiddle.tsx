@@ -18,9 +18,9 @@ import useFormatDuration from "@/components/hooks/useFormatDuration";
 
 const cx = classNames.bind(styles);
 function ControlMiddle() {
-  const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
   const { data } = useGetDataInfoSong();
-  const duration = useFormatDuration(data?.data?.duration);
+  const [playlistLocal, setPlaylistLocal] = useState(null);
+  const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
   const {
     activePlay,
     setActivePlay,
@@ -38,27 +38,44 @@ function ControlMiddle() {
     audioRandomSong,
     setAudioRandomSong,
     autoClick,
+    dataStorage,
   } = useContext(MusicContext);
+
+  const dataSong = data?.data ? data.data : dataStorage;
+  const duration = useFormatDuration(dataSong?.duration);
+  const dataPlaylist =
+    playlistContext.length > 0 ? playlistContext : playlistLocal;
+  // Lấy dữ liệu của localStorage "currentPlaylist" set cho setPlaylistLocal
+  useEffect(() => {
+    const storedDataPlaylist = localStorage.getItem("currentPlaylist");
+    if (storedDataPlaylist) {
+      const storedPlaylist = JSON.parse(storedDataPlaylist);
+      setPlaylistLocal(storedPlaylist);
+    }
+  }, []);
+
   const [history, setHistory] = useState<string[]>([]);
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
   };
+
   const handleNextSong = () => {
     let nextIndex = 0;
-    if (audioRandomSong) {
-      nextIndex =
-        Math.floor(Math.random() * playlistContext.length) %
-        playlistContext.length;
-    } else {
-      nextIndex = indexSong + 1;
+    if (dataPlaylist) {
+      if (audioRandomSong) {
+        nextIndex =
+          Math.floor(Math.random() * dataPlaylist.length) % dataPlaylist.length;
+      } else {
+        nextIndex = indexSong + 1;
+      }
+      if (nextIndex >= dataPlaylist.length) {
+        nextIndex = 0;
+      }
+      setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
+      setEncodeIdSong(dataPlaylist[nextIndex]?.encodeId);
+      setIndexSong(nextIndex);
     }
-    if (nextIndex >= playlistContext.length) {
-      nextIndex = 0;
-    }
-    setHistory((prev) => [...prev, playlistContext[indexSong]?.encodeId]);
-    setEncodeIdSong(playlistContext[nextIndex]?.encodeId);
-    setIndexSong(nextIndex);
   };
   const handlePrevSong = () => {
     if (history.length > 0) {
@@ -112,7 +129,7 @@ function ControlMiddle() {
         </button>
         {/* Play & Pause */}
         <button
-          id={data?.data?.encodeId}
+          id={dataSong?.encodeId}
           onClick={(e) => handlePlayMusic(e.currentTarget.id)}
           className={cx("control-btn-item")}
         >
@@ -137,7 +154,9 @@ function ControlMiddle() {
         </Tippy>
       </div>
       <div className={cx("control-duration")}>
-        <span className={cx("time-start")}>{formatTime(audioCurrentTime)}</span>
+        <span className={cx("time-start")}>
+          {audioCurrentTime ? formatTime(audioCurrentTime) : "0:00"}
+        </span>
         <input
           className={cx("control-input")}
           type="range"

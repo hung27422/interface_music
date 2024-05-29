@@ -37,6 +37,8 @@ interface MusicContextType {
   setAudioVolume: React.Dispatch<React.SetStateAction<number>>;
   audioMute: boolean;
   setAudioMute: React.Dispatch<React.SetStateAction<boolean>>;
+  dataStorage: {};
+  setDataStorage: React.Dispatch<React.SetStateAction<{}>>;
 }
 
 // Provide a default value for the context
@@ -73,6 +75,8 @@ const defaultValue: MusicContextType = {
   setAudioVolume: () => {},
   audioMute: false,
   setAudioMute: () => {},
+  dataStorage: {},
+  setDataStorage: () => {},
 };
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
@@ -93,6 +97,7 @@ function ContextMusic({ children }: Props) {
   const [audioRandomSong, setAudioRandomSong] = useState<boolean>(false);
   const [audioVolume, setAudioVolume] = useState<number>(1);
   const [audioMute, setAudioMute] = useState<boolean>(false);
+  const [dataStorage, setDataStorage] = useState<{}>({});
 
   const contextValue = {
     audioRef,
@@ -127,6 +132,8 @@ function ContextMusic({ children }: Props) {
     setAudioVolume,
     audioMute,
     setAudioMute,
+    dataStorage,
+    setDataStorage,
   };
   return (
     <MusicContext.Provider value={contextValue}>

@@ -9,16 +9,18 @@ const cx = classNames.bind(styles);
 interface TitlePageProps {
   title: string;
   show?: boolean;
-  data: InfoSong[];
+  data?: InfoSong[];
 }
 function TitlePage({ title, show, data }: TitlePageProps) {
   const { setEncodeIdSong, activePlay, setActivePlay } =
     useContext(MusicContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const handlePlaySongRandom = () => {
-    let indexRadom = Math.floor(Math.random() * data.length) % data.length;
-    setEncodeIdSong(data[indexRadom]?.encodeId);
-    setActivePlay(true);
+    if (data) {
+      let indexRadom = Math.floor(Math.random() * data.length) % data.length;
+      setEncodeIdSong(data[indexRadom]?.encodeId);
+      setActivePlay(true);
+    }
   };
 
   return (

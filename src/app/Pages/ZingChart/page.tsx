@@ -2,11 +2,9 @@
 import classNames from "classnames/bind";
 import styles from "./ZingChart.module.scss";
 import useDataChartHome from "@/components/hooks/useDataChartHome";
-import { useEffect, useState } from "react";
-import { faL, faPlay } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 import ZingChartLine from "@/components/ZingChartLine/ZingChartLine";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IChartHome, InfoSong } from "@/Interfaces/Interface";
+import { InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import WeeklyZingchart from "./WeeklyZingchart";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";

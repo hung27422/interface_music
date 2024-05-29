@@ -33,8 +33,8 @@ function MediaSong({
   index,
   playlist,
 }: MediaSongProps) {
-  const duration = useFormatDuration(data?.duration);
   const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
+  const duration = useFormatDuration(data?.duration);
   const {
     encodeIdSong,
     setEncodeIdSong,
@@ -43,7 +43,6 @@ function MediaSong({
     setIndexSong,
     setPlaylistContext,
   } = useContext(MusicContext);
-
   const handlePlayMusic = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
       notify();
@@ -52,6 +51,8 @@ function MediaSong({
       setActivePlay(!activePlay);
       setIndexSong(index ?? 0);
       setPlaylistContext(playlist ?? []);
+      localStorage.setItem("currentSong", JSON.stringify(data));
+      localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
     }
   };
   return (

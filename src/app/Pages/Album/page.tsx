@@ -23,7 +23,6 @@ function Album() {
   const listArtist = data?.data?.artists;
   const totalDuration = useFormatTime(infoPlaylist?.song.totalDuration);
   const like = useFormatNumber(infoPlaylist?.like);
-  console.log("infoPlaylist", infoPlaylist);
 
   return (
     <div className={cx("wrapper")}>
