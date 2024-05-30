@@ -41,7 +41,7 @@ function ControlMusic() {
         <ControlMiddle />
       </div>
       <div className={cx("control-right")}>
-        <ControlRight />
+        <ControlRight data={songData} />
       </div>
     </div>
   );

@@ -62,6 +62,7 @@ function MediaSong({
       setPlaylistContext(playlist ?? []);
       localStorage.setItem("currentSong", JSON.stringify(data));
       localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+      localStorage.setItem("encodeIdLyric", JSON.stringify(encodeId));
     }
   };
   return (

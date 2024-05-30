@@ -4,9 +4,13 @@ import classNames from "classnames/bind";
 import styles from "./ControlMusic.module.scss";
 import { useContext, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
+import LyricSong from "@/components/LyricSong/LyricSong";
+import { InfoSong } from "@/Interfaces/Interface";
 const cx = classNames.bind(styles);
-
-function ControlRight() {
+interface ControlRightProps {
+  data: InfoSong;
+}
+function ControlRight({ data }: ControlRightProps) {
   const { audioVolume, setAudioVolume, audioMute, setAudioMute } =
     useContext(MusicContext);
   const [prevVolume, setPrevVolume] = useState(100);
@@ -31,9 +35,7 @@ function ControlRight() {
         </button>
       </Tippy>
       <Tippy content="Xem lời bài hát">
-        <button className={cx("control-btn-item")}>
-          <MicroIcon></MicroIcon>
-        </button>
+        <LyricSong data={data} />
       </Tippy>
       <div className={cx("control-volume")}>
         {!audioMute ? (

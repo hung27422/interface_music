@@ -1,0 +1,73 @@
+.wrapper {
+  background-color: var(--bg-homepage);
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow: hidden;
+  z-index: 99;
+}
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-left {
+  width: 30%;
+}
+.header-middle {
+  width: 60%;
+  text-align: center;
+}
+
+.header-middle-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-color);
+  padding: 4px 24px;
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--text-color);
+}
+.header-right {
+  width: 30%;
+  text-align: right;
+}
+.header-right-icon {
+  cursor: pointer;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--black);
+  padding: 4px 24px;
+  background-color: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--text-color);
+}
+.container {
+  display: flex;
+  margin-top: 20px;
+}
+.img-song {
+  border-radius: 16px;
+}
+.container-lyric {
+  max-height: 400px;
+  overflow: hidden auto;
+  text-align: center;
+  position: relative;
+  width: 600px;
+  -webkit-mask-image: linear-gradient(
+    175deg,
+    hsla(0, 0%, 100%, 0),
+    hsla(0, 0%, 100%, 0.8) 10%,
+    #fff 25%,
+    #fff 75%,
+    hsla(0, 0%, 100%, 0.8) 90%,
+    hsla(0, 0%, 100%, 0)
+  );
+}
+.container-lyric-item + .container-lyric-item {
+  margin-left: 4px;
+}
+.container-lyric::-webkit-scrollbar {
+  display: none; /* Ẩn thanh cuộn trên trình duyệt sử dụng WebKit (Chrome, Safari) */
+}

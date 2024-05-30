@@ -88,3 +88,9 @@ export interface IRadio {
   startTime: number;
   endTime: number;
 }
+export interface ILyric {
+  words: [];
+  data: string;
+  endTime: number;
+  startTime: number;
+}
