@@ -1,5 +1,5 @@
 "use client";
-import { InfoSong } from "@/Interfaces/Interface";
+import { ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
 import React, { createContext, useState, ReactNode, useRef } from "react";
 interface Props {
   children: ReactNode;
@@ -39,6 +39,8 @@ interface MusicContextType {
   setAudioMute: React.Dispatch<React.SetStateAction<boolean>>;
   dataStorage: {};
   setDataStorage: React.Dispatch<React.SetStateAction<{}>>;
+  playlistItemStoredLocal: ISectionPlaylist[];
+  setPlaylistStoredLocal: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 // Provide a default value for the context
@@ -77,6 +79,8 @@ const defaultValue: MusicContextType = {
   setAudioMute: () => {},
   dataStorage: {},
   setDataStorage: () => {},
+  playlistItemStoredLocal: [] as ISectionPlaylist[],
+  setPlaylistStoredLocal: () => {},
 };
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
@@ -98,6 +102,7 @@ function ContextMusic({ children }: Props) {
   const [audioVolume, setAudioVolume] = useState<number>(1);
   const [audioMute, setAudioMute] = useState<boolean>(false);
   const [dataStorage, setDataStorage] = useState<{}>({});
+  const [playlistItemStoredLocal, setPlaylistStoredLocal] = useState<any>([]);
 
   const contextValue = {
     audioRef,
@@ -134,6 +139,8 @@ function ContextMusic({ children }: Props) {
     setAudioMute,
     dataStorage,
     setDataStorage,
+    playlistItemStoredLocal,
+    setPlaylistStoredLocal,
   };
   return (
     <MusicContext.Provider value={contextValue}>

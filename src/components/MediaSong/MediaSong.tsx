@@ -33,7 +33,16 @@ function MediaSong({
   index,
   playlist,
 }: MediaSongProps) {
-  const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
+  const notify = (title: string) =>
+    toast(
+      <>
+        Bạn hãy đăng ký VIP để nghe bài <br></br>
+        <span style={{ color: "var(--text-color)", fontWeight: "700" }}>
+          {title}
+        </span>{" "}
+        nhé ^.^
+      </>
+    );
   const duration = useFormatDuration(data?.duration);
   const {
     encodeIdSong,
@@ -45,7 +54,7 @@ function MediaSong({
   } = useContext(MusicContext);
   const handlePlayMusic = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
-      notify();
+      notify(data?.title);
     } else {
       setEncodeIdSong(encodeId);
       setActivePlay(!activePlay);

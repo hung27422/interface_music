@@ -20,7 +20,16 @@ const cx = classNames.bind(styles);
 function ControlMiddle() {
   const { data } = useGetDataInfoSong();
   const [playlistLocal, setPlaylistLocal] = useState(null);
-  const notify = () => toast("Bạn hãy đăng ký VIP để nghe bài này nhé ^.^");
+  const notify = (title: string) =>
+    toast(
+      <>
+        Bạn hãy đăng ký VIP để nghe bài <br></br>
+        <span style={{ color: "var(--text-color)", fontWeight: "700" }}>
+          {title}
+        </span>
+        nhé ^.^
+      </>
+    );
   const {
     activePlay,
     setActivePlay,
@@ -75,6 +84,10 @@ function ControlMiddle() {
       setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
       setEncodeIdSong(dataPlaylist[nextIndex]?.encodeId);
       setIndexSong(nextIndex);
+      localStorage.setItem(
+        "currentSong",
+        JSON.stringify(dataPlaylist[nextIndex])
+      );
     }
   };
   const handlePrevSong = () => {
@@ -100,7 +113,7 @@ function ControlMiddle() {
   };
   useEffect(() => {
     if (data?.data?.streamingStatus === 2) {
-      notify();
+      notify(data?.data?.title);
       const next = setTimeout(() => {
         handleNextSong();
       }, 3000);

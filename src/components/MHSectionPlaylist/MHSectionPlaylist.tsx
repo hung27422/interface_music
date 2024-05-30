@@ -5,7 +5,7 @@ import Tippy from "@tippyjs/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { InfoSong, ISectionPlaylist } from "@/Interfaces/Interface";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { url } from "inspector";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import Link from "next/link";
@@ -23,12 +23,11 @@ function MHSectionPlaylist({
   top100,
 }: MHSectionPlaylistProps) {
   const { setEncodeIdPlaylist } = useContext(MusicContext);
+  const [playlistItem, setPlaylistItem] = useState();
 
-  // useEffect(() => {
-  //   console.log("section", dataSectionPlaylist);
-  // }, [dataSectionPlaylist]);
   const handleGetEncodeId = (encodeId: string) => {
     setEncodeIdPlaylist(encodeId);
+    localStorage.setItem("encodeIdAlbum", JSON.stringify(encodeId));
   };
   return (
     <div className={cx("wrapper")}>
@@ -50,6 +49,7 @@ function MHSectionPlaylist({
                         <Link
                           href={"/Pages/Album"}
                           id={item.encodeId}
+                          data-value={item}
                           onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
                           className={cx("avatar")}
                           style={{
@@ -78,7 +78,7 @@ function MHSectionPlaylist({
                     <div className={cx("description")}>
                       {item.sortDescription !== "" ? (
                         <span className={cx("content-des")}>
-                          {item?.sortDescription}
+                          {truncateTitle(item?.sortDescription, 50)}
                         </span>
                       ) : (
                         <div className={cx("info-des")}>
@@ -131,7 +131,7 @@ function MHSectionPlaylist({
                     <div className={cx("description")}>
                       {item.sortDescription !== "" ? (
                         <span className={cx("content-des")}>
-                          {item?.sortDescription}
+                          {truncateTitle(item?.sortDescription, 50)}
                         </span>
                       ) : (
                         <div className={cx("info-des")}>
@@ -154,3 +154,9 @@ function MHSectionPlaylist({
 }
 
 export default MHSectionPlaylist;
+const truncateTitle = (title: string, maxLength: number) => {
+  if (title.length <= maxLength) {
+    return title;
+  }
+  return title.substring(0, maxLength) + "...";
+};

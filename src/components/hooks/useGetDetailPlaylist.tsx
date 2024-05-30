@@ -1,5 +1,5 @@
 "use client";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 const fetcher = async (url: string) => {
@@ -12,10 +12,17 @@ const fetcher = async (url: string) => {
 };
 function useGetDetailPlaylist() {
   const { encodeIdPlaylist } = useContext(MusicContext);
-
+  const [id, setId] = useState("");
+  const encodeIdAlbum = localStorage.getItem("encodeIdAlbum");
+  useEffect(() => {
+    if (encodeIdAlbum) {
+      const encodeId = JSON.parse(encodeIdAlbum);
+      setId(encodeId);
+    }
+  }, [encodeIdAlbum]);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const { data, isLoading } = useSWR(
-    apiUrl + `/detailplaylist?id=${encodeIdPlaylist}`,
+    apiUrl + `/detailplaylist?id=${encodeIdPlaylist ? encodeIdPlaylist : id}`,
     fetcher,
     {
       revalidateIfStale: false,

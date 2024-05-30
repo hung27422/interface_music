@@ -13,13 +13,6 @@ interface IRadioProps {
 }
 function RadioItem({ data }: IRadioProps) {
   //   console.log("radio", data);
-  const startTime = new Date(data.program.startTime).getTime();
-  const endTime = new Date(data.program.endTime).getTime();
-  const currentTime = Date.now();
-
-  const duration = endTime - startTime;
-  const elapsed = currentTime - startTime;
-  const percentage = Math.min((elapsed / duration) * 100, 100);
   return (
     <div className={cx("wrapper")}>
       <div className={cx("body")}>

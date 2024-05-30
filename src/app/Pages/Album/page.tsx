@@ -2,21 +2,24 @@
 import classNames from "classnames/bind";
 import styles from "./album.module.scss";
 import useGetDetailPlaylist from "@/components/hooks/useGetDetailPlaylist";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
 import Tippy from "@tippyjs/react";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import useFormatDate from "@/components/hooks/useFormatDate";
-import { IArtist, InfoSong } from "@/Interfaces/Interface";
+import { IArtist, ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
 import useFormatTime from "@/components/hooks/useFormatTime";
 import useFormatNumber from "@/components/hooks/useFormatNumber";
 import ArtistItems from "@/components/ArtistItems/ArtistItems";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import { list } from "postcss";
+import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 function Album() {
   const { data, isLoading } = useGetDetailPlaylist();
+  const { playlistItemStoredLocal, setPlaylistStoredLocal } =
+    useContext(MusicContext);
   const infoPlaylist = data?.data;
   const contentLastUpdate = useFormatDate(infoPlaylist?.contentLastUpdate);
   const listSong = data?.data?.song.items;

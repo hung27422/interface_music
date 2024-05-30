@@ -20,7 +20,6 @@ function Audio() {
     audioVolume,
     setAudioVolume,
     audioMute,
-    setAudioMute,
   } = useContext(MusicContext);
   //Handle Play, Pause Song
   useEffect(() => {
