@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { ITrending } from "@/Interfaces/Interface";
-import useFormatDate from "../hooks/useFormatDate";
+import useFormatDate from "../../hooks/useFormatDate";
 const cx = classNames.bind(styles);
 interface ItemSliderProps {
   data: ITrending;

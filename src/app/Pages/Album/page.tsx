@@ -1,16 +1,16 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./album.module.scss";
-import useGetDetailPlaylist from "@/components/hooks/useGetDetailPlaylist";
+import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
 import Tippy from "@tippyjs/react";
 import MediaSong from "@/components/MediaSong/MediaSong";
-import useFormatDate from "@/components/hooks/useFormatDate";
+import useFormatDate from "@/hooks/useFormatDate";
 import { IArtist, ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
-import useFormatTime from "@/components/hooks/useFormatTime";
-import useFormatNumber from "@/components/hooks/useFormatNumber";
+import useFormatTime from "@/hooks/useFormatTime";
+import useFormatNumber from "@/hooks/useFormatNumber";
 import ArtistItems from "@/components/ArtistItems/ArtistItems";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import { list } from "postcss";
@@ -112,6 +112,7 @@ function Album() {
                           )}
                         >
                           <MediaSong
+                            index={index}
                             data={item}
                             trending={true}
                             playlist={listSong}

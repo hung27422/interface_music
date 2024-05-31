@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./ZingChart.module.scss";
-import useDataChartHome from "@/components/hooks/useDataChartHome";
+import useDataChartHome from "@/hooks/useDataChartHome";
 import { useState } from "react";
 import ZingChartLine from "@/components/ZingChartLine/ZingChartLine";
 import { InfoSong } from "@/Interfaces/Interface";
@@ -56,6 +56,7 @@ function ZingChart() {
                           </span>
                           <span className={cx("mh-trending-space")}>-</span>
                           <MediaSong
+                            index={index}
                             data={item}
                             trending={true}
                             playlist={listSong}
@@ -82,6 +83,7 @@ function ZingChart() {
                         </span>
                         <span className={cx("mh-trending-space")}>-</span>
                         <MediaSong
+                          index={index}
                           data={item}
                           trending={true}
                           playlist={listSong}

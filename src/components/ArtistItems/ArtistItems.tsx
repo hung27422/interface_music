@@ -5,7 +5,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShuffle, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { IArtist } from "@/Interfaces/Interface";
-import useFormatNumber from "../hooks/useFormatNumber";
+import useFormatNumber from "../../hooks/useFormatNumber";
 import { useContext } from "react";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);

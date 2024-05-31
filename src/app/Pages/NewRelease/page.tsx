@@ -3,18 +3,17 @@ import classNames from "classnames/bind";
 import styles from "./NewRelease.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import useDataChartHome from "@/components/hooks/useDataChartHome";
-import useDataHome from "@/components/hooks/useDataHome";
+import useDataChartHome from "@/hooks/useDataChartHome";
+import useDataHome from "@/hooks/useDataHome";
 import { IHome, ITypeNewRelease, InfoSong } from "@/Interfaces/Interface";
 import { useState } from "react";
 import MediaSong from "@/components/MediaSong/MediaSong";
 const cx = classNames.bind(styles);
 
 function NewRelease() {
-  const { data } = useDataHome();
+  const { data: dataHome } = useDataHome();
   const [activeId, setActiveId] = useState("1");
-  console.log(data);
-  const newRelease = data?.data.items.filter(
+  const newRelease = dataHome?.data.items.filter(
     (item: IHome) => item.sectionType === "new-release"
   );
   const dataAll = newRelease?.map((item: ITypeNewRelease) => {
@@ -29,6 +28,7 @@ function NewRelease() {
   const handleChangeSection = (id: string) => {
     setActiveId(id);
   };
+  console.log("dataAll", dataAll);
 
   return (
     <div className={cx("wrapper")}>
@@ -67,7 +67,12 @@ function NewRelease() {
             return data?.map((item: InfoSong, index: number) => {
               return (
                 <div key={index}>
-                  <MediaSong trending={true} data={item} playlist={dataAll} />
+                  <MediaSong
+                    index={index}
+                    trending={true}
+                    data={item}
+                    playlist={data}
+                  />
                 </div>
               );
             });
@@ -79,9 +84,10 @@ function NewRelease() {
               return (
                 <div key={index}>
                   <MediaSong
+                    index={index}
                     trending={true}
                     data={item}
-                    playlist={dataVietnamese}
+                    playlist={data}
                   />
                 </div>
               );
@@ -94,9 +100,10 @@ function NewRelease() {
               return (
                 <div key={index}>
                   <MediaSong
+                    index={index}
                     trending={true}
                     data={item}
-                    playlist={dataOthers}
+                    playlist={data}
                   />
                 </div>
               );

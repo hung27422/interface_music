@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import LyricSong from "@/components/LyricSong/LyricSong";
 import { InfoSong } from "@/Interfaces/Interface";
+import MVSong from "@/components/MVSong/MVSong";
 const cx = classNames.bind(styles);
 interface ControlRightProps {
   data: InfoSong;
@@ -30,12 +31,14 @@ function ControlRight({ data }: ControlRightProps) {
   return (
     <div className={cx("control-right")}>
       <Tippy content="MV">
-        <button className={cx("control-btn-item")}>
-          <MVIcon></MVIcon>
-        </button>
+        <div>
+          <MVSong data={data} />
+        </div>
       </Tippy>
       <Tippy content="Xem lời bài hát">
-        <LyricSong data={data} />
+        <div>
+          <LyricSong data={data} />
+        </div>
       </Tippy>
       <div className={cx("control-volume")}>
         {!audioMute ? (

@@ -55,6 +55,7 @@
 .wrapper:hover .media-right {
   display: flex;
 }
+
 .wrapper.trending:hover .media-right {
   display: flex;
 }
@@ -65,11 +66,12 @@
   width: fit-content;
   border: none;
 }
+
 .wrapper.control:hover {
   background-color: transparent;
 }
 .wrapper.control:hover .icon-pause {
-  display: flex;
+  display: none;
 }
 // Media Left
 .media-left {

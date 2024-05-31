@@ -10,7 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { ILyric, InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
-import useGetDataLyric from "../hooks/useGetDataLyric";
+import useGetDataLyric from "../../hooks/useGetDataLyric";
+import { MusicContext } from "../ContextMusic/ContextMusic";
+import { words } from "lodash";
+import ControlMiddle from "@/app/Layouts/ControlMusic/ControlMiddle";
 const cx = classNames.bind(styles);
 
 const style = {
@@ -21,7 +24,8 @@ const style = {
   width: 1000,
   height: 600,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid var(--text-color)",
+  borderRadius: "12px",
   boxShadow: 24,
   //   p: 4,
 };
@@ -33,9 +37,35 @@ export default function LyricSong({ data }: LyricSongProp) {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const { data: dataLyrics } = useGetDataLyric();
-  //   console.log("lyric12333", dataLyrics);
   const dataWords = dataLyrics?.data?.sentences;
-  console.log("words", dataWords);
+  const dataLyric = dataLyrics?.data?.lyric;
+  const { audioCurrentTime } = React.useContext(MusicContext);
+  const delta = 0.41;
+
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const activeLyric = document.querySelector(`.${styles.show}`);
+    if (activeLyric && containerRef.current) {
+      // Lấy vị trí cuộn từ cạnh trên nội dung bên trong là thẻ <li></li> tới cạnh trên của containerRef
+      const containerTop = containerRef.current.scrollTop;
+      // Lấy chiều cao của containerRef
+      const containerHeight = containerRef.current.clientHeight;
+      //Lấy độ dài từ cạnh trên containerRef tới cạnh trên của thẻ <li></li> hiện tại
+      const lyricTop = (activeLyric as HTMLElement).offsetTop;
+      // Lấy chiều cao của thẻ <li></li>
+      const lyricHeight = (activeLyric as HTMLElement).clientHeight;
+      console.log("containerTop", containerTop);
+
+      // Kiểm tra độ dài của thẻ <li></li> vượt ngoài containerRef không
+      if (lyricTop + lyricHeight > containerTop + containerHeight) {
+        containerRef.current.scrollTo({
+          top: lyricTop - containerHeight / 2 + lyricHeight / 2,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [audioCurrentTime]);
   return (
     <div>
       <button onClick={handleOpen}>
@@ -43,7 +73,6 @@ export default function LyricSong({ data }: LyricSongProp) {
       </button>
       <Modal
         open={open}
-        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -56,6 +85,7 @@ export default function LyricSong({ data }: LyricSongProp) {
               </div>
               <div className={cx("header-right")}>
                 <FontAwesomeIcon
+                  onClick={handleClose}
                   className={cx("header-right-icon")}
                   icon={faXmark}
                 />
@@ -71,20 +101,42 @@ export default function LyricSong({ data }: LyricSongProp) {
                   height={200}
                 />
               </div>
-              <div className={cx("container-lyric")}>
-                {dataWords?.map((sentence: any, index: number) => (
-                  <div key={index}>
-                    {sentence.words.map((word: ILyric, wordIndex: number) => (
-                      <span
-                        key={wordIndex}
-                        className={cx("container-lyric-item")}
-                      >
-                        {word.data}
-                      </span>
+              <div ref={containerRef} className={cx("container-lyric")}>
+                {dataLyric ? (
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: dataLyric.replace(/\n/g, "<br>"),
+                    }}
+                  />
+                ) : (
+                  <>
+                    {dataWords?.map((sentence: any, index: number) => (
+                      <div key={index}>
+                        {sentence.words.map(
+                          (word: ILyric, wordIndex: number) => (
+                            <span
+                              key={wordIndex}
+                              className={cx(
+                                "container-lyric-item",
+                                Math.abs(
+                                  audioCurrentTime - word.startTime / 1000
+                                ) < delta
+                                  ? "show"
+                                  : ""
+                              )}
+                            >
+                              {word.data}
+                            </span>
+                          )
+                        )}
+                      </div>
                     ))}
-                  </div>
-                ))}
+                  </>
+                )}
               </div>
+            </div>
+            <div className={cx("footer")}>
+              <ControlMiddle />
             </div>
           </div>
         </Box>
@@ -92,3 +144,13 @@ export default function LyricSong({ data }: LyricSongProp) {
     </div>
   );
 }
+const formatTime = (time: number) => {
+  let totalSeconds = time;
+  // Chuyển đổi từ giây sang phút
+  let totalMinutes = Math.floor(totalSeconds / 60);
+  // Tính số giờ
+  let hours = Math.floor(totalMinutes / 60);
+  // Tính số phút
+  let minutes = totalMinutes % 60;
+  return `${hours} giờ ${minutes} phút`;
+};

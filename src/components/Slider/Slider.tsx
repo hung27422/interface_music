@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import styles from "./Slider.module.scss";
 import Image from "next/image";
-import useDataHome from "../hooks/useDataHome";
+import useDataHome from "../../hooks/useDataHome";
 interface Item {
   sectionType: string;
   items: Item[];

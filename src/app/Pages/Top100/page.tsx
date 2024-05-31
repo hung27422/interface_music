@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./Top100.module.scss";
-import useDataHome from "@/components/hooks/useDataHome";
+import useDataHome from "@/hooks/useDataHome";
 import { ISectionPlaylist } from "@/Interfaces/Interface";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 import Image from "next/image";

@@ -7,12 +7,12 @@ import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
-import useGetDetailPlaylist from "../hooks/useGetDetailPlaylist";
+import useGetDetailPlaylist from "../../hooks/useGetDetailPlaylist";
 import { log } from "console";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { title } from "process";
-import useDataHome from "../hooks/useDataHome";
-import useTruncateTitle from "../hooks/useTruncateTitle";
+import useDataHome from "../../hooks/useDataHome";
+import useTruncateTitle from "../../hooks/useTruncateTitle";
 const cx = classNames.bind(styles);
 function RecentlyPlayed() {
   const { data } = useGetDetailPlaylist();
@@ -48,7 +48,6 @@ function RecentlyPlayed() {
         localStorage.setItem("playlists", JSON.stringify(playlists));
         setIsPlaylistSaved(true); // Đặt biến trạng thái là đã lưu
       }
-      console.log("playlists", playlists);
       setPlaylistStoredLocal(playlists);
     }
   }, [data, isPlaylistSaved, setPlaylistStoredLocal]);

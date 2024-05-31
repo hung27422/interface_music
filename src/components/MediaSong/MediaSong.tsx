@@ -11,7 +11,7 @@ import {
 import Tippy from "@tippyjs/react";
 import { InfoSong } from "../../Interfaces/Interface";
 import { useContext, useEffect, useState } from "react";
-import useFormatDuration from "../hooks/useFormatDuration";
+import useFormatDuration from "../../hooks/useFormatDuration";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
@@ -62,7 +62,7 @@ function MediaSong({
       setPlaylistContext(playlist ?? []);
       localStorage.setItem("currentSong", JSON.stringify(data));
       localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
-      localStorage.setItem("encodeIdLyric", JSON.stringify(encodeId));
+      localStorage.setItem("encodeId", JSON.stringify(encodeId));
     }
   };
   return (
@@ -87,34 +87,36 @@ function MediaSong({
           <Image
             src={data?.thumbnailM}
             alt="image-song"
-            width={trending || weekly ? 40 : 60}
-            height={trending || weekly ? 40 : 60}
+            width={trending || weekly ? 40 : 64}
+            height={trending || weekly ? 40 : 64}
             className={cx("image-song", trending && "trending")}
           ></Image>
-          <div
-            id={data?.encodeId}
-            onClick={(e) => handlePlayMusic(e.currentTarget.id)}
-            className={cx(
-              "btn-icon-play",
-              { control },
-              activePlay && encodeIdSong === data?.encodeId && "icon-play"
-            )}
-          >
-            {activePlay && encodeIdSong === data?.encodeId ? (
-              <Image
-                src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
-                alt="icon-play"
-                width={26}
-                height={26}
-                // className={cx("icon-play")}
-              ></Image>
-            ) : (
-              <FontAwesomeIcon className={cx("icon-pause")} icon={faPlay} />
-            )}
+          {!control && (
+            <div
+              id={data?.encodeId}
+              onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+              className={cx(
+                "btn-icon-play",
+                { control },
+                activePlay && encodeIdSong === data?.encodeId && "icon-play"
+              )}
+            >
+              {activePlay && encodeIdSong === data?.encodeId ? (
+                <Image
+                  src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+                  alt="icon-play"
+                  width={26}
+                  height={26}
+                  className={cx("icon-play")}
+                ></Image>
+              ) : (
+                <FontAwesomeIcon className={cx("icon-pause")} icon={faPlay} />
+              )}
 
-            <div className={cx("space")}></div>
-            <div className={cx("space")}></div>
-          </div>
+              <div className={cx("space")}></div>
+              <div className={cx("space")}></div>
+            </div>
+          )}
         </div>
         <div className={cx("media-info")}>
           <div className={cx("premium")}>

@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./WeeklyZingchart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import useDataChartHome from "@/components/hooks/useDataChartHome";
+import useDataChartHome from "@/hooks/useDataChartHome";
 import { useContext, useEffect } from "react";
 import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
@@ -72,6 +72,7 @@ function WeeklyZingchart() {
                         </span>
                         <span className={cx("weekly-top-space")}>-</span>
                         <MediaSong
+                          index={index}
                           data={itemI}
                           trending={true}
                           weekly={true}

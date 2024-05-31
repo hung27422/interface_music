@@ -12,9 +12,9 @@ import Tippy from "@tippyjs/react";
 import { useContext, useEffect, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import { PauseIcon } from "@/components/Icons/Icons";
-import useGetDataInfoSong from "@/components/hooks/useGetDataInfoSong";
+import useGetDataInfoSong from "@/hooks/useGetDataInfoSong";
 import { toast } from "react-toastify";
-import useFormatDuration from "@/components/hooks/useFormatDuration";
+import useFormatDuration from "@/hooks/useFormatDuration";
 
 const cx = classNames.bind(styles);
 function ControlMiddle() {

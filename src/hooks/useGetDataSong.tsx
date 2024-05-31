@@ -1,7 +1,7 @@
 "use client";
 import { useContext } from "react";
 import useSWR from "swr";
-import { MusicContext } from "../ContextMusic/ContextMusic";
+import { MusicContext } from "../components/ContextMusic/ContextMusic";
 const fetcher = async (url: string) => {
   const res = await fetch(url);
   if (!res.ok) {

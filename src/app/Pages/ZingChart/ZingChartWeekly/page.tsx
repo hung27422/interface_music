@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./ZingChartWeekly.module.scss";
-import useDataChartHome from "@/components/hooks/useDataChartHome";
+import useDataChartHome from "@/hooks/useDataChartHome";
 import { useContext, useEffect, useState } from "react";
 import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
@@ -89,6 +89,7 @@ function ZingChartWeekly() {
                     </span>
                     <span className={cx("weekly-top-space")}>-</span>
                     <MediaSong
+                      index={index}
                       data={item}
                       trending={true}
                       playlist={dataWeeklyVN}
@@ -113,6 +114,7 @@ function ZingChartWeekly() {
                     </span>
                     <span className={cx("weekly-top-space")}>-</span>
                     <MediaSong
+                      index={index}
                       data={item}
                       trending={true}
                       playlist={dataWeeklyUSUK}
@@ -137,6 +139,7 @@ function ZingChartWeekly() {
                     </span>
                     <span className={cx("weekly-top-space")}>-</span>
                     <MediaSong
+                      index={index}
                       data={item}
                       trending={true}
                       playlist={dataWeeklyKorea}

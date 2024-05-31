@@ -1,7 +1,7 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
 import useSWR from "swr";
-import { MusicContext } from "../ContextMusic/ContextMusic";
+import { MusicContext } from "../components/ContextMusic/ContextMusic";
 const fetcher = async (url: string) => {
   const res = await fetch(url);
   if (!res.ok) {
@@ -10,19 +10,20 @@ const fetcher = async (url: string) => {
   const data = await res.json();
   return data;
 };
-function useGetDetailPlaylist() {
-  const { encodeIdPlaylist } = useContext(MusicContext);
+function useGetDataLyric() {
+  const { encodeIdSong } = useContext(MusicContext);
   const [id, setId] = useState("");
-  const encodeIdAlbum = localStorage.getItem("encodeIdAlbum");
+  const encodeIdLyric = localStorage.getItem("encodeId");
+
   useEffect(() => {
-    if (encodeIdAlbum) {
-      const encodeId = JSON.parse(encodeIdAlbum);
+    if (encodeIdLyric) {
+      const encodeId = JSON.parse(encodeIdLyric);
       setId(encodeId);
     }
-  }, [encodeIdAlbum]);
+  }, [encodeIdLyric]);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const { data, isLoading } = useSWR(
-    apiUrl + `/detailplaylist?id=${encodeIdPlaylist ? encodeIdPlaylist : id}`,
+    apiUrl + `/lyric?id=${encodeIdSong ? encodeIdSong : id}`,
     fetcher,
     {
       revalidateIfStale: false,
@@ -33,4 +34,4 @@ function useGetDetailPlaylist() {
   return { data, isLoading };
 }
 
-export default useGetDetailPlaylist;
+export default useGetDataLyric;

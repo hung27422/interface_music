@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./page.module.scss";
 const cx = classNames.bind(styles);
 
-import useDataHome from "@/components/hooks/useDataHome";
+import useDataHome from "@/hooks/useDataHome";
 import { useContext, useEffect, useRef, useState } from "react";
 import SliderItem from "@/components/Slider/Slider";
 import NewReleaseItem from "@/components/NewReleaseItem/NewReleaseItem";
@@ -21,7 +21,7 @@ import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import RadioItem from "@/components/RadioItem/RadioItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
-import useGetDetailPlaylist from "@/components/hooks/useGetDetailPlaylist";
+import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
 interface IHomeProps {
   items: ITypeNewRelease;
 }

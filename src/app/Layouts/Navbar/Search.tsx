@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
-import useGetDataSearch from "@/components/hooks/useGetDataSearch";
+import useGetDataSearch from "@/hooks/useGetDataSearch";
 import { InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
 import Link from "next/link";
@@ -87,7 +87,11 @@ export default function Search() {
                   .map((item: InfoSong, index: number) => {
                     return (
                       <div className={cx("item-song")} key={index}>
-                        <MediaSong data={item} playlist={data?.data} />
+                        <MediaSong
+                          index={index}
+                          data={item}
+                          playlist={data?.data}
+                        />
                       </div>
                     );
                   })}

@@ -7,7 +7,7 @@ import { faPlay, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 import { useContext, useEffect } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
-import useGetDataArtist from "@/components/hooks/useGetDataArtist";
+import useGetDataArtist from "@/hooks/useGetDataArtist";
 import { IArtist, ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import ArtistItems from "@/components/ArtistItems/ArtistItems";
@@ -71,13 +71,17 @@ function Artists() {
                 <button className={cx("btn-all")}>Tất cả {`>`}</button>
               </div>
               <div className={cx("song-feature-list")}>
-                {songFeature?.map((data: any) => {
+                {songFeature?.map((data: any, indexList: number) => {
                   return data?.items
                     ?.slice(0, 9)
                     .map((item: InfoSong, index: number) => {
                       return (
                         <div key={index}>
-                          <MediaSong data={item} playlist={songFeature} />
+                          <MediaSong
+                            index={index}
+                            data={item}
+                            playlist={data?.items}
+                          />
                         </div>
                       );
                     });
