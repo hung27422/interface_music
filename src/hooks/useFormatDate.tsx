@@ -1,4 +1,7 @@
 function useFormatDate(releaseDate: number) {
+  if (releaseDate === undefined) {
+    return ""; // Or any other default value or behavior
+  }
   var releaseDateInSeconds = releaseDate * 1000;
   var releaseDateObj = new Date(releaseDateInSeconds);
   var day = releaseDateObj.getDate();

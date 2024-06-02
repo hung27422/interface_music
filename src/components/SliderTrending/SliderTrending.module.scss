@@ -96,3 +96,20 @@
   border-radius: 50%;
   border: 1px solid var(--white);
 }
+.show-btn-play {
+  display: block;
+  position: absolute;
+  color: var(--white);
+  left: 13%;
+  width: 45px;
+  height: 45px;
+  font-size: 2rem;
+  border-radius: 50%;
+  border: 1px solid var(--white);
+}
+.btn-play .show-btn {
+  display: block;
+}
+.icon-play {
+  margin: 0 auto;
+}

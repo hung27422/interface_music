@@ -31,15 +31,17 @@ function ControlRight({ data }: ControlRightProps) {
   return (
     <div className={cx("control-right")}>
       <Tippy content="MV">
-        <div>
+        <div className={cx("control-mv")}>
           <MVSong data={data} />
         </div>
       </Tippy>
+
       <Tippy content="Xem lời bài hát">
-        <div>
+        <div className={cx("control-lyric")}>
           <LyricSong data={data} />
         </div>
       </Tippy>
+
       <div className={cx("control-volume")}>
         {!audioMute ? (
           <button

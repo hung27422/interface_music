@@ -13,18 +13,27 @@ import { MusicContext } from "../ContextMusic/ContextMusic";
 import { title } from "process";
 import useDataHome from "../../hooks/useDataHome";
 import useTruncateTitle from "../../hooks/useTruncateTitle";
+import Image from "next/image";
 const cx = classNames.bind(styles);
 function RecentlyPlayed() {
-  const { data } = useGetDetailPlaylist();
+  const { isValidating } = useGetDetailPlaylist();
   const [isPlaylistSaved, setIsPlaylistSaved] = useState(false);
   const {
     playlistItemStoredLocal,
     setPlaylistStoredLocal,
     setEncodeIdPlaylist,
+    getDataPlaylist,
+    encodeIdSong,
+    setActivePlay,
+    activePlay,
+    setIndexSong,
+    encodeIdPlaylist,
+    setEncodeIdSong,
+    setPlaylistContext,
   } = useContext(MusicContext);
 
   useEffect(() => {
-    if (data?.data && !isPlaylistSaved) {
+    if (getDataPlaylist?.data && !isPlaylistSaved) {
       // Lấy danh sách playlist từ local storage
       const playlistItem = localStorage.getItem("playlists");
       let playlists: any[] = [];
@@ -34,11 +43,11 @@ function RecentlyPlayed() {
       // Kiểm tra xem infoPlaylist có trong danh sách không
       const isInfoPlaylistExist = playlists.some(
         (playlist: ISectionPlaylist) =>
-          playlist.encodeId === data?.data.encodeId
+          playlist.encodeId === getDataPlaylist?.data.encodeId
       );
       if (!isInfoPlaylistExist) {
         // Thêm playlist mới vào danh sách
-        playlists.push(data?.data);
+        playlists.push(getDataPlaylist?.data);
 
         // Giới hạn danh sách chỉ chứa 14 phần tử mới nhất
         if (playlists.length > 14) {
@@ -50,12 +59,55 @@ function RecentlyPlayed() {
       }
       setPlaylistStoredLocal(playlists);
     }
-  }, [data, isPlaylistSaved, setPlaylistStoredLocal]);
+  }, [getDataPlaylist, isPlaylistSaved, setPlaylistStoredLocal]);
 
   const handleGetEncodeId = (encodeId: string) => {
     setEncodeIdPlaylist(encodeId);
     localStorage.setItem("encodeIdAlbum", JSON.stringify(encodeId));
   };
+  const handlePlayMusic = (encodeIdPlaylist1: string) => {
+    const currentIndex = 0;
+    setEncodeIdPlaylist(encodeIdPlaylist1);
+    const playlist = getDataPlaylist?.data?.song?.items;
+    console.log("playlist", playlist);
+    const idPlaylist = getDataPlaylist?.data?.encodeId;
+    if (!playlist) {
+      console.error("Playlist is undefined.");
+      return;
+    }
+    const firstSongId = playlist[0]?.encodeId;
+    //Xử lý phát dừng nhạc, lưu lịch sử phát nhạc
+    if (idPlaylist === encodeIdPlaylist1) {
+      setActivePlay(!activePlay);
+    } else {
+      setActivePlay(true);
+      setIndexSong(currentIndex ?? 0);
+      localStorage.setItem(
+        "currentSong",
+        JSON.stringify(playlist[currentIndex])
+      );
+      localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+      localStorage.setItem("encodeId", JSON.stringify(firstSongId));
+    }
+  };
+  // Set encodeId Song và encodeId Playlist vào useContext
+  useEffect(() => {
+    if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
+      const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
+      const playlist = getDataPlaylist?.data?.song?.items;
+      if (firstSongId) {
+        setEncodeIdSong(firstSongId);
+        localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
+        setPlaylistContext(playlist ?? []);
+      }
+    }
+  }, [
+    encodeIdPlaylist,
+    getDataPlaylist,
+    isValidating,
+    setEncodeIdSong,
+    setPlaylistContext,
+  ]);
   return (
     <>
       {playlistItemStoredLocal && (
@@ -79,14 +131,36 @@ function RecentlyPlayed() {
                           }}
                         ></Link>
                       </div>
-                      <div className={cx("action")}>
+                      <div
+                        className={cx(
+                          activePlay &&
+                            getDataPlaylist?.data?.encodeId === item?.encodeId
+                            ? "show-action"
+                            : "action"
+                        )}
+                      >
                         <Tippy content="Thêm vào thư viện">
                           <button className={cx("btn-heart", "btn-icon")}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                           </button>
                         </Tippy>
-                        <button className={cx("btn-play")}>
-                          <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                        <button
+                          id={item.encodeId}
+                          onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+                          className={cx("btn-play")}
+                        >
+                          {activePlay &&
+                          getDataPlaylist?.data?.encodeId === item?.encodeId ? (
+                            <Image
+                              src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+                              alt="icon-play"
+                              width={26}
+                              height={26}
+                              className={cx("icon-play")}
+                            ></Image>
+                          ) : (
+                            <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                          )}
                         </button>
                         <Tippy content="Khác">
                           <button className={cx("btn-menu", "btn-icon")}>

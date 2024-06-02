@@ -52,6 +52,12 @@
     accent-color: var(--text-color);
   }
 }
+.control-mv,
+.control-lyric {
+  width: 40px;
+  height: 40px;
+  margin: 0 10px;
+}
 .btn-sound {
   width: 35px;
 }

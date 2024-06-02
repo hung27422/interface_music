@@ -44,6 +44,16 @@
   bottom: auto;
   transform: translateX(-50%) translateY(-50%);
 }
+.show-action {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translateX(-50%) translateY(-50%);
+}
 .title {
   margin-bottom: 20px;
 }
@@ -66,6 +76,9 @@
   font-size: 2.8rem !important;
   color: var(--white);
   border: 1px solid var(--white);
+}
+.icon-play {
+  margin: 0 auto;
 }
 .btn-icon {
   width: 26px;

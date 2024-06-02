@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Tippy from "@tippyjs/react";
 import { InfoSong } from "../../Interfaces/Interface";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import useFormatDuration from "../../hooks/useFormatDuration";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { toast } from "react-toastify";
@@ -51,20 +51,27 @@ function MediaSong({
     setActivePlay,
     setIndexSong,
     setPlaylistContext,
+    setActivePlaylist,
   } = useContext(MusicContext);
   const handlePlayMusic = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
       notify(data?.title);
+    }
+    setEncodeIdSong(encodeId);
+    if (encodeId === encodeIdSong) {
+      setActivePlay(!activePlay);
     } else {
       setEncodeIdSong(encodeId);
-      setActivePlay(!activePlay);
-      setIndexSong(index ?? 0);
-      setPlaylistContext(playlist ?? []);
-      localStorage.setItem("currentSong", JSON.stringify(data));
-      localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
-      localStorage.setItem("encodeId", JSON.stringify(encodeId));
+      setActivePlay(true);
     }
+    setActivePlaylist(false);
+    setIndexSong(index ?? 0);
+    setPlaylistContext(playlist ?? []);
+    localStorage.setItem("currentSong", JSON.stringify(data));
+    localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+    localStorage.setItem("encodeId", JSON.stringify(encodeId));
   };
+
   return (
     <div
       className={cx(
@@ -84,13 +91,15 @@ function MediaSong({
         )}
       >
         <div className={cx("box-media")}>
-          <Image
-            src={data?.thumbnailM}
-            alt="image-song"
-            width={trending || weekly ? 40 : 64}
-            height={trending || weekly ? 40 : 64}
-            className={cx("image-song", trending && "trending")}
-          ></Image>
+          {data?.thumbnailM && (
+            <Image
+              src={data.thumbnailM}
+              alt="image-song"
+              width={trending || weekly ? 40 : 64}
+              height={trending || weekly ? 40 : 64}
+              className={cx("image-song", trending && "trending")}
+            />
+          )}
           {!control && (
             <div
               id={data?.encodeId}

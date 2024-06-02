@@ -15,18 +15,42 @@ import ArtistItems from "@/components/ArtistItems/ArtistItems";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import { list } from "postcss";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
+import Image from "next/image";
 const cx = classNames.bind(styles);
 function Album() {
-  const { data, isLoading } = useGetDetailPlaylist();
-  const { playlistItemStoredLocal, setPlaylistStoredLocal } =
-    useContext(MusicContext);
-  const infoPlaylist = data?.data;
-  const contentLastUpdate = useFormatDate(infoPlaylist?.contentLastUpdate);
-  const listSong = data?.data?.song.items;
-  const listArtist = data?.data?.artists;
-  const totalDuration = useFormatTime(infoPlaylist?.song.totalDuration);
-  const like = useFormatNumber(infoPlaylist?.like);
+  const {
+    setAudioRandomSong,
+    setAudioRepeatSong,
+    setEncodeIdSong,
+    setActivePlay,
+    activePlay,
+    setPlaylistContext,
+  } = useContext(MusicContext);
+  const { isLoading } = useGetDetailPlaylist();
+  const { getDataPlaylist } = useContext(MusicContext);
+  const infoPlaylist = getDataPlaylist?.data;
+  const releaseDate = getDataPlaylist?.data?.contentLastUpdate;
+  const contentLastUpdate = useFormatDate(releaseDate || 0);
+  const listSong = getDataPlaylist?.data?.song.items;
+  const listArtist = getDataPlaylist?.data?.artists;
+  console.log("infoPlaylist", infoPlaylist);
 
+  const totalDuration = useFormatTime(
+    getDataPlaylist?.data.song.totalDuration || 0
+  );
+  const like = useFormatNumber(infoPlaylist?.like || 0);
+  const handlePlayMusic = () => {
+    if (!listSong) return;
+    const nextIndex =
+      Math.floor(Math.random() * listSong?.length) % listSong.length;
+    setEncodeIdSong(listSong[nextIndex].encodeId);
+    setPlaylistContext(listSong ?? []);
+    setActivePlay(!activePlay);
+    setAudioRandomSong(true);
+    setAudioRepeatSong(false);
+
+    localStorage.setItem("currentPlaylist", JSON.stringify(listSong));
+  };
   return (
     <div className={cx("wrapper")}>
       {isLoading ? (
@@ -44,9 +68,22 @@ function Album() {
                         backgroundImage: `url(${infoPlaylist?.thumbnailM})`,
                       }}
                     ></div>
-                    <div className={cx("action")}>
-                      <button className={cx("btn-play")}>
-                        <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                    <div className={cx(activePlay ? "show-action" : "action")}>
+                      <button
+                        onClick={handlePlayMusic}
+                        className={cx("btn-play")}
+                      >
+                        {activePlay ? (
+                          <Image
+                            src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+                            alt="icon-play"
+                            width={26}
+                            height={26}
+                            className={cx("icon-play")}
+                          ></Image>
+                        ) : (
+                          <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                        )}
                       </button>
                     </div>
                   </div>
@@ -129,7 +166,7 @@ function Album() {
               </div>
             </div>
           </div>
-          {listArtist?.length > 1 && (
+          {(listArtist?.length ?? 0) > 1 && (
             <div className={cx("album-detail-artist")}>
               <h2 className={cx("album-detail-artist-title")}>
                 Danh Sách Nghệ Sĩ Tham Gia

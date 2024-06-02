@@ -5,13 +5,28 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { ITrending } from "@/Interfaces/Interface";
 import useFormatDate from "../../hooks/useFormatDate";
+import { useContext } from "react";
+import { MusicContext } from "../ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 interface ItemSliderProps {
   data: ITrending;
   NO: number;
 }
 function ItemSlider({ data, NO }: ItemSliderProps) {
+  const {
+    encodeIdSong,
+    setEncodeIdSong,
+    activePlay,
+    setActivePlay,
+    setIndexSong,
+    setPlaylistContext,
+  } = useContext(MusicContext);
   const dateNow = useFormatDate(data?.releaseDate);
+
+  const handlePlayMusic = (encodeId: string) => {
+    setEncodeIdSong(encodeId);
+    setActivePlay(!activePlay);
+  };
   return (
     <div className={cx("wrapper-item")}>
       <div className={cx("slider-item-content")}>
@@ -22,8 +37,26 @@ function ItemSlider({ data, NO }: ItemSliderProps) {
           height={120}
           className={cx("slider-item-img")}
         ></Image>
-        <button className={cx("btn-play", "btn-icon")}>
-          <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+        <button
+          id={data?.encodeId}
+          onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+          className={cx(
+            activePlay && encodeIdSong === data?.encodeId
+              ? "show-btn-play"
+              : "btn-play"
+          )}
+        >
+          {activePlay && encodeIdSong === data?.encodeId ? (
+            <Image
+              src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+              alt="icon-play"
+              width={26}
+              height={26}
+              className={cx("icon-play")}
+            ></Image>
+          ) : (
+            <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+          )}
         </button>
         <div className={cx("slider-item-info")}>
           <div className={cx("info-song")}>

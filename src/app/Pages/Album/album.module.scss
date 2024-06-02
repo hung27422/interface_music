@@ -68,6 +68,16 @@
   transform: translateX(-50%) translateY(-50%);
   z-index: 1;
 }
+.show-action {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform: translateX(-50%) translateY(-50%);
+  z-index: 1;
+}
 .btn-play {
   width: 45px !important;
   height: 45px !important;
@@ -75,6 +85,9 @@
   font-size: 3rem !important;
   color: var(--white);
   border: 1px solid var(--white);
+}
+.icon-play {
+  margin: 0 auto;
 }
 .playlist-left-info {
   text-align: center;

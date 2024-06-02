@@ -11,18 +11,24 @@ const fetcher = async (url: string) => {
   return data;
 };
 function useGetDetailPlaylist() {
-  const { encodeIdPlaylist } = useContext(MusicContext);
+  const { encodeIdPlaylist, setGetDataPlaylist } = useContext(MusicContext);
+
   const [id, setId] = useState("");
   const encodeIdAlbum = localStorage.getItem("encodeIdAlbum");
   useEffect(() => {
     if (encodeIdAlbum) {
-      const encodeId = JSON.parse(encodeIdAlbum);
-      setId(encodeId);
+      try {
+        const encodeId = JSON.parse(encodeIdAlbum);
+        setId(encodeId);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [encodeIdAlbum]);
+  const idPlaylist = encodeIdPlaylist ? encodeIdPlaylist : id;
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const { data, isLoading } = useSWR(
-    apiUrl + `/detailplaylist?id=${encodeIdPlaylist ? encodeIdPlaylist : id}`,
+  const { data, isLoading, mutate, isValidating } = useSWR(
+    apiUrl + `/detailplaylist?id=${idPlaylist}`,
     fetcher,
     {
       revalidateIfStale: false,
@@ -30,7 +36,24 @@ function useGetDetailPlaylist() {
       revalidateOnReconnect: false,
     }
   );
-  return { data, isLoading };
+  //Nếu encodeIdPlaylist thay đổi thì reload lại data
+  useEffect(() => {
+    if (encodeIdPlaylist) {
+      mutate();
+    }
+  }, [encodeIdPlaylist, mutate]);
+  //Set data detailplaylist vào context
+  useEffect(() => {
+    if (data) {
+      setGetDataPlaylist(data);
+    }
+  }, [data, setGetDataPlaylist]);
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     console.log("isLoading", isLoading);
+  //   }
+  // }, [isLoading]);
+  return { data, isLoading, mutate, isValidating };
 }
 
 export default useGetDetailPlaylist;

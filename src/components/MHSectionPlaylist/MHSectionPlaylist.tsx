@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { url } from "inspector";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import Link from "next/link";
+import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
 const cx = classNames.bind(styles);
 interface MHSectionPlaylistProps {
   dataSectionPlaylist: ISectionPlaylist;
@@ -16,19 +17,78 @@ interface MHSectionPlaylistProps {
   hide?: boolean;
   top100?: boolean;
 }
+
 function MHSectionPlaylist({
   dataSectionPlaylist,
   show,
   hide,
   top100,
 }: MHSectionPlaylistProps) {
-  const { setEncodeIdPlaylist } = useContext(MusicContext);
-  const [playlistItem, setPlaylistItem] = useState();
+  const { isValidating } = useGetDetailPlaylist();
+  const {
+    encodeIdPlaylist,
+    setEncodeIdPlaylist,
+    encodeIdSong,
+    setEncodeIdSong,
+    activePlay,
+    setActivePlay,
+    setPlaylistContext,
+    getDataPlaylist,
+    setIndexSong,
+    activePlaylist,
+    setActivePlaylist,
+  } = useContext(MusicContext);
 
+  //Set encodeIdPlaylist để chuyển qua page album
   const handleGetEncodeId = (encodeId: string) => {
     setEncodeIdPlaylist(encodeId);
     localStorage.setItem("encodeIdAlbum", JSON.stringify(encodeId));
   };
+
+  const handlePlayMusic = (encodeIdPlaylist1: string) => {
+    setActivePlay(false);
+    const currentIndex = 0;
+    setEncodeIdPlaylist(encodeIdPlaylist1);
+    const playlist = getDataPlaylist?.data?.song?.items;
+    console.log("playlist", playlist);
+    const idPlaylist = getDataPlaylist?.data?.encodeId;
+    if (!playlist) {
+      console.error("Playlist is undefined.");
+      return;
+    }
+    const firstSongId = playlist[0]?.encodeId;
+    //Xử lý phát dừng nhạc, lưu lịch sử phát nhạc
+    if (idPlaylist === encodeIdPlaylist1) {
+      setActivePlaylist(!activePlaylist);
+    } else {
+      setActivePlaylist(true);
+    }
+    setIndexSong(currentIndex ?? 0);
+    localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
+    localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+    localStorage.setItem("encodeId", JSON.stringify(firstSongId));
+  };
+  // Set encodeId Song và encodeId Playlist vào useContext
+  useEffect(() => {
+    if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
+      const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
+      const playlist = getDataPlaylist?.data?.song?.items;
+      if (firstSongId) {
+        setEncodeIdSong(firstSongId);
+        setPlaylistContext(playlist ?? []);
+        localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
+        localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+        localStorage.setItem("encodeId", JSON.stringify(firstSongId));
+      }
+    }
+  }, [
+    encodeIdPlaylist,
+    getDataPlaylist,
+    isValidating,
+    setEncodeIdSong,
+    setPlaylistContext,
+  ]);
+
   return (
     <div className={cx("wrapper")}>
       {!hide && (
@@ -57,14 +117,36 @@ function MHSectionPlaylist({
                           }}
                         ></Link>
                       </div>
-                      <div className={cx("action")}>
+                      <div
+                        className={cx(
+                          activePlaylist &&
+                            getDataPlaylist?.data?.encodeId === item?.encodeId
+                            ? "show-action"
+                            : "action"
+                        )}
+                      >
                         <Tippy content="Thêm vào thư viện">
                           <button className={cx("btn-heart", "btn-icon")}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                           </button>
                         </Tippy>
-                        <button className={cx("btn-play")}>
-                          <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                        <button
+                          id={item.encodeId}
+                          onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+                          className={cx("btn-play")}
+                        >
+                          {activePlaylist &&
+                          getDataPlaylist?.data?.encodeId === item?.encodeId ? (
+                            <Image
+                              src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+                              alt="icon-play"
+                              width={26}
+                              height={26}
+                              className={cx("icon-play")}
+                            ></Image>
+                          ) : (
+                            <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                          )}
                         </button>
                         <Tippy content="Khác">
                           <button className={cx("btn-menu", "btn-icon")}>
@@ -110,14 +192,36 @@ function MHSectionPlaylist({
                           }}
                         ></Link>
                       </div>
-                      <div className={cx("action")}>
+                      <div
+                        className={cx(
+                          activePlaylist &&
+                            getDataPlaylist?.data?.encodeId === item?.encodeId
+                            ? "show-action"
+                            : "action"
+                        )}
+                      >
                         <Tippy content="Thêm vào thư viện">
                           <button className={cx("btn-heart", "btn-icon")}>
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                           </button>
                         </Tippy>
-                        <button className={cx("btn-play")}>
-                          <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                        <button
+                          id={item.encodeId}
+                          onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+                          className={cx("btn-play")}
+                        >
+                          {activePlaylist &&
+                          getDataPlaylist?.data?.encodeId === item?.encodeId ? (
+                            <Image
+                              src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"
+                              alt="icon-play"
+                              width={26}
+                              height={26}
+                              className={cx("icon-play")}
+                            ></Image>
+                          ) : (
+                            <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
+                          )}
                         </button>
                         <Tippy content="Khác">
                           <button className={cx("btn-menu", "btn-icon")}>
@@ -160,3 +264,13 @@ const truncateTitle = (title: string, maxLength: number) => {
   }
   return title.substring(0, maxLength) + "...";
 };
+function setIdSongAndPlaylist(
+  setEncodeIdPlaylist: any,
+  encodeIdPlaylist1: string,
+  setEncodeIdSong: any,
+  idSong: any
+) {
+  setEncodeIdPlaylist(encodeIdPlaylist1);
+  console.log("encodeIdPlaylist1", encodeIdPlaylist1);
+  setEncodeIdSong(idSong);
+}

@@ -11,7 +11,6 @@ export interface InfoSong {
   thumbnailM: string;
   duration: number;
   streamingStatus: number;
-  // artists:
 }
 export interface ITypeNewRelease {
   items?: any;
@@ -31,7 +30,7 @@ export interface ISectionPlaylist {
   thumbnailM: string;
   sortDescription: string;
   dataSectionPlaylist?: object;
-  items?: [];
+  items?: ISectionPlaylist[];
 }
 export interface ITrending {
   map(
@@ -93,4 +92,22 @@ export interface ILyric {
   data: string;
   endTime: number;
   startTime: number;
+}
+interface IPlaylistData {
+  song: {
+    items: InfoSong[];
+    totalDuration: number;
+    total: number;
+  };
+  contentLastUpdate: number;
+  artists: IArtist[];
+  like?: number;
+  title: string;
+  artistsNames: string;
+  description: string;
+  thumbnailM: string;
+  encodeId: string;
+}
+export interface IGetData {
+  data: IPlaylistData;
 }

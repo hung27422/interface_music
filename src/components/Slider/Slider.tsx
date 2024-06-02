@@ -32,9 +32,9 @@ function SliderItem() {
   return (
     <Slider {...settings} className={cx("wrapper")}>
       {bannerItems?.map((item: Item, index: any) =>
-        item.items?.map((subItem: Item, index: any) => {
+        item.items?.map((subItem: Item, subIndex: any) => {
           return (
-            <div key={index} className={cx("slider-item")}>
+            <div key={index + "-" + subIndex} className={cx("slider-item")}>
               <Image
                 src={subItem.banner}
                 className={cx("image-slider")}

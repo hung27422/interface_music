@@ -12,14 +12,27 @@ interface TitlePageProps {
   data?: InfoSong[];
 }
 function TitlePage({ title, show, data }: TitlePageProps) {
-  const { setEncodeIdSong, activePlay, setActivePlay } =
-    useContext(MusicContext);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const {
+    setEncodeIdSong,
+    activePlay,
+    setActivePlay,
+    setIndexSong,
+    setPlaylistContext,
+  } = useContext(MusicContext);
+
   const handlePlaySongRandom = () => {
     if (data) {
-      let indexRadom = Math.floor(Math.random() * data.length) % data.length;
-      setEncodeIdSong(data[indexRadom]?.encodeId);
+      let indexRandom = Math.floor(Math.random() * data.length) % data.length;
+      setEncodeIdSong(data[indexRandom]?.encodeId);
       setActivePlay(true);
+      setIndexSong(indexRandom ?? 0);
+      setPlaylistContext(data ?? []);
+      localStorage.setItem("currentPlaylist", JSON.stringify(data));
+      localStorage.setItem("currentSong", JSON.stringify(data[indexRandom]));
+      localStorage.setItem(
+        "encodeId",
+        JSON.stringify(data[indexRandom]?.encodeId)
+      );
     }
   };
 

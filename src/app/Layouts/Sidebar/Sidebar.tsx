@@ -17,8 +17,17 @@ function Sidebar() {
           width={50}
           height={50}
           alt="iconLogo"
+          className={cx("image")}
+          priority
         ></Image>
-        <Image src={images.logo} width={120} height={40} alt="iconLogo"></Image>
+        <Image
+          src={images.logo}
+          width={120}
+          height={40}
+          alt="iconLogo"
+          className={cx("image")}
+          priority
+        ></Image>
       </Link>
       <MenuSidebar></MenuSidebar>
       <CreatePlaylist></CreatePlaylist>

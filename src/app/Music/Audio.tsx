@@ -9,6 +9,7 @@ function Audio() {
   const audioPlay = data?.data?.["128"];
   const {
     activePlay,
+    setActivePlay,
     audioCurrentTime,
     setAudioCurrentTime,
     audioDuration,
@@ -20,11 +21,13 @@ function Audio() {
     audioVolume,
     setAudioVolume,
     audioMute,
+    activePlaylist,
+    setActivePlaylist,
   } = useContext(MusicContext);
   //Handle Play, Pause Song
   useEffect(() => {
     if (audioRef.current && audioPlay) {
-      if (activePlay) {
+      if (activePlay || activePlaylist) {
         audioRef.current.play().catch((error) => {
           console.error("Error attempting to play audio:", error);
         });
@@ -32,7 +35,7 @@ function Audio() {
         audioRef.current.pause();
       }
     }
-  }, [activePlay, audioPlay, audioRef]);
+  }, [activePlay, activePlaylist, audioPlay, audioRef, setActivePlaylist]);
   // Handle Change Volume
   useEffect(() => {
     if (audioRef.current) {

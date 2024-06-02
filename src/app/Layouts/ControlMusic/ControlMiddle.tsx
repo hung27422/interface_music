@@ -15,11 +15,12 @@ import { PauseIcon } from "@/components/Icons/Icons";
 import useGetDataInfoSong from "@/hooks/useGetDataInfoSong";
 import { toast } from "react-toastify";
 import useFormatDuration from "@/hooks/useFormatDuration";
+import { InfoSong } from "@/Interfaces/Interface";
 
 const cx = classNames.bind(styles);
 function ControlMiddle() {
   const { data } = useGetDataInfoSong();
-  const [playlistLocal, setPlaylistLocal] = useState(null);
+  const [playlistLocal, setPlaylistLocal] = useState<InfoSong[] | null>(null);
   const notify = (title: string) =>
     toast(
       <>
@@ -48,12 +49,14 @@ function ControlMiddle() {
     setAudioRandomSong,
     autoClick,
     dataStorage,
+    activePlaylist,
+    setActivePlaylist,
   } = useContext(MusicContext);
 
   const dataSong = data?.data ? data.data : dataStorage;
   const duration = useFormatDuration(dataSong?.duration);
   const dataPlaylist =
-    playlistContext.length > 0 ? playlistContext : playlistLocal;
+    playlistContext?.length > 0 ? playlistContext : playlistLocal;
   // Lấy dữ liệu của localStorage "currentPlaylist" set cho setPlaylistLocal
   useEffect(() => {
     const storedDataPlaylist = localStorage.getItem("currentPlaylist");
@@ -67,6 +70,7 @@ function ControlMiddle() {
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
+    setActivePlaylist(false);
   };
 
   const handleNextSong = () => {
@@ -84,6 +88,7 @@ function ControlMiddle() {
       setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
       setEncodeIdSong(dataPlaylist[nextIndex]?.encodeId);
       setIndexSong(nextIndex);
+      setActivePlay(true);
       localStorage.setItem(
         "currentSong",
         JSON.stringify(dataPlaylist[nextIndex])
@@ -95,11 +100,12 @@ function ControlMiddle() {
       const prevEncodeId = history[history.length - 1];
       setHistory((prev) => prev.slice(0, -1));
       setEncodeIdSong(prevEncodeId);
+      setActivePlay(true);
     }
   };
   const handleChangeSeek = (value: number) => {
     const audio = audioRef.current;
-    if (audio !== null && audio !== undefined) {
+    if (audio) {
       audio.currentTime = (audioDuration / 100) * value;
     }
   };
@@ -146,7 +152,7 @@ function ControlMiddle() {
           onClick={(e) => handlePlayMusic(e.currentTarget.id)}
           className={cx("control-btn-item")}
         >
-          {activePlay ? <PauseIcon /> : <PlayIcon></PlayIcon>}
+          {activePlay || activePlaylist ? <PauseIcon /> : <PlayIcon></PlayIcon>}
         </button>
         {/* Next */}
         <button

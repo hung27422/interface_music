@@ -66,6 +66,16 @@
   bottom: auto;
   transform: translateX(-50%) translateY(-50%);
 }
+.show-action {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  transform: translateX(-50%) translateY(-50%);
+}
 .title {
   margin-bottom: 20px;
 }
@@ -128,4 +138,7 @@
   background-color: transparent;
   border-radius: 50%;
   cursor: pointer;
+}
+.icon-play {
+  margin: 0 auto;
 }

@@ -30,7 +30,7 @@ interface MVSongProp {
 }
 export default function MVSong({ data }: MVSongProp) {
   const { data: dataMV } = useGetDataMV();
-  const srcMV = dataMV?.data?.streaming?.mp4["480p"];
+  const srcMV = dataMV?.data?.streaming?.mp4?.["480p"];
   const { setActivePlay } = React.useContext(MusicContext);
   const refVideo = React.useRef<HTMLVideoElement>(null);
 
@@ -63,7 +63,7 @@ export default function MVSong({ data }: MVSongProp) {
               <div className={cx("header-left")}></div>
               <div className={cx("header-middle")}>
                 <span className={cx("header-middle-title")}>
-                  MV: {data.title}
+                  MV: {truncateTitle(data.title, 30)}
                 </span>
               </div>
               <div className={cx("header-right")}>
@@ -89,3 +89,9 @@ export default function MVSong({ data }: MVSongProp) {
     </div>
   );
 }
+const truncateTitle = (title: string, maxLength: number) => {
+  if (title?.length <= maxLength) {
+    return title;
+  }
+  return title?.substring(0, maxLength) + "...";
+};

@@ -1,5 +1,5 @@
 "use client";
-import { ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
+import { ISectionPlaylist, InfoSong, IGetData } from "@/Interfaces/Interface";
 import React, { createContext, useState, ReactNode, useRef } from "react";
 interface Props {
   children: ReactNode;
@@ -41,10 +41,16 @@ interface MusicContextType {
   setDataStorage: React.Dispatch<React.SetStateAction<{}>>;
   playlistItemStoredLocal: ISectionPlaylist[];
   setPlaylistStoredLocal: React.Dispatch<React.SetStateAction<any[]>>;
+  getDataPlaylist: IGetData | null;
+  setGetDataPlaylist: React.Dispatch<React.SetStateAction<any>>;
+  activePlaylist: boolean;
+  setActivePlaylist: React.Dispatch<React.SetStateAction<any>>;
 }
 
 // Provide a default value for the context
 const defaultValue: MusicContextType = {
+  getDataPlaylist: null,
+  setGetDataPlaylist: () => {},
   audioRef: { current: null } as React.RefObject<HTMLAudioElement>,
   autoClick: { current: null },
   typeWeekly: "",
@@ -81,9 +87,13 @@ const defaultValue: MusicContextType = {
   setDataStorage: () => {},
   playlistItemStoredLocal: [] as ISectionPlaylist[],
   setPlaylistStoredLocal: () => {},
+  activePlaylist: false,
+  setActivePlaylist: () => {},
 };
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
+  const [getDataPlaylist, setGetDataPlaylist] = useState<IGetData | null>(null);
+
   const audioRef = useRef<HTMLAudioElement>(null);
   const autoClick = useRef<HTMLButtonElement>(null);
   const [typeWeekly, setTypeWeekly] = useState<string>("");
@@ -103,8 +113,10 @@ function ContextMusic({ children }: Props) {
   const [audioMute, setAudioMute] = useState<boolean>(false);
   const [dataStorage, setDataStorage] = useState<{}>({});
   const [playlistItemStoredLocal, setPlaylistStoredLocal] = useState<any>([]);
-
+  const [activePlaylist, setActivePlaylist] = useState<boolean>(false);
   const contextValue = {
+    getDataPlaylist,
+    setGetDataPlaylist,
     audioRef,
     autoClick,
     typeWeekly,
@@ -141,6 +153,8 @@ function ContextMusic({ children }: Props) {
     setDataStorage,
     playlistItemStoredLocal,
     setPlaylistStoredLocal,
+    activePlaylist,
+    setActivePlaylist,
   };
   return (
     <MusicContext.Provider value={contextValue}>

@@ -21,14 +21,11 @@ import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import RadioItem from "@/components/RadioItem/RadioItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
-import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
 interface IHomeProps {
   items: ITypeNewRelease;
 }
 export default function Home() {
   const { data, isLoading } = useDataHome();
-  const { data: dataPlaylist } = useGetDetailPlaylist();
-
   const { playlistItemStoredLocal } = useContext(MusicContext);
   //Api
   const newRelease = data?.data.items.filter(
@@ -54,7 +51,7 @@ export default function Home() {
             <SliderItem></SliderItem>
           </div>
           <div className={cx("container")}>
-            {dataPlaylist && playlistItemStoredLocal && <RecentlyPlayed />}
+            {playlistItemStoredLocal && <RecentlyPlayed />}
             {newRelease?.map((item: IHomeProps, index: number) => (
               <div key={index} className={cx("new-release")}>
                 <NewReleaseItem

@@ -33,19 +33,21 @@ interface LyricSongProp {
   data: InfoSong;
 }
 export default function LyricSong({ data }: LyricSongProp) {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { audioCurrentTime } = React.useContext(MusicContext);
+  const containerRef = React.useRef<HTMLDivElement>(null);
   const { data: dataLyrics } = useGetDataLyric();
   const dataWords = dataLyrics?.data?.sentences;
   const dataLyric = dataLyrics?.data?.lyric;
-  const { audioCurrentTime } = React.useContext(MusicContext);
+  //Lấy thời gian xấp xỉ
   const delta = 0.41;
 
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   React.useEffect(() => {
     const activeLyric = document.querySelector(`.${styles.show}`);
+
     if (activeLyric && containerRef.current) {
       // Lấy vị trí cuộn từ cạnh trên nội dung bên trong là thẻ <li></li> tới cạnh trên của containerRef
       const containerTop = containerRef.current.scrollTop;
@@ -55,8 +57,6 @@ export default function LyricSong({ data }: LyricSongProp) {
       const lyricTop = (activeLyric as HTMLElement).offsetTop;
       // Lấy chiều cao của thẻ <li></li>
       const lyricHeight = (activeLyric as HTMLElement).clientHeight;
-      console.log("containerTop", containerTop);
-
       // Kiểm tra độ dài của thẻ <li></li> vượt ngoài containerRef không
       if (lyricTop + lyricHeight > containerTop + containerHeight) {
         containerRef.current.scrollTo({
