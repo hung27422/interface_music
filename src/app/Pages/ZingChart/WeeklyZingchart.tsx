@@ -10,26 +10,51 @@ import Link from "next/link";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 interface IResult {
-  items: any;
+  items: InfoSong[];
   data: IChartHome[];
   type: string;
 }
 function WeeklyZingchart() {
   const { data } = useDataChartHome();
-  const { setTypeWeekly } = useContext(MusicContext);
+  const {
+    setTypeWeekly,
+    setEncodeIdSong,
+    setActivePlay,
+    activePlay,
+    setActivePlaylist,
+    setIndexSong,
+    setPlaylistContext,
+  } = useContext(MusicContext);
   const weekly = data?.data.weekChart;
+  // console.log("weekly", weekly);
+
   const result: IResult[] = [];
   for (let i = 0; i < 3; i++) {
     if (weekly) {
+      const key = Object.keys(weekly)[i];
       result.push({
-        data: weekly?.[Object.keys(weekly)[i]],
-        type: Object.keys(weekly)[i],
-        items: weekly?.[Object.keys(weekly)[i]].items,
+        data: weekly[key],
+        type: key,
+        items: weekly[key].items || [],
       });
     }
   }
+  // console.log("result", result);
+
   const handleGetDataWeekly = (id: string) => {
     setTypeWeekly(id);
+  };
+  const handlePlayMusicPlaylist = (value: InfoSong[]) => {
+    console.log("value", value);
+    if (!value || value.length === 0) return;
+    setEncodeIdSong(value[0].encodeId);
+    setActivePlay(!activePlay);
+    setActivePlaylist(false);
+    setIndexSong(0);
+    setPlaylistContext(value ?? []);
+    localStorage.setItem("currentSong", JSON.stringify(value[0]));
+    localStorage.setItem("currentPlaylist", JSON.stringify(value));
+    localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
   };
   return (
     <div className={cx("wrapper")}>
@@ -49,7 +74,10 @@ function WeeklyZingchart() {
                   {item.type === "us" && "US-UK"}
                   {item.type === "korea" && "K-POP"}
                 </Link>
-                <div className={cx("title-btn-icon-play", "btn-icon-play")}>
+                <div
+                  onClick={() => handlePlayMusicPlaylist(item?.items)}
+                  className={cx("btn-icon-play")}
+                >
                   <FontAwesomeIcon className={cx("btn-play")} icon={faPlay} />
                 </div>
               </div>
