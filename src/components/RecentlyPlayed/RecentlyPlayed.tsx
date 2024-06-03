@@ -30,6 +30,8 @@ function RecentlyPlayed() {
     encodeIdPlaylist,
     setEncodeIdSong,
     setPlaylistContext,
+    activePlaylist,
+    setActivePlaylist,
   } = useContext(MusicContext);
 
   useEffect(() => {
@@ -66,21 +68,21 @@ function RecentlyPlayed() {
     localStorage.setItem("encodeIdAlbum", JSON.stringify(encodeId));
   };
   const handlePlayMusic = (encodeIdPlaylist1: string) => {
-    const currentIndex = 0;
-    setEncodeIdPlaylist(encodeIdPlaylist1);
     const playlist = getDataPlaylist?.data?.song?.items;
-    console.log("playlist", playlist);
     const idPlaylist = getDataPlaylist?.data?.encodeId;
+    const currentIndex = 0;
     if (!playlist) {
       console.error("Playlist is undefined.");
       return;
     }
     const firstSongId = playlist[0]?.encodeId;
+    setActivePlay(false);
+    setEncodeIdPlaylist(encodeIdPlaylist1);
     //Xử lý phát dừng nhạc, lưu lịch sử phát nhạc
     if (idPlaylist === encodeIdPlaylist1) {
-      setActivePlay(!activePlay);
+      setActivePlaylist(!activePlaylist);
     } else {
-      setActivePlay(true);
+      setActivePlaylist(true);
       setIndexSong(currentIndex ?? 0);
       localStorage.setItem(
         "currentSong",
@@ -97,8 +99,10 @@ function RecentlyPlayed() {
       const playlist = getDataPlaylist?.data?.song?.items;
       if (firstSongId) {
         setEncodeIdSong(firstSongId);
-        localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
         setPlaylistContext(playlist ?? []);
+        localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
+        localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+        localStorage.setItem("encodeId", JSON.stringify(firstSongId));
       }
     }
   }, [
@@ -133,7 +137,7 @@ function RecentlyPlayed() {
                       </div>
                       <div
                         className={cx(
-                          activePlay &&
+                          activePlaylist &&
                             getDataPlaylist?.data?.encodeId === item?.encodeId
                             ? "show-action"
                             : "action"
@@ -149,7 +153,7 @@ function RecentlyPlayed() {
                           onClick={(e) => handlePlayMusic(e.currentTarget.id)}
                           className={cx("btn-play")}
                         >
-                          {activePlay &&
+                          {activePlaylist &&
                           getDataPlaylist?.data?.encodeId === item?.encodeId ? (
                             <Image
                               src="https://zmp3-static.zmdcdn.me/skins/zmp3-v6.1/images/icons/icon-playing.gif"

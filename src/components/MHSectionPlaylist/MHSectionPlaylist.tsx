@@ -50,7 +50,6 @@ function MHSectionPlaylist({
     const currentIndex = 0;
     setEncodeIdPlaylist(encodeIdPlaylist1);
     const playlist = getDataPlaylist?.data?.song?.items;
-    console.log("playlist", playlist);
     const idPlaylist = getDataPlaylist?.data?.encodeId;
     if (!playlist) {
       console.error("Playlist is undefined.");
