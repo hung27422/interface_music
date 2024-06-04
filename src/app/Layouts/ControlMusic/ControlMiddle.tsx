@@ -93,6 +93,11 @@ function ControlMiddle() {
         "currentSong",
         JSON.stringify(dataPlaylist[nextIndex])
       );
+      localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
+      localStorage.setItem(
+        "encodeId",
+        JSON.stringify(dataPlaylist[nextIndex]?.encodeId)
+      );
     }
   };
   const handlePrevSong = () => {
@@ -101,6 +106,16 @@ function ControlMiddle() {
       setHistory((prev) => prev.slice(0, -1));
       setEncodeIdSong(prevEncodeId);
       setActivePlay(true);
+      let prevIndex = indexSong - 1;
+      setIndexSong(prevIndex);
+      if (dataPlaylist) {
+        localStorage.setItem(
+          "currentSong",
+          JSON.stringify(dataPlaylist[prevIndex])
+        );
+        localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
+        localStorage.setItem("encodeId", JSON.stringify(prevEncodeId));
+      }
     }
   };
   const handleChangeSeek = (value: number) => {

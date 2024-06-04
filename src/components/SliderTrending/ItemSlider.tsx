@@ -3,7 +3,7 @@ import styles from "./SliderTrending.module.scss";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import { ITrending } from "@/Interfaces/Interface";
+import { ITrending, InfoSong } from "@/Interfaces/Interface";
 import useFormatDate from "../../hooks/useFormatDate";
 import { useContext } from "react";
 import { MusicContext } from "../ContextMusic/ContextMusic";
@@ -11,8 +11,10 @@ const cx = classNames.bind(styles);
 interface ItemSliderProps {
   data: ITrending;
   NO: number;
+  playlist?: ITrending[];
+  index: number;
 }
-function ItemSlider({ data, NO }: ItemSliderProps) {
+function ItemSlider({ data, NO, playlist, index }: ItemSliderProps) {
   const {
     encodeIdSong,
     setEncodeIdSong,
@@ -26,6 +28,16 @@ function ItemSlider({ data, NO }: ItemSliderProps) {
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
+    if (encodeId === encodeIdSong) {
+      setActivePlay(!activePlay);
+    } else {
+      setActivePlay(true);
+    }
+    setPlaylistContext(playlist ?? []);
+    setIndexSong(index);
+    localStorage.setItem("currentSong", JSON.stringify(data));
+    localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
+    localStorage.setItem("encodeId", JSON.stringify(encodeId));
   };
   return (
     <div className={cx("wrapper-item")}>

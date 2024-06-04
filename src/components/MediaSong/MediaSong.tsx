@@ -139,7 +139,7 @@ function MediaSong({
           <span className={cx("name-singer", weekly && "hide")}>
             {data?.artistsNames}
           </span>
-          {releaseDate && (
+          {releaseDate && !trending && (
             <span className={cx("name-singer", weekly && "hide")}>
               {dateRelease(data?.releaseDate)}
             </span>
@@ -154,7 +154,9 @@ function MediaSong({
         </div>
       ) : (
         <div
-          style={{ display: control ? "none" : "block" }}
+          style={{
+            display: control || (weekly && trending) ? "none" : "block",
+          }}
           className={cx("media-middle", trending && "trending")}
         >
           <span className={cx("title-album")}>{data?.album?.title}</span>

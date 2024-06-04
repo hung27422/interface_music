@@ -30,7 +30,12 @@ function SliderItem({ data }: SliderItemProps) {
       {data?.items?.map((item: ITrending, index: number) => {
         return (
           <div key={index} className={cx("item-slider")}>
-            <ItemSlider data={item} NO={index} />
+            <ItemSlider
+              playlist={data?.items}
+              index={index}
+              data={item}
+              NO={index}
+            />
           </div>
         );
       })}
