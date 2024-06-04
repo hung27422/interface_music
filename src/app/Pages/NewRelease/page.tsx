@@ -71,6 +71,7 @@ function NewRelease() {
                     trending={true}
                     data={item}
                     playlist={data}
+                    releaseDate
                   />
                 </div>
               );
@@ -87,6 +88,7 @@ function NewRelease() {
                     trending={true}
                     data={item}
                     playlist={data}
+                    releaseDate
                   />
                 </div>
               );
@@ -103,6 +105,7 @@ function NewRelease() {
                     trending={true}
                     data={item}
                     playlist={data}
+                    releaseDate
                   />
                 </div>
               );

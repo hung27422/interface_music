@@ -23,6 +23,7 @@ interface MediaSongProps {
   weekly?: boolean;
   index?: number;
   playlist?: InfoSong[];
+  releaseDate?: boolean;
 }
 function MediaSong({
   data,
@@ -32,6 +33,7 @@ function MediaSong({
   weekly,
   index,
   playlist,
+  releaseDate,
 }: MediaSongProps) {
   const notify = (title: string) =>
     toast(
@@ -137,10 +139,24 @@ function MediaSong({
           <span className={cx("name-singer", weekly && "hide")}>
             {data?.artistsNames}
           </span>
+          {releaseDate && (
+            <span className={cx("name-singer", weekly && "hide")}>
+              {dateRelease(data?.releaseDate)}
+            </span>
+          )}
         </div>
       </div>
-      {trending && !weekly && (
+      {trending && !weekly && releaseDate ? (
         <div className={cx("media-middle", trending && "trending")}>
+          <span className={cx("title-album")}>
+            {dateRelease(data?.releaseDate)}
+          </span>
+        </div>
+      ) : (
+        <div
+          style={{ display: control ? "none" : "block" }}
+          className={cx("media-middle", trending && "trending")}
+        >
           <span className={cx("title-album")}>{data?.album?.title}</span>
         </div>
       )}
@@ -179,3 +195,23 @@ function MediaSong({
 }
 
 export default MediaSong;
+const dateRelease = (timestamp: number): string => {
+  const date: any = new Date(timestamp * 1000);
+  const now: any = new Date();
+  const differenceInDays: number = Math.floor(
+    (now - date) / (1000 * 60 * 60 * 24)
+  );
+  let vietnamesePhrase: any;
+
+  if (differenceInDays === 0) {
+    vietnamesePhrase = "Hôm nay"; // Today
+  } else if (differenceInDays === 1) {
+    vietnamesePhrase = "Ngày hôm qua"; // Yesterday
+  } else if (differenceInDays === 2) {
+    vietnamesePhrase = "Hôm kia"; // The day before yesterday
+  } else if (differenceInDays > 2) {
+    // For days beyond 2, you can use a more generic phrase like "Cách đây X ngày" (X days ago)
+    vietnamesePhrase = `Cách đây ${differenceInDays} ngày`;
+  }
+  return vietnamesePhrase;
+};
