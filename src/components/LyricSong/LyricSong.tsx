@@ -33,13 +33,14 @@ interface LyricSongProp {
   data: InfoSong;
 }
 export default function LyricSong({ data }: LyricSongProp) {
-  const { audioCurrentTime } = React.useContext(MusicContext);
+  const { audioCurrentTime, encodeIdSong } = React.useContext(MusicContext);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const { data: dataLyrics } = useGetDataLyric();
   const dataWords = dataLyrics?.data?.sentences;
   const dataLyric = dataLyrics?.data?.lyric;
   //Lấy thời gian xấp xỉ
   const delta = 0.41;
+  console.log("isSong", encodeIdSong);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -102,13 +103,24 @@ export default function LyricSong({ data }: LyricSongProp) {
                 />
               </div>
               <div ref={containerRef} className={cx("container-lyric")}>
-                {dataLyric ? (
+                {!dataWords ? (
                   <span
-                    dangerouslySetInnerHTML={{
-                      __html: dataLyric.replace(/\n/g, "<br>"),
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      left: "40%",
+                      right: "50%",
+                      width: "200px",
                     }}
-                  />
+                  >
+                    Không có lời bài hát
+                  </span>
                 ) : (
+                  // <span
+                  //   dangerouslySetInnerHTML={{
+                  //     __html: dataLyric.replace(/\n/g, "<br>"),
+                  //   }}
+                  // />
                   <>
                     {dataWords?.map((sentence: any, index: number) => (
                       <div key={index}>

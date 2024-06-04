@@ -16,28 +16,27 @@ interface MHSectionPlaylistProps {
   show?: boolean;
   hide?: boolean;
   top100?: boolean;
+  playlist?: ISectionPlaylist[];
 }
 
 function MHSectionPlaylist({
   dataSectionPlaylist,
-  show,
   hide,
   top100,
+  playlist,
 }: MHSectionPlaylistProps) {
-  const { isValidating } = useGetDetailPlaylist();
   const {
     encodeIdPlaylist,
     setEncodeIdPlaylist,
-    encodeIdSong,
     setEncodeIdSong,
-    activePlay,
     setActivePlay,
     setPlaylistContext,
-    getDataPlaylist,
     setIndexSong,
     activePlaylist,
     setActivePlaylist,
+    setPlaylistHub,
   } = useContext(MusicContext);
+  const { data: getDataPlaylist, isValidating } = useGetDetailPlaylist();
 
   //Set encodeIdPlaylist để chuyển qua page album
   const handleGetEncodeId = (encodeId: string) => {
@@ -49,12 +48,9 @@ function MHSectionPlaylist({
     setActivePlay(false);
     const currentIndex = 0;
     setEncodeIdPlaylist(encodeIdPlaylist1);
+    if (!getDataPlaylist) return;
     const playlist = getDataPlaylist?.data?.song?.items;
     const idPlaylist = getDataPlaylist?.data?.encodeId;
-    if (!playlist) {
-      console.error("Playlist is undefined.");
-      return;
-    }
     const firstSongId = playlist[0]?.encodeId;
     //Xử lý phát dừng nhạc, lưu lịch sử phát nhạc
     if (idPlaylist === encodeIdPlaylist1) {
@@ -87,13 +83,24 @@ function MHSectionPlaylist({
     setEncodeIdSong,
     setPlaylistContext,
   ]);
-
+  const handleChangPageHub = (value: string) => {
+    setPlaylistHub(value);
+  };
   return (
     <div className={cx("wrapper")}>
       {!hide && (
         <div className={cx("mh-section-header")}>
           <h2 className={cx("title")}>{dataSectionPlaylist?.title}</h2>
-          <button className={cx("btn-all")}>Tất cả {`>`}</button>
+          {dataSectionPlaylist?.items &&
+            dataSectionPlaylist?.items?.length > 5 && (
+              <Link
+                href={"/Pages/Hub"}
+                onClick={() => handleChangPageHub(dataSectionPlaylist?.title)}
+                className={cx("btn-all")}
+              >
+                Tất cả {`>`}
+              </Link>
+            )}
         </div>
       )}
       <div className={cx("mh-container")}>
@@ -263,13 +270,3 @@ const truncateTitle = (title: string, maxLength: number) => {
   }
   return title.substring(0, maxLength) + "...";
 };
-function setIdSongAndPlaylist(
-  setEncodeIdPlaylist: any,
-  encodeIdPlaylist1: string,
-  setEncodeIdSong: any,
-  idSong: any
-) {
-  setEncodeIdPlaylist(encodeIdPlaylist1);
-  console.log("encodeIdPlaylist1", encodeIdPlaylist1);
-  setEncodeIdSong(idSong);
-}

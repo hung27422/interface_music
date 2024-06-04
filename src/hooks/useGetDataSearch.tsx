@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import useSWR from "swr";
 import { MusicContext } from "../components/ContextMusic/ContextMusic";
+import useDebounce from "./useDebounce";
 const fetcher = async (url: string) => {
   const res = await fetch(url);
   if (!res.ok) {
@@ -12,10 +13,10 @@ const fetcher = async (url: string) => {
 };
 function useGetDataSearch() {
   const { resultSearch } = useContext(MusicContext);
-
+  const debounceValue = useDebounce(resultSearch, 500);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const { data, isLoading } = useSWR(
-    apiUrl + `/search?keyword=${resultSearch}`,
+    apiUrl + `/search?keyword=${debounceValue}`,
     fetcher,
     {
       revalidateIfStale: false,

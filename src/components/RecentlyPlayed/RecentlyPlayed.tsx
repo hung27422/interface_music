@@ -16,16 +16,17 @@ import useTruncateTitle from "../../hooks/useTruncateTitle";
 import Image from "next/image";
 const cx = classNames.bind(styles);
 function RecentlyPlayed() {
-  const { isValidating } = useGetDetailPlaylist();
+  const {
+    data: getDataPlaylist,
+    isLoading,
+    isValidating,
+  } = useGetDetailPlaylist();
   const [isPlaylistSaved, setIsPlaylistSaved] = useState(false);
   const {
     playlistItemStoredLocal,
     setPlaylistStoredLocal,
     setEncodeIdPlaylist,
-    getDataPlaylist,
-    encodeIdSong,
     setActivePlay,
-    activePlay,
     setIndexSong,
     encodeIdPlaylist,
     setEncodeIdSong,

@@ -3,7 +3,6 @@ import classNames from "classnames/bind";
 import styles from "./NewRelease.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import useDataChartHome from "@/hooks/useDataChartHome";
 import useDataHome from "@/hooks/useDataHome";
 import { IHome, ITypeNewRelease, InfoSong } from "@/Interfaces/Interface";
 import { useState } from "react";

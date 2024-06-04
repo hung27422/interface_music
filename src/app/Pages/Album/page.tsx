@@ -1,7 +1,6 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./album.module.scss";
-import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
@@ -16,6 +15,7 @@ import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import { list } from "postcss";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import Image from "next/image";
+import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
 const cx = classNames.bind(styles);
 function Album() {
   const {
@@ -26,19 +26,19 @@ function Album() {
     activePlay,
     setPlaylistContext,
   } = useContext(MusicContext);
-  const { isLoading } = useGetDetailPlaylist();
-  const { getDataPlaylist } = useContext(MusicContext);
+  const { data: getDataPlaylist, isLoading } = useGetDetailPlaylist();
+
   const infoPlaylist = getDataPlaylist?.data;
   const releaseDate = getDataPlaylist?.data?.contentLastUpdate;
   const contentLastUpdate = useFormatDate(releaseDate || 0);
   const listSong = getDataPlaylist?.data?.song.items;
   const listArtist = getDataPlaylist?.data?.artists;
-  console.log("infoPlaylist", infoPlaylist);
 
   const totalDuration = useFormatTime(
     getDataPlaylist?.data.song.totalDuration || 0
   );
   const like = useFormatNumber(infoPlaylist?.like || 0);
+
   const handlePlayMusic = () => {
     if (!listSong) return;
     const nextIndex =

@@ -7,13 +7,21 @@ import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist"
 import HubHotItem from "@/components/HubHotItem/HubHotItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import TitlePage from "@/components/TitlePage/TitlePage";
+import { useContext } from "react";
+import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 function Hub() {
+  const { playlistHub } = useContext(MusicContext);
   const { data, isLoading } = useDataHome();
 
   const playlist = data?.data.items.filter(
     (item: ISectionPlaylist) => item.sectionType === "playlist"
   );
+  const playlistHubItem = data?.data.items.filter(
+    (item: ISectionPlaylist) =>
+      item.sectionType === "playlist" && item.title === playlistHub
+  );
+
   return (
     <div>
       {isLoading ? (
@@ -37,11 +45,19 @@ function Hub() {
             </div>
           </div>
           <div className={cx("playlist")}>
-            {playlist?.map((item: ISectionPlaylist, index: number) => (
-              <div key={index} className={cx("mh-section-playlist")}>
-                <MHSectionPlaylist dataSectionPlaylist={item} />
-              </div>
-            ))}
+            {playlistHubItem.length > 0
+              ? playlistHubItem?.map(
+                  (item: ISectionPlaylist, index: number) => (
+                    <div key={index} className={cx("mh-section-playlist")}>
+                      <MHSectionPlaylist top100 dataSectionPlaylist={item} />
+                    </div>
+                  )
+                )
+              : playlist?.map((item: ISectionPlaylist, index: number) => (
+                  <div key={index} className={cx("mh-section-playlist")}>
+                    <MHSectionPlaylist dataSectionPlaylist={item} />
+                  </div>
+                ))}
           </div>
         </div>
       )}

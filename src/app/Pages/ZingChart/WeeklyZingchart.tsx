@@ -45,7 +45,6 @@ function WeeklyZingchart() {
     setTypeWeekly(id);
   };
   const handlePlayMusicPlaylist = (value: InfoSong[]) => {
-    console.log("value", value);
     if (!value || value.length === 0) return;
     setEncodeIdSong(value[0].encodeId);
     setActivePlay(!activePlay);

@@ -15,7 +15,8 @@ import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import Image from "next/image";
 import images from "@/assets/images/images";
-import Search from "./Search";
+import Search from "./SearchSub";
+import Search1 from "./Search";
 const cx = classNames.bind(styles);
 function Navbar() {
   const notify = () =>

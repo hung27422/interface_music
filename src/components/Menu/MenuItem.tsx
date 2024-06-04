@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import styles from "./Menu.module.scss";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 const cx = classNames.bind(styles);
 interface Props {
   title: string;

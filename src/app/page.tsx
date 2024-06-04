@@ -20,13 +20,12 @@ import { log } from "console";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import RadioItem from "@/components/RadioItem/RadioItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
-import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
+// import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
 interface IHomeProps {
   items: ITypeNewRelease;
 }
 export default function Home() {
   const { data, isLoading } = useDataHome();
-  const { playlistItemStoredLocal } = useContext(MusicContext);
   //Api
   const newRelease = data?.data.items.filter(
     (item: IHome) => item.sectionType === "new-release"
@@ -51,7 +50,7 @@ export default function Home() {
             <SliderItem></SliderItem>
           </div>
           <div className={cx("container")}>
-            {playlistItemStoredLocal && <RecentlyPlayed />}
+            {/* {playlistItemStoredLocal && <RecentlyPlayed />} */}
             {newRelease?.map((item: IHomeProps, index: number) => (
               <div key={index} className={cx("new-release")}>
                 <NewReleaseItem
@@ -63,7 +62,10 @@ export default function Home() {
             ))}
             {playlist?.map((item: ISectionPlaylist, index: number) => (
               <div key={index} className={cx("mh-section-playlist")}>
-                <MHSectionPlaylist dataSectionPlaylist={item} />
+                <MHSectionPlaylist
+                  playlist={playlist}
+                  dataSectionPlaylist={item}
+                />
               </div>
             ))}
             <div className={cx("top-5-bxh")}>

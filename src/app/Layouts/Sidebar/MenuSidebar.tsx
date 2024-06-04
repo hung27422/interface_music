@@ -11,7 +11,7 @@ import {
 } from "@/components/Icons";
 import Menu from "@/components/Menu/Menu";
 import MenuItems from "@/components/Menu/MenuItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./Sidebar.module.scss";
 import { Flavors } from "next/font/google";
@@ -26,12 +26,21 @@ import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
 
 function MenuSidebar() {
-  const [active, setActive] = useState("1");
+  const [idLocal, setIdLocal] = useState("");
+  const [active, setActive] = useState("");
   const notify = () =>
     toast("Trang này chưa được phát triển, bạn quay lại sau nhé ^.^");
   const handleActive = (id: string) => {
     setActive(id);
+    localStorage.setItem("idPages", JSON.stringify(id));
   };
+  useEffect(() => {
+    const activeIdLocal = localStorage.getItem("idPages");
+    if (activeIdLocal) {
+      const idPageLocal = JSON.parse(activeIdLocal);
+      setIdLocal(idPageLocal);
+    }
+  }, [active]);
   return (
     <div className={cx("sidebar-wrapper")}>
       <div className={cx("sidebar-main")}>
@@ -41,7 +50,7 @@ function MenuSidebar() {
             id={"1"}
             title="Trang chủ"
             icon={<HomeIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
@@ -49,7 +58,7 @@ function MenuSidebar() {
             id={"11"}
             title="ZingChart"
             icon={<ZingchartIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
@@ -57,7 +66,7 @@ function MenuSidebar() {
             id={"2"}
             title="Xu hướng"
             icon={<TrendingIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
@@ -65,7 +74,7 @@ function MenuSidebar() {
             id={"3"}
             title="Thư viện"
             icon={<LibraryIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={notify}
           ></MenuItems>
         </Menu>
@@ -78,7 +87,7 @@ function MenuSidebar() {
             id={"4"}
             title="BXH Nhạc Mới"
             icon={<BXHIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
@@ -86,7 +95,7 @@ function MenuSidebar() {
             id={"5"}
             title="Chủ đề và thể loại"
             icon={<TopicOptionsIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
@@ -94,7 +103,7 @@ function MenuSidebar() {
             id={"6"}
             title="Top 100"
             icon={<Top100Icon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <AdvertisementVIP />
@@ -103,7 +112,7 @@ function MenuSidebar() {
             id={"8"}
             title="Yêu thích"
             icon={<SongFavoriteIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={notify}
           ></MenuItems>
           <MenuItems
@@ -111,7 +120,7 @@ function MenuSidebar() {
             id={"9"}
             title="Playlist"
             icon={<PlaylistIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={notify}
           ></MenuItems>
           <MenuItems
@@ -119,7 +128,7 @@ function MenuSidebar() {
             id={"10"}
             title="Album"
             icon={<AlbumIcon />}
-            active={active}
+            active={idLocal ? idLocal : "1"}
             onClick={notify}
           ></MenuItems>
         </Menu>
