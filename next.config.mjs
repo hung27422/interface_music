@@ -7,7 +7,6 @@ const nextConfig = {
         hostname: "photo-resize-zmp3.zmdcdn.me",
         port: "",
         pathname: "/**",
-        
       },
       {
         protocol: "https",
@@ -22,6 +21,7 @@ const nextConfig = {
         pathname: "/**",
       },
     ],
+    domains: ["lh3.googleusercontent.com"],
   },
 };
 

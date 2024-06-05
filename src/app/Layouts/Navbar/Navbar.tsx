@@ -17,6 +17,7 @@ import Image from "next/image";
 import images from "@/assets/images/images";
 import Search from "./SearchSub";
 import Search1 from "./Search";
+import BoxAuth0 from "../../../auth0/BoxAuth0";
 const cx = classNames.bind(styles);
 function Navbar() {
   const notify = () =>
@@ -46,13 +47,14 @@ function Navbar() {
               icon={faGear}
             />
           </Tippy>
-          <Image
+          <BoxAuth0 />
+          {/* <Image
             className={cx("avt-user")}
             src={images.avatar}
             alt="user"
             width={40}
             height={40}
-          />
+          /> */}
         </div>
       </div>
     </div>

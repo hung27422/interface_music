@@ -12,6 +12,7 @@ const cx = classNames.bind(styles);
 import ContextMusic from "@/components/ContextMusic/ContextMusic";
 import { ToastContainer } from "react-toastify";
 import Audio from "./Music/Audio";
+import AuthOProvider from "@/auth0/Auth0Provider";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,14 +24,16 @@ export default function RootLayout({
         <body className={inter.className}>
           <Audio />
           <ToastContainer />
-          <div className={cx("layout")}>
-            <Navbar />
-            <div className={cx("content")}>
-              <Sidebar></Sidebar>
-              <div className={cx("homepage")}>{children}</div>
+          <AuthOProvider>
+            <div className={cx("layout")}>
+              <Navbar />
+              <div className={cx("content")}>
+                <Sidebar></Sidebar>
+                <div className={cx("homepage")}>{children}</div>
+              </div>
+              <ControlMusic></ControlMusic>
             </div>
-            <ControlMusic></ControlMusic>
-          </div>
+          </AuthOProvider>
         </body>
       </ContextMusic>
     </html>
