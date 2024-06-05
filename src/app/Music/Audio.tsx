@@ -49,7 +49,7 @@ function Audio() {
   // Handle Repeat Song
   const handleEnded = () => {
     if (audioRepeatSong) {
-      if (audioRef.current !== null && audioRef.current !== undefined) {
+      if (audioRef.current) {
         audioRef.current.play();
       }
     } else {

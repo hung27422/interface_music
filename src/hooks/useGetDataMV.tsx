@@ -17,8 +17,12 @@ function useGetDataMV() {
 
   useEffect(() => {
     if (encodeIdVideo) {
-      const encodeId = JSON.parse(encodeIdVideo);
-      setId(encodeId);
+      try {
+        const encodeId = JSON.parse(encodeIdVideo);
+        setId(encodeId);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [encodeIdVideo]);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;

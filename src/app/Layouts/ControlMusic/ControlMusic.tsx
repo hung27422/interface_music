@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import Image from "next/image";
 import images from "@/assets/images/images";
+import { isEmpty } from "lodash";
 
 const cx = classNames.bind(styles);
 function ControlMusic() {
@@ -22,11 +23,12 @@ function ControlMusic() {
   }, [setDataStorage]);
 
   const songData = data?.msg === "Success" ? data?.data : dataStorage;
+  console.log("songData", songData);
 
   return (
     <div className={cx("wrapper")}>
       <div className={cx("control-left")}>
-        {!songData ? (
+        {isEmpty(songData) ? (
           <div className={cx("control-null")}>
             <Image src={images.logo} width={80} height={80} alt="imag-avt" />
             <span className={cx("control-null-des")}>

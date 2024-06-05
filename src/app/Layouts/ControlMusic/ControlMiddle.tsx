@@ -101,21 +101,37 @@ function ControlMiddle() {
     }
   };
   const handlePrevSong = () => {
-    if (history.length > 0) {
+    if (!dataPlaylist) return;
+    if (history.length > 0 && audioRandomSong) {
       const prevEncodeId = history[history.length - 1];
       setHistory((prev) => prev.slice(0, -1));
       setEncodeIdSong(prevEncodeId);
       setActivePlay(true);
       let prevIndex = indexSong - 1;
       setIndexSong(prevIndex);
-      if (dataPlaylist) {
-        localStorage.setItem(
-          "currentSong",
-          JSON.stringify(dataPlaylist[prevIndex])
-        );
-        localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
-        localStorage.setItem("encodeId", JSON.stringify(prevEncodeId));
+      localStorage.setItem(
+        "currentSong",
+        JSON.stringify(dataPlaylist[prevIndex])
+      );
+      localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
+      localStorage.setItem("encodeId", JSON.stringify(prevEncodeId));
+    } else {
+      let prevIndex = indexSong - 1;
+      if (prevIndex < 0) {
+        prevIndex = dataPlaylist.length - 1;
       }
+      setEncodeIdSong(dataPlaylist[prevIndex]?.encodeId);
+      setActivePlay(true);
+      setIndexSong(prevIndex);
+      localStorage.setItem(
+        "currentSong",
+        JSON.stringify(dataPlaylist[prevIndex])
+      );
+      localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
+      localStorage.setItem(
+        "encodeId",
+        JSON.stringify(dataPlaylist[prevIndex]?.encodeId)
+      );
     }
   };
   const handleChangeSeek = (value: number) => {
@@ -157,7 +173,11 @@ function ControlMiddle() {
         {/* Prev */}
         <button
           onClick={handlePrevSong}
-          className={cx("control-btn-item", history.length === 0 && "disabled")}
+          className={cx(
+            "control-btn-item",
+            (history.length === 0 && audioRandomSong) ||
+              (indexSong === 0 && "disabled")
+          )}
         >
           <PrevIcon></PrevIcon>
         </button>
