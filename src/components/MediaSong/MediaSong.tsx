@@ -73,6 +73,7 @@ function MediaSong({
     localStorage.setItem("currentSong", JSON.stringify(data));
     localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
     localStorage.setItem("encodeId", JSON.stringify(encodeId));
+    // localStorage.setItem("indexSong", JSON.stringify(index));
   };
 
   return (

@@ -21,6 +21,7 @@ const cx = classNames.bind(styles);
 function ControlMiddle() {
   const { data } = useGetDataInfoSong();
   const [playlistLocal, setPlaylistLocal] = useState<InfoSong[] | null>(null);
+  const [indexLocal, setIndexLocal] = useState<number>(0);
   const notify = (title: string) =>
     toast(
       <>
@@ -55,6 +56,7 @@ function ControlMiddle() {
 
   const dataSong = data?.data ? data.data : dataStorage;
   const duration = useFormatDuration(dataSong?.duration);
+
   const dataPlaylist =
     playlistContext?.length > 0 ? playlistContext : playlistLocal;
   // Lấy dữ liệu của localStorage "currentPlaylist" set cho setPlaylistLocal
@@ -64,6 +66,17 @@ function ControlMiddle() {
       try {
         const storedPlaylist = JSON.parse(storedDataPlaylist);
         setPlaylistLocal(storedPlaylist);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, []);
+  useEffect(() => {
+    const storedIndexSong = localStorage.getItem("indexSong");
+    if (storedIndexSong) {
+      try {
+        const storedIndex = JSON.parse(storedIndexSong);
+        setIndexLocal(storedIndex);
       } catch (err) {
         console.log(err);
       }
@@ -84,7 +97,7 @@ function ControlMiddle() {
         nextIndex =
           Math.floor(Math.random() * dataPlaylist.length) % dataPlaylist.length;
       } else {
-        nextIndex = indexSong + 1;
+        nextIndex = indexSong ? indexSong + 1 : indexLocal + 1;
       }
       if (nextIndex >= dataPlaylist.length) {
         nextIndex = 0;
@@ -102,6 +115,7 @@ function ControlMiddle() {
         "encodeId",
         JSON.stringify(dataPlaylist[nextIndex]?.encodeId)
       );
+      localStorage.setItem("indexSong", JSON.stringify(nextIndex));
     }
   };
   const handlePrevSong = () => {
