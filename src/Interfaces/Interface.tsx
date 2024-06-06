@@ -12,6 +12,7 @@ export interface InfoSong {
   duration: number;
   streamingStatus: number;
   releaseDate: number;
+  listen: number;
 }
 export interface ITypeNewRelease {
   items?: any;

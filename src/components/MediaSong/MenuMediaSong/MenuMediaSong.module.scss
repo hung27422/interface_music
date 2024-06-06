@@ -1,0 +1,117 @@
+.box-menu {
+  width: 300px;
+  height: max-content;
+  background-color: var(--white);
+  padding: 6px 12px;
+}
+.header {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--text-color);
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+.img-song {
+  border-radius: 8px;
+}
+.info-song {
+  display: flex;
+  flex-direction: column;
+}
+
+.name-song {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-left: 12px;
+}
+.list-selectiton {
+  margin-top: 20px;
+}
+.item-selection {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  margin-top: 4px;
+  border-radius: 6px;
+}
+.item-selection:hover,
+.item-playlist:hover {
+  background-color: hsla(0, 11%, 61%, 0.102);
+}
+.item-select-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  text-align: center;
+}
+.item-select-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-left: 12px;
+}
+.show-playlist {
+  position: relative;
+}
+
+.show-playlist:hover .box-playlist {
+  display: block;
+}
+.box-playlist::after {
+  content: "";
+  display: block;
+  position: absolute;
+  right: -19px;
+  top: 19px;
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+}
+.box-playlist {
+  display: none;
+  position: absolute;
+  width: 250px;
+  left: -168px;
+  background-color: var(--white);
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+.box-playlist-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item-playlist {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 2px 4px;
+  border-radius: 2px;
+}
+.item-playlist-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--text-color);
+  text-align: center;
+}
+.level-item {
+  width: 12px;
+  height: 12px;
+  padding: 12px;
+  cursor: pointer;
+  outline: none;
+}
+.item-playlist-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-color);
+  margin-left: 12px;
+}
+.level-item:hover {
+  border-radius: 50%;
+  color: var(--text-color);
+  background-color: var(--secondary);
+  cursor: pointer;
+}

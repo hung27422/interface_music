@@ -14,6 +14,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import useFormatDuration from "../../hooks/useFormatDuration";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { toast } from "react-toastify";
+import MenuMediaSong from "./MenuMediaSong/MenuMediaSong";
 const cx = classNames.bind(styles);
 interface MediaSongProps {
   data: InfoSong;
@@ -178,7 +179,8 @@ function MediaSong({
               </Tippy>
             )}
             <Tippy content="Khác">
-              <FontAwesomeIcon className={cx("level-item")} icon={faEllipsis} />
+              <MenuMediaSong data={data} />
+              {/* <FontAwesomeIcon className={cx("level-item")} icon={faEllipsis} /> */}
             </Tippy>
           </div>
         </>
@@ -188,7 +190,7 @@ function MediaSong({
             <FontAwesomeIcon className={cx("level-item")} icon={faHeart} />
           </Tippy>
           <Tippy content="Khác">
-            <FontAwesomeIcon className={cx("level-item")} icon={faEllipsis} />
+            <MenuMediaSong data={data} />
           </Tippy>
         </div>
       )}

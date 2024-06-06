@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function useGetDataPlaylist() {
+  const notify = () => toast("Bạn đã thêm bài này vào playlist rồi ^.^");
   // localStorage.removeItem("playlist1");
   const [dataPlaylist, setDataPlaylist] = useState(() => {
     const localData = localStorage.getItem("playlist1");
@@ -83,13 +85,33 @@ function useGetDataPlaylist() {
       data: [...prevData.data, newPlaylist],
     }));
   };
+  const addSongToPlaylist = (playlistId: string, song: any) => {
+    // Kiểm tra xem encodeId đã tồn tại trong bất kỳ bài hát nào trong playlist chưa
+    const isDuplicate = dataPlaylist.data.some((playlist: any) =>
+      playlist.songs.some(
+        (existingSong: any) => existingSong.encodeId === song.encodeId
+      )
+    );
+
+    // Nếu không phát hiện bài hát trùng lặp, thêm bài hát mới vào playlist
+    if (!isDuplicate) {
+      setDataPlaylist((prevData: { data: any }) => ({
+        data: prevData.data.map((playlist: any) =>
+          playlist.id === playlistId
+            ? { ...playlist, songs: [...playlist.songs, song] }
+            : playlist
+        ),
+      }));
+    } else {
+      notify();
+    }
+  };
   useEffect(() => {
     localStorage.setItem("playlist1", JSON.stringify(dataPlaylist));
-    const test = JSON.parse(localStorage.getItem("playlist1") || "");
-    console.log("test", test);
+    // const test = JSON.parse(localStorage.getItem("playlist1") || "");
   }, [dataPlaylist]);
 
-  return { dataPlaylist, addPlaylist };
+  return { dataPlaylist, addPlaylist, addSongToPlaylist };
 }
 
 export default useGetDataPlaylist;

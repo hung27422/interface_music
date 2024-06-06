@@ -61,8 +61,12 @@ function ControlMiddle() {
   useEffect(() => {
     const storedDataPlaylist = localStorage.getItem("currentPlaylist");
     if (storedDataPlaylist) {
-      const storedPlaylist = JSON.parse(storedDataPlaylist);
-      setPlaylistLocal(storedPlaylist);
+      try {
+        const storedPlaylist = JSON.parse(storedDataPlaylist);
+        setPlaylistLocal(storedPlaylist);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, []);
 

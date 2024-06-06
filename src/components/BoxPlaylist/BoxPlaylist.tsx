@@ -7,6 +7,7 @@ import Modal from "@mui/material/Modal";
 import classNames from "classnames/bind";
 import styles from "./BoxPlaylist.module.scss";
 import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
+import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
 const style = {
   position: "absolute" as "absolute",
@@ -26,12 +27,29 @@ export default function BoxPlaylist() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const { addPlaylist } = useGetDataPlaylist();
+  const { dataPlaylist, addPlaylist } = useGetDataPlaylist();
   const [playlistName, setPlaylistName] = React.useState("");
-  React.useEffect(() => {
-    console.log(playlistName);
-  }, [playlistName]);
+  const notify = () =>
+    toast(
+      "Xin lỗi chúng tôi giới hạn tạo 6 playlist. Chúng tôi sẽ sớm phát triển thêm ^.^"
+    );
+
+  const playlistLocal = localStorage.getItem("playlist1") || "";
+  if (!playlistLocal) {
+    return;
+  }
+  const dataPlaylistLocal = JSON.parse(playlistLocal);
+  const dataPlaylistItem = dataPlaylist.data.map((item: any) => {
+    return item;
+  });
+  const dataPlaylistItems = dataPlaylistLocal
+    ? dataPlaylistLocal.data
+    : dataPlaylistItem;
   const handleAddPlaylistData = () => {
+    if (dataPlaylistItems.length > 5) {
+      notify();
+      return;
+    }
     if (playlistName.trim() !== "") {
       addPlaylist(playlistName);
       setPlaylistName("");
