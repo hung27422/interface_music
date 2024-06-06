@@ -3,7 +3,7 @@ import styles from "./TitlePage.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { InfoSong } from "@/Interfaces/Interface";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 const cx = classNames.bind(styles);
 interface TitlePageProps {
@@ -14,7 +14,6 @@ interface TitlePageProps {
 function TitlePage({ title, show, data }: TitlePageProps) {
   const {
     setEncodeIdSong,
-    activePlay,
     setActivePlay,
     setIndexSong,
     setPlaylistContext,
@@ -25,8 +24,8 @@ function TitlePage({ title, show, data }: TitlePageProps) {
       let indexRandom = Math.floor(Math.random() * data.length) % data.length;
       setEncodeIdSong(data[indexRandom]?.encodeId);
       setActivePlay(true);
-      setIndexSong(indexRandom ?? 0);
-      setPlaylistContext(data ?? []);
+      setIndexSong(indexRandom);
+      setPlaylistContext(data);
       localStorage.setItem("currentPlaylist", JSON.stringify(data));
       localStorage.setItem("currentSong", JSON.stringify(data[indexRandom]));
       localStorage.setItem(

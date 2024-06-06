@@ -70,13 +70,21 @@ function MenuSidebar() {
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
           <MenuItems
+            href="/Pages/Playlist"
+            id={"9"}
+            title="Playlist"
+            icon={<PlaylistIcon />}
+            active={idLocal ? idLocal : "1"}
+            onClick={(e: any) => handleActive(e.currentTarget.id)}
+          ></MenuItems>
+          {/* <MenuItems
             href=""
             id={"3"}
             title="Thư viện"
             icon={<LibraryIcon />}
             active={idLocal ? idLocal : "1"}
             onClick={notify}
-          ></MenuItems>
+          ></MenuItems> */}
         </Menu>
       </div>
       <div className={cx("sidebar-divide")}></div>
@@ -112,14 +120,6 @@ function MenuSidebar() {
             id={"8"}
             title="Yêu thích"
             icon={<SongFavoriteIcon />}
-            active={idLocal ? idLocal : "1"}
-            onClick={notify}
-          ></MenuItems>
-          <MenuItems
-            href=""
-            id={"9"}
-            title="Playlist"
-            icon={<PlaylistIcon />}
             active={idLocal ? idLocal : "1"}
             onClick={notify}
           ></MenuItems>

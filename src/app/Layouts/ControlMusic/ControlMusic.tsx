@@ -23,7 +23,6 @@ function ControlMusic() {
   }, [setDataStorage]);
 
   const songData = data?.msg === "Success" ? data?.data : dataStorage;
-  console.log("songData", songData);
 
   return (
     <div className={cx("wrapper")}>

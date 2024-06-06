@@ -17,7 +17,7 @@ import Link from "next/link";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import useDebounce from "@/hooks/useDebounce";
 
-export default function Search() {
+export default function SearchSub() {
   const { data, isLoading } = useGetDataSearch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const { resultSearch, setResultSearch } = React.useContext(MusicContext);

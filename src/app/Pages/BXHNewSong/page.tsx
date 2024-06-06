@@ -2,8 +2,6 @@
 import classNames from "classnames/bind";
 import styles from "./BXHNewSong.module.scss";
 import useDataTrending from "@/hooks/useDataTrending";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { InfoSong } from "@/Interfaces/Interface";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";

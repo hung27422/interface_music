@@ -40,7 +40,6 @@ export default function LyricSong({ data }: LyricSongProp) {
   const dataLyric = dataLyrics?.data?.lyric;
   //Lấy thời gian xấp xỉ
   const delta = 0.41;
-  console.log("isSong", encodeIdSong);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);

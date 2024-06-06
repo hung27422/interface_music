@@ -13,8 +13,8 @@ import { InfoSong } from "@/Interfaces/Interface";
 import Link from "next/link";
 import Image from "next/image";
 
-function Search1() {
-  const { data, isLoading } = useGetDataSearch();
+function Search() {
+  const { data } = useGetDataSearch();
   const { resultSearch, setResultSearch, setEncodeIdPlaylist } =
     useContext(MusicContext);
   const [showResult, setShowResult] = useState(true);
@@ -65,7 +65,7 @@ function Search1() {
   };
   const searchResultTippy = (attrs: any) => (
     <div className={cx("result-wrapper")} {...attrs}>
-      {data?.data?.songs && data.data.songs.length > 0 && (
+      {data?.data?.songs && (
         <div className={cx("result-search")}>
           <h3 className={cx("title-result")}>Gợi ý kết quả</h3>
           <div className={cx("item-result")}>
@@ -85,7 +85,7 @@ function Search1() {
   );
   return (
     <TippyHeadless
-      //   visible={showResult}
+      // visible={showResult}
       trigger="click"
       render={
         resultSearch.length === 0
@@ -114,4 +114,4 @@ function Search1() {
   );
 }
 
-export default Search1;
+export default Search;
