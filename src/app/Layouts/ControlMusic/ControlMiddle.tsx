@@ -150,6 +150,7 @@ function ControlMiddle() {
         "encodeId",
         JSON.stringify(dataPlaylist[prevIndex]?.encodeId)
       );
+      localStorage.setItem("indexSong", JSON.stringify(prevIndex));
     }
   };
   const handleChangeSeek = (value: number) => {

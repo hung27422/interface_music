@@ -54,6 +54,7 @@ function WeeklyZingchart() {
     localStorage.setItem("currentSong", JSON.stringify(value[0]));
     localStorage.setItem("currentPlaylist", JSON.stringify(value));
     localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
+    localStorage.setItem("indexSong", JSON.stringify(0));
   };
   return (
     <div className={cx("wrapper")}>

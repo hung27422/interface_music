@@ -91,6 +91,8 @@ function RecentlyPlayed() {
       );
       localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
       localStorage.setItem("encodeId", JSON.stringify(firstSongId));
+    localStorage.setItem("indexSong", JSON.stringify(0));
+
     }
   };
   // Set encodeId Song và encodeId Playlist vào useContext
