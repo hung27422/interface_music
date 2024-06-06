@@ -12,6 +12,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import BoxPlaylist from "@/components/BoxPlaylist/BoxPlaylist";
+import { InfoSong } from "@/Interfaces/Interface";
 const cx = classNames.bind(styles);
 function Playlist() {
   const {
@@ -31,14 +32,12 @@ function Playlist() {
     return;
   }
   const dataPlaylistLocal = JSON.parse(playlistLocal);
-  const dataPlaylistItem = dataPlaylist.data.map((item: any) => {
+  const dataPlaylistItem = dataPlaylist?.data.map((item: any) => {
     return item;
   });
   const dataPlaylistItems = dataPlaylistLocal
     ? dataPlaylistLocal.data
     : dataPlaylistItem;
-  //   console.log("dataPlaylistLocal", dataPlaylistLocal.data);
-  //   console.log("dataPlaylistItem", dataPlaylistItem);
 
   const handleClickShowPlaylist = (id: string) => {
     setIdPlaylist(id);
@@ -58,6 +57,7 @@ function Playlist() {
     localStorage.setItem("currentSong", JSON.stringify(value[0]));
     localStorage.setItem("currentPlaylist", JSON.stringify(value));
     localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
+    localStorage.setItem("indexSong", JSON.stringify(0));
   };
   return (
     <div className={cx("wrapper")}>
@@ -175,13 +175,14 @@ function Playlist() {
                 <>
                   {item?.songs.length > 0 ? (
                     <>
-                      {item?.songs.map((item: any, index: number) => {
+                      {item?.songs.map((result: InfoSong, index: number) => {
                         return (
                           <MediaSong
                             trending
                             key={index}
-                            data={item}
+                            data={result}
                             index={index}
+                            playlist={item?.songs}
                           />
                         );
                       })}

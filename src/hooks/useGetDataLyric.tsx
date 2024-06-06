@@ -17,8 +17,12 @@ function useGetDataLyric() {
 
   useEffect(() => {
     if (encodeIdLyric) {
-      const encodeId = JSON.parse(encodeIdLyric);
-      setId(encodeId);
+      try {
+        const encodeId = JSON.parse(encodeIdLyric);
+        setId(encodeId);
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [encodeIdLyric]);
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
