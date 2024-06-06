@@ -74,7 +74,12 @@ function Search() {
               .map((item: InfoSong, index: number) => {
                 return (
                   <div className={cx("item-song")} key={index}>
-                    <MediaSong index={index} data={item} playlist={data.data} />
+                    <MediaSong
+                      search
+                      index={index}
+                      data={item}
+                      playlist={data.data}
+                    />
                   </div>
                 );
               })}

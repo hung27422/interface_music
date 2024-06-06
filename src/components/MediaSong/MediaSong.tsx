@@ -25,6 +25,7 @@ interface MediaSongProps {
   index?: number;
   playlist?: InfoSong[];
   releaseDate?: boolean;
+  search?: boolean;
 }
 function MediaSong({
   data,
@@ -35,6 +36,7 @@ function MediaSong({
   index,
   playlist,
   releaseDate,
+  search,
 }: MediaSongProps) {
   const notify = (title: string) =>
     toast(
@@ -158,7 +160,8 @@ function MediaSong({
       ) : (
         <div
           style={{
-            display: control || (weekly && trending) ? "none" : "block",
+            display:
+              control || (weekly && trending) || search ? "none" : "block",
           }}
           className={cx("media-middle", trending && "trending")}
         >
