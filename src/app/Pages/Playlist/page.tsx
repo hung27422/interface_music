@@ -175,13 +175,13 @@ function Playlist() {
                 <>
                   {item?.songs.length > 0 ? (
                     <>
-                      {item?.songs.map((result: InfoSong, index: number) => {
+                      {item?.songs.map((result: InfoSong, subIndex: number) => {
                         return (
                           <MediaSong
                             trending
                             key={index}
                             data={result}
-                            index={index}
+                            index={subIndex}
                             playlist={item?.songs}
                           />
                         );
