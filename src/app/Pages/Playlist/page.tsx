@@ -28,9 +28,12 @@ function Playlist() {
   const { dataPlaylist } = useGetDataPlaylist();
   const [showAction, setShowAction] = useState("");
   const { user } = useAuth0();
-  const playlistLocal = localStorage.getItem("playlist1") || "";
+  const playlistLocal =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("playlist1")
+      : null;
   if (!playlistLocal) {
-    return;
+    return null;
   }
   const dataPlaylistLocal = JSON.parse(playlistLocal);
   const dataPlaylistItem = dataPlaylist?.data.map((item: any) => {
