@@ -26,6 +26,7 @@ interface MediaSongProps {
   playlist?: InfoSong[];
   releaseDate?: boolean;
   search?: boolean;
+  removePlaylist?: boolean;
 }
 function MediaSong({
   data,
@@ -37,6 +38,7 @@ function MediaSong({
   playlist,
   releaseDate,
   search,
+  removePlaylist,
 }: MediaSongProps) {
   const notify = (title: string) =>
     toast(
@@ -184,8 +186,9 @@ function MediaSong({
               </Tippy>
             )}
             <Tippy content="Khác">
-              <MenuMediaSong data={data} />
-              {/* <FontAwesomeIcon className={cx("level-item")} icon={faEllipsis} /> */}
+              <>
+                <MenuMediaSong data={data} />
+              </>
             </Tippy>
           </div>
         </>
@@ -195,7 +198,9 @@ function MediaSong({
             <FontAwesomeIcon className={cx("level-item")} icon={faHeart} />
           </Tippy>
           <Tippy content="Khác">
-            <MenuMediaSong data={data} />
+            <>
+              <MenuMediaSong data={data} />
+            </>
           </Tippy>
         </div>
       )}

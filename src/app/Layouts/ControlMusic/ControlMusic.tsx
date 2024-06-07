@@ -18,7 +18,11 @@ function ControlMusic() {
   useEffect(() => {
     const storedData = localStorage.getItem("currentSong");
     if (storedData) {
-      setDataStorage(JSON.parse(storedData));
+      try {
+        setDataStorage(JSON.parse(storedData));
+      } catch (err) {
+        console.log(err);
+      }
     }
   }, [setDataStorage]);
 

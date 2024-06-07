@@ -6,6 +6,13 @@ import Modal from "@mui/material/Modal";
 
 import classNames from "classnames/bind";
 import styles from "./BoxLogin.module.scss";
+import MenuItems from "../Menu/MenuItem";
+import { PlaylistIcon } from "../Icons/Icons";
+import Image from "next/image";
+import images from "@/assets/images/images";
+import Login from "@/auth0/Login";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 const style = {
   position: "absolute" as "absolute",
@@ -14,21 +21,42 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
+  border: "2px solid var(--text-color)",
   boxShadow: 24,
   p: 4,
+  borderRadius: "12px",
 };
-
-export default function BoxLogin() {
+interface BoxLoginProps {
+  sideBar?: boolean;
+  crPlaylist?: boolean;
+}
+export default function BoxLogin({ sideBar, crPlaylist }: BoxLoginProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <button onClick={handleOpen} className={cx("btn-add-playlist")}>
-        Thêm Playlist +
-      </button>
+      {sideBar && (
+        <MenuItems
+          href=""
+          id={"9"}
+          title="Playlist"
+          icon={<PlaylistIcon />}
+          active=""
+          onClick={handleOpen}
+        ></MenuItems>
+      )}
+      {crPlaylist && (
+        <div onClick={handleOpen} className={cx("playlist-wrapper")}>
+          <div className={cx("box-icon")}>
+            <i className={cx("icon-add")}>
+              <FontAwesomeIcon icon={faPlus} />
+            </i>
+          </div>
+          <span className={cx("title-playlist")}>Thêm mới Playlist</span>
+        </div>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
@@ -36,12 +64,29 @@ export default function BoxLogin() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <div className={cx("wrapper")}>
+            <div className={cx("header")}>
+              <Image
+                src={images.iconLogo}
+                width={50}
+                height={50}
+                alt="iconLogo"
+                className={cx("image")}
+                priority
+              ></Image>
+              <Image
+                src={images.logo}
+                width={120}
+                height={40}
+                alt="iconLogo"
+                className={cx("image")}
+                priority
+              ></Image>
+            </div>
+            <div className={cx("container")}>
+              <Login primary="primary"></Login>
+            </div>
+          </div>
         </Box>
       </Modal>
     </div>

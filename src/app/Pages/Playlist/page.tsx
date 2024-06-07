@@ -22,9 +22,10 @@ function Playlist() {
     encodeIdSong,
     setPlaylistContext,
     setIndexSong,
+    idPlaylistLocal,
+    setIdPlaylistLocal,
   } = useContext(MusicContext);
   const { dataPlaylist } = useGetDataPlaylist();
-  const [idPlaylist, setIdPlaylist] = useState("1");
   const [showAction, setShowAction] = useState("");
   const { user } = useAuth0();
   const playlistLocal = localStorage.getItem("playlist1") || "";
@@ -40,7 +41,7 @@ function Playlist() {
     : dataPlaylistItem;
 
   const handleClickShowPlaylist = (id: string) => {
-    setIdPlaylist(id);
+    setIdPlaylistLocal(id);
   };
   const handlePlayMusic = (value: any[], id: string) => {
     if (!value) return;
@@ -53,7 +54,7 @@ function Playlist() {
     setIndexSong(0);
     setPlaylistContext(value);
     setShowAction(id);
-    setIdPlaylist(id);
+    setIdPlaylistLocal(id);
     localStorage.setItem("currentSong", JSON.stringify(value[0]));
     localStorage.setItem("currentPlaylist", JSON.stringify(value));
     localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
@@ -63,7 +64,7 @@ function Playlist() {
     <div className={cx("wrapper")}>
       <div className={cx("header")}>
         <TitlePage title="#Playlist" show={false} />
-        <BoxPlaylist />
+        <BoxPlaylist playlist />
       </div>
       <div className={cx("playlist")}>
         {dataPlaylistItems.map((item: any, index: number) => {
@@ -71,7 +72,7 @@ function Playlist() {
             .slice(0, 4)
             .map((song: any) => song.thumbnailM);
           return (
-            <div key={index} className={cx("playlist-img")}>
+            <div key={item?.id} className={cx("playlist-img")}>
               {item?.songs.length === 0 && (
                 <div className={cx("playlist-img-item")}>
                   <div className={cx("size-img")}>
@@ -171,7 +172,7 @@ function Playlist() {
         {dataPlaylistItems.map((item: any, index: number) => {
           return (
             <div key={index}>
-              {idPlaylist === item?.id && (
+              {idPlaylistLocal === item?.id && (
                 <>
                   {item?.songs.length > 0 ? (
                     <>
@@ -179,7 +180,7 @@ function Playlist() {
                         return (
                           <MediaSong
                             trending
-                            key={index}
+                            key={result.encodeId}
                             data={result}
                             index={subIndex}
                             playlist={item?.songs}

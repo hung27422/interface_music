@@ -23,17 +23,21 @@ import {
 } from "@/components/Icons/Icons";
 import AdvertisementVIP from "./AdvertisementVIP";
 import { toast } from "react-toastify";
+import { useAuth0 } from "@auth0/auth0-react";
+import BoxLogin from "@/components/BoxLogin/BoxLogin";
 const cx = classNames.bind(styles);
 
 function MenuSidebar() {
   const [idLocal, setIdLocal] = useState("");
   const [active, setActive] = useState("");
+  const { isAuthenticated } = useAuth0();
   const notify = () =>
     toast("Trang này chưa được phát triển, bạn quay lại sau nhé ^.^");
   const handleActive = (id: string) => {
     setActive(id);
     localStorage.setItem("idPages", JSON.stringify(id));
   };
+  const handleLogin = () => {};
   useEffect(() => {
     const activeIdLocal = localStorage.getItem("idPages");
     if (activeIdLocal) {
@@ -69,14 +73,19 @@ function MenuSidebar() {
             active={idLocal ? idLocal : "1"}
             onClick={(e: any) => handleActive(e.currentTarget.id)}
           ></MenuItems>
-          <MenuItems
-            href="/Pages/Playlist"
-            id={"9"}
-            title="Playlist"
-            icon={<PlaylistIcon />}
-            active={idLocal ? idLocal : "1"}
-            onClick={(e: any) => handleActive(e.currentTarget.id)}
-          ></MenuItems>
+          {isAuthenticated ? (
+            <MenuItems
+              href="/Pages/Playlist"
+              id={"9"}
+              title="Playlist"
+              icon={<PlaylistIcon />}
+              active={idLocal ? idLocal : "1"}
+              onClick={(e: any) => handleActive(e.currentTarget.id)}
+            ></MenuItems>
+          ) : (
+            <BoxLogin sideBar />
+          )}
+
           {/* <MenuItems
             href=""
             id={"3"}

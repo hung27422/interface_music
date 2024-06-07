@@ -9,16 +9,21 @@ import {
   faListOl,
   faMicrophone,
   faPlus,
+  faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
 import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
 import BoxPlaylist from "@/components/BoxPlaylist/BoxPlaylist";
+import { useContext } from "react";
+import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 interface MenuMediaSongProps {
   data: InfoSong;
 }
 function MenuMediaSong({ data }: MenuMediaSongProps) {
-  const { dataPlaylist, addSongToPlaylist } = useGetDataPlaylist();
+  const { dataPlaylist, addSongToPlaylist, removeSongFromPlaylist } =
+    useGetDataPlaylist();
+  const { idPlaylistLocal } = useContext(MusicContext);
   const playlistLocal = localStorage.getItem("playlist1") || "";
   if (!playlistLocal) {
     return;
@@ -32,6 +37,9 @@ function MenuMediaSong({ data }: MenuMediaSongProps) {
     : dataPlaylistItem;
   const handleAddSongToPlaylist = (playlistId: string) => {
     addSongToPlaylist(playlistId, data);
+  };
+  const handleRemoveSongFromPlaylist = () => {
+    removeSongFromPlaylist(idPlaylistLocal, data.encodeId);
   };
   const MenuTippy = (attrs: any) => {
     return (
@@ -82,6 +90,15 @@ function MenuMediaSong({ data }: MenuMediaSongProps) {
               <FontAwesomeIcon icon={faMicrophone} />
             </span>
             <span className={cx("item-select-title")}>Xem lời bài hát</span>
+          </li>
+          <li
+            onClick={() => handleRemoveSongFromPlaylist()}
+            className={cx("item-selection", "remove-song")}
+          >
+            <span className={cx("item-select-icon")}>
+              <FontAwesomeIcon icon={faTrashAlt} />
+            </span>
+            <span className={cx("item-select-title")}>Xóa khỏi Playlist</span>
           </li>
         </ul>
       </div>

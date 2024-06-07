@@ -51,6 +51,8 @@ interface MusicContextType {
   setActivePlaylist: React.Dispatch<React.SetStateAction<any>>;
   playlistHub: string;
   setPlaylistHub: React.Dispatch<React.SetStateAction<any>>;
+  idPlaylistLocal: string;
+  setIdPlaylistLocal: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // Provide a default value for the context
@@ -96,6 +98,8 @@ const defaultValue: MusicContextType = {
   setActivePlaylist: () => {},
   playlistHub: "",
   setPlaylistHub: () => {},
+  idPlaylistLocal: "1",
+  setIdPlaylistLocal: () => {},
 };
 export const MusicContext = createContext<MusicContextType>(defaultValue);
 function ContextMusic({ children }: Props) {
@@ -121,6 +125,8 @@ function ContextMusic({ children }: Props) {
   const [playlistItemStoredLocal, setPlaylistStoredLocal] = useState<any>([]);
   const [activePlaylist, setActivePlaylist] = useState<boolean>(false);
   const [playlistHub, setPlaylistHub] = useState<string>("");
+  const [idPlaylistLocal, setIdPlaylistLocal] = useState<string>("1");
+
   const contextValue = {
     audioRef,
     autoClick,
@@ -162,6 +168,8 @@ function ContextMusic({ children }: Props) {
     setActivePlaylist,
     playlistHub,
     setPlaylistHub,
+    idPlaylistLocal,
+    setIdPlaylistLocal,
   };
   return (
     <MusicContext.Provider value={contextValue}>

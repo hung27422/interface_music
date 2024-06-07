@@ -78,7 +78,7 @@ function Search() {
                       search
                       index={index}
                       data={item}
-                      playlist={data.data}
+                      playlist={data.data.songs}
                     />
                   </div>
                 );

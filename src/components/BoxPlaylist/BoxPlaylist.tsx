@@ -8,6 +8,8 @@ import classNames from "classnames/bind";
 import styles from "./BoxPlaylist.module.scss";
 import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const cx = classNames.bind(styles);
 const style = {
   position: "absolute" as "absolute",
@@ -22,8 +24,11 @@ const style = {
   textAlign: "center",
   borderRadius: "5px",
 };
-
-export default function BoxPlaylist() {
+interface BoxPlaylistProps {
+  playlist?: boolean;
+  sidebar?: boolean;
+}
+export default function BoxPlaylist({ playlist, sidebar }: BoxPlaylistProps) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -58,9 +63,22 @@ export default function BoxPlaylist() {
   };
   return (
     <div>
-      <button onClick={handleOpen} className={cx("btn-add-playlist")}>
-        Thêm Playlist +
-      </button>
+      {playlist && (
+        <button onClick={handleOpen} className={cx("btn-add-playlist")}>
+          Thêm Playlist +
+        </button>
+      )}
+      {sidebar && (
+        <div onClick={handleOpen} className={cx("playlist-wrapper")}>
+          <div className={cx("box-icon")}>
+            <i className={cx("icon-add")}>
+              <FontAwesomeIcon icon={faPlus} />
+            </i>
+          </div>
+          <span className={cx("title-playlist")}>Thêm mới Playlist</span>
+        </div>
+      )}
+
       <Modal
         open={open}
         onClose={handleClose}
