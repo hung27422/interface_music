@@ -28,10 +28,10 @@ function Playlist() {
   const { dataPlaylist } = useGetDataPlaylist();
   const [showAction, setShowAction] = useState("");
   const { user } = useAuth0();
-  const playlistLocal =
-    typeof localStorage !== "undefined"
-      ? localStorage.getItem("playlist1")
-      : null;
+  let playlistLocal: string | null = null;
+  if (typeof window !== "undefined") {
+    playlistLocal = localStorage.getItem("playlist1");
+  }
   if (!playlistLocal) {
     return null;
   }
