@@ -63,7 +63,7 @@ export default function BoxPlaylist({ playlist, sidebar }: BoxPlaylistProps) {
       handleClose();
     }
   };
-  if (!isAuthenticated) return null;
+  if (!isAuthenticated) return <></>;
   return (
     <div>
       {playlist && (
