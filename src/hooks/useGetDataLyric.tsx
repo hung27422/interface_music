@@ -13,7 +13,10 @@ const fetcher = async (url: string) => {
 function useGetDataLyric() {
   const { encodeIdSong } = useContext(MusicContext);
   const [id, setId] = useState("");
-  const encodeIdLyric = localStorage.getItem("encodeId");
+  const encodeIdLyric =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("encodeId")
+      : null;
 
   useEffect(() => {
     if (encodeIdLyric) {

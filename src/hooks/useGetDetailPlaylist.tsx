@@ -14,7 +14,10 @@ function useGetDetailPlaylist() {
   const { encodeIdPlaylist } = useContext(MusicContext);
 
   const [id, setId] = useState("");
-  const encodeIdAlbum = localStorage.getItem("encodeIdAlbum");
+  const encodeIdAlbum =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("encodeIdAlbum")
+      : null;
   useEffect(() => {
     if (encodeIdAlbum) {
       try {

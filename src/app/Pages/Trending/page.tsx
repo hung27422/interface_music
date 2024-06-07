@@ -5,7 +5,6 @@ import Image from "next/image";
 import images from "@/assets/images/images";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import useDataHome from "@/hooks/useDataHome";
-import { useEffect } from "react";
 import { ITrending, InfoSong } from "@/Interfaces/Interface";
 import useDataTrending from "@/hooks/useDataTrending";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";

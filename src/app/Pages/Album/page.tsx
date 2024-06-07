@@ -32,7 +32,6 @@ function Album() {
   const contentLastUpdate = useFormatDate(releaseDate || 0);
   const listSong = getDataPlaylist?.data?.song.items;
   const listArtist = getDataPlaylist?.data?.artists;
-
   const totalDuration = useFormatTime(
     getDataPlaylist?.data.song.totalDuration || 0
   );

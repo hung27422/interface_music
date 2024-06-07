@@ -8,7 +8,8 @@ function AuthOProvider({ children }: { children: React.ReactNode }) {
       domain="dev-zse8qge31om0dwlh.us.auth0.com"
       clientId="558TIlmIBmSjf5Ncu2An2o7sYcm5K0Hw"
       authorizationParams={{
-        redirect_uri: window.location.origin,
+        redirect_uri:
+          typeof window !== "undefined" ? window.location.origin : undefined,
       }}
     >
       {children}

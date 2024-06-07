@@ -13,8 +13,10 @@ const fetcher = async (url: string) => {
 function useGetDataMV() {
   const { encodeIdSong } = useContext(MusicContext);
   const [id, setId] = useState("");
-  const encodeIdVideo = localStorage.getItem("encodeId");
-
+  const encodeIdVideo =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("encodeId")
+      : null;
   useEffect(() => {
     if (encodeIdVideo) {
       try {
