@@ -91,32 +91,41 @@ function ControlMiddle() {
   };
 
   const handleNextSong = () => {
-    let nextIndex = 0;
-    if (dataPlaylist) {
-      if (audioRandomSong) {
-        nextIndex =
-          Math.floor(Math.random() * dataPlaylist.length) % dataPlaylist.length;
-      } else {
-        nextIndex = indexSong ? indexSong + 1 : indexLocal + 1;
-      }
-      if (nextIndex >= dataPlaylist.length) {
-        nextIndex = 0;
-      }
-      setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
-      setEncodeIdSong(dataPlaylist[nextIndex]?.encodeId);
-      setIndexSong(nextIndex);
-      setActivePlay(true);
-      localStorage.setItem(
-        "currentSong",
-        JSON.stringify(dataPlaylist[nextIndex])
-      );
-      localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
-      localStorage.setItem(
-        "encodeId",
-        JSON.stringify(dataPlaylist[nextIndex]?.encodeId)
-      );
-      localStorage.setItem("indexSong", JSON.stringify(nextIndex));
+    if (!dataPlaylist || dataPlaylist.length === 0) {
+      // Xử lý trường hợp không có danh sách phát hoặc danh sách phát rỗng
+      console.error("No playlist data or playlist is empty");
+      return;
     }
+    let nextIndex = 0;
+    if (audioRandomSong) {
+      nextIndex =
+        Math.floor(Math.random() * dataPlaylist.length) % dataPlaylist.length;
+    } else {
+      let currentIndex =
+        indexSong !== undefined
+          ? indexSong
+          : indexLocal !== undefined
+          ? indexLocal
+          : 0;
+      nextIndex = (currentIndex + 1) % dataPlaylist.length;
+    }
+    if (nextIndex >= dataPlaylist.length) {
+      nextIndex = 0;
+    }
+    setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
+    setEncodeIdSong(dataPlaylist[nextIndex]?.encodeId);
+    setIndexSong(nextIndex);
+    setActivePlay(true);
+    localStorage.setItem(
+      "currentSong",
+      JSON.stringify(dataPlaylist[nextIndex])
+    );
+    localStorage.setItem("currentPlaylist", JSON.stringify(dataPlaylist));
+    localStorage.setItem(
+      "encodeId",
+      JSON.stringify(dataPlaylist[nextIndex]?.encodeId)
+    );
+    localStorage.setItem("indexSong", JSON.stringify(nextIndex));
   };
   const handlePrevSong = () => {
     if (!dataPlaylist) return;
