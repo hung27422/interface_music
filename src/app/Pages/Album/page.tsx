@@ -49,7 +49,6 @@ function Album() {
     setAudioRepeatSong(false);
     localStorage.setItem("currentPlaylist", JSON.stringify(listSong));
   };
-  if (typeof window === "undefined") return null;
   return (
     <div className={cx("wrapper")}>
       {isLoading ? (
