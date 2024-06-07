@@ -43,7 +43,7 @@ export default function BoxPlaylist({ playlist, sidebar }: BoxPlaylistProps) {
 
   const playlistLocal = localStorage.getItem("playlist1") || "";
   if (!playlistLocal) {
-    return;
+    return null;
   }
   const dataPlaylistLocal = JSON.parse(playlistLocal);
   const dataPlaylistItem = dataPlaylist.data.map((item: any) => {
@@ -64,6 +64,7 @@ export default function BoxPlaylist({ playlist, sidebar }: BoxPlaylistProps) {
     }
   };
   if (!isAuthenticated) return <></>;
+
   return (
     <div>
       {playlist && (
