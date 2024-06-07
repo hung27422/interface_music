@@ -13,7 +13,6 @@ interface IRadioProps {
   data: IRadio;
 }
 function RadioItem({ data }: IRadioProps) {
-  //   console.log("radio", data);
   const notify = () => {
     toast("Hiện chức năng chưa được phát triển. Bạn quay lại sau nhé ^.^");
   };

@@ -10,6 +10,7 @@ import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { useAuth0 } from "@auth0/auth0-react";
 const cx = classNames.bind(styles);
 const style = {
   position: "absolute" as "absolute",
@@ -29,6 +30,7 @@ interface BoxPlaylistProps {
   sidebar?: boolean;
 }
 export default function BoxPlaylist({ playlist, sidebar }: BoxPlaylistProps) {
+  const { isAuthenticated } = useAuth0();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -61,6 +63,7 @@ export default function BoxPlaylist({ playlist, sidebar }: BoxPlaylistProps) {
       handleClose();
     }
   };
+  if (!isAuthenticated) return null;
   return (
     <div>
       {playlist && (
