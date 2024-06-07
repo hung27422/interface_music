@@ -5,7 +5,10 @@ function useGetDataPlaylist() {
   const notify = () => toast("Bạn đã thêm bài này vào playlist rồi ^.^");
   // localStorage.removeItem("playlist1");
   const [dataPlaylist, setDataPlaylist] = useState(() => {
-    const localData = localStorage.getItem("playlist1");
+    const localData =
+      typeof localStorage !== "undefined"
+        ? localStorage.getItem("playlist1")
+        : null;
     return localData
       ? JSON.parse(localData)
       : {

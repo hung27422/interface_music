@@ -14,6 +14,10 @@ import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import BoxPlaylist from "@/components/BoxPlaylist/BoxPlaylist";
 import { InfoSong } from "@/Interfaces/Interface";
 const cx = classNames.bind(styles);
+interface PlaylistData {
+  data: any[]; // Định nghĩa kiểu cho thuộc tính data
+  // Thêm các thuộc tính khác nếu cần
+}
 function Playlist() {
   const {
     setEncodeIdSong,
@@ -27,15 +31,28 @@ function Playlist() {
   } = useContext(MusicContext);
   const { dataPlaylist } = useGetDataPlaylist();
   const [showAction, setShowAction] = useState("");
+  const [dataPlaylistLocal, setDataPlaylistLocal] =
+    useState<PlaylistData | null>(null);
   const { user } = useAuth0();
-  let playlistLocal: string | null = null;
-  if (typeof window !== "undefined") {
-    playlistLocal = localStorage.getItem("playlist1");
-  }
+
+  const playlistLocal =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("playlist1")
+      : null;
+  useEffect(() => {
+    if (playlistLocal) {
+      try {
+        const dataPlaylist = JSON.parse(playlistLocal);
+        setDataPlaylistLocal(dataPlaylist);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, [playlistLocal]);
+
   if (!playlistLocal) {
     return null;
   }
-  const dataPlaylistLocal = JSON.parse(playlistLocal);
   const dataPlaylistItem = dataPlaylist?.data.map((item: any) => {
     return item;
   });
