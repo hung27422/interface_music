@@ -7,12 +7,19 @@ import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { IRadio, ISectionPlaylist } from "@/Interfaces/Interface";
 import useFormatTime from "../../hooks/useFormatTime";
 import useFormatDate from "../../hooks/useFormatDate";
+import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
 interface IRadioProps {
   data: IRadio;
 }
 function RadioItem({ data }: IRadioProps) {
   //   console.log("radio", data);
+  const notify = () => {
+    toast("Hiện chức năng chưa được phát triển. Bạn quay lại sau nhé ^.^");
+  };
+  const handlePlayMusicRadio = () => {
+    notify();
+  };
   return (
     <div className={cx("wrapper")}>
       <div className={cx("body")}>
@@ -26,7 +33,10 @@ function RadioItem({ data }: IRadioProps) {
             ></div>
           </div>
           <div className={cx("action")}>
-            <button className={cx("btn-play-radio")}>
+            <button
+              onClick={handlePlayMusicRadio}
+              className={cx("btn-play-radio")}
+            >
               <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
             </button>
           </div>
