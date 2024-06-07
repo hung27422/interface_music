@@ -27,7 +27,6 @@ function Album() {
     setPlaylistContext,
   } = useContext(MusicContext);
   const { data: getDataPlaylist, isLoading } = useGetDetailPlaylist();
-
   const infoPlaylist = getDataPlaylist?.data;
   const releaseDate = getDataPlaylist?.data?.contentLastUpdate;
   const contentLastUpdate = useFormatDate(releaseDate || 0);
@@ -40,7 +39,7 @@ function Album() {
   const like = useFormatNumber(infoPlaylist?.like || 0);
 
   const handlePlayMusic = () => {
-    if (!listSong) return;
+    if (!listSong) return null;
     const nextIndex =
       Math.floor(Math.random() * listSong?.length) % listSong.length;
     setEncodeIdSong(listSong[nextIndex].encodeId);
@@ -48,7 +47,6 @@ function Album() {
     setActivePlay(!activePlay);
     setAudioRandomSong(true);
     setAudioRepeatSong(false);
-
     localStorage.setItem("currentPlaylist", JSON.stringify(listSong));
   };
   return (

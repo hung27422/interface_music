@@ -18,6 +18,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  if (typeof window === "undefined") return null;
   return (
     <html lang="en">
       <ContextMusic>
