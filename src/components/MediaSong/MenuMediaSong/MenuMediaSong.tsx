@@ -26,7 +26,7 @@ function MenuMediaSong({ data }: MenuMediaSongProps) {
   const { idPlaylistLocal } = useContext(MusicContext);
   const playlistLocal = localStorage.getItem("playlist1") || "";
   if (!playlistLocal) {
-    return;
+    return console.log("playlistLocal", playlistLocal);
   }
   const dataPlaylistLocal = JSON.parse(playlistLocal);
   const dataPlaylistItem = dataPlaylist.data.map((item: any) => {
