@@ -48,6 +48,10 @@ export interface ITrending {
   items?: [];
   promotes?: [];
   releaseDate: number;
+  album: any;
+  duration: number;
+  streamingStatus: number;
+  listen: number;
 }
 export interface IChartHome {
   hour: number;
