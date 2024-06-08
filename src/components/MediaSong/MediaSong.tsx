@@ -52,15 +52,7 @@ function MediaSong({
     );
   const { handlePlayMusic, handleSaveMusicLocalStorage } = useHandlePlayMusic();
   const duration = useFormatDuration(data?.duration);
-  const {
-    encodeIdSong,
-    setEncodeIdSong,
-    activePlay,
-    setActivePlay,
-    setIndexSong,
-    setPlaylistContext,
-    setActivePlaylist,
-  } = useContext(MusicContext);
+  const { encodeIdSong, activePlay } = useContext(MusicContext);
   const handlePlayMusicMedia = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
       notify(data?.title);

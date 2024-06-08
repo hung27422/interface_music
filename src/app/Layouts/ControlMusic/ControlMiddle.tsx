@@ -21,7 +21,9 @@ const cx = classNames.bind(styles);
 function ControlMiddle() {
   const { data } = useGetDataInfoSong();
   const [playlistLocal, setPlaylistLocal] = useState<InfoSong[] | null>(null);
+  const [history, setHistory] = useState<string[]>([]);
   const [indexLocal, setIndexLocal] = useState<number>(0);
+
   const notify = (title: string) =>
     toast(
       <>
@@ -71,14 +73,7 @@ function ControlMiddle() {
       }
     }
   }, []);
-  useEffect(() => {
-    if (indexLocal) {
-      console.log("indexLocal", indexLocal);
-    }
-    if (indexSong) {
-      console.log("indexSong", typeof indexSong);
-    }
-  }, [indexLocal, indexSong]);
+  // Lưu indexSong để khi reload lại vẫn còn index để next song
   useEffect(() => {
     const storedIndexSong = localStorage.getItem("indexSong");
     if (storedIndexSong) {
@@ -91,8 +86,6 @@ function ControlMiddle() {
     }
   }, []);
 
-  const [history, setHistory] = useState<string[]>([]);
-
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
@@ -102,7 +95,7 @@ function ControlMiddle() {
   const handleNextSong = () => {
     if (!dataPlaylist || dataPlaylist.length === 0) {
       // Xử lý trường hợp không có danh sách phát hoặc danh sách phát rỗng
-      console.error("No playlist data or playlist is empty");
+      console.error("dataPlaylist rỗng");
       return;
     }
     let nextIndex = 0;

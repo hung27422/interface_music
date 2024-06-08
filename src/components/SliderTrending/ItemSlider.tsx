@@ -7,37 +7,21 @@ import { ITrending, InfoSong } from "@/Interfaces/Interface";
 import useFormatDate from "../../hooks/format/useFormatDate";
 import { useContext } from "react";
 import { MusicContext } from "../ContextMusic/ContextMusic";
+import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 interface ItemSliderProps {
-  data: ITrending;
+  data: InfoSong;
   NO: number;
-  playlist?: ITrending[];
+  playlist?: InfoSong[];
   index: number;
 }
 function ItemSlider({ data, NO, playlist, index }: ItemSliderProps) {
-  const {
-    encodeIdSong,
-    setEncodeIdSong,
-    activePlay,
-    setActivePlay,
-    setIndexSong,
-    setPlaylistContext,
-  } = useContext(MusicContext);
+  const { encodeIdSong, activePlay } = useContext(MusicContext);
   const dateNow = useFormatDate(data?.releaseDate);
-
-  const handlePlayMusic = (encodeId: string) => {
-    setEncodeIdSong(encodeId);
-    setActivePlay(!activePlay);
-    if (encodeId === encodeIdSong) {
-      setActivePlay(!activePlay);
-    } else {
-      setActivePlay(true);
-    }
-    setPlaylistContext(playlist ?? []);
-    setIndexSong(index);
-    localStorage.setItem("currentSong", JSON.stringify(data));
-    localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
-    localStorage.setItem("encodeId", JSON.stringify(encodeId));
+  const { handlePlayMusic, handleSaveMusicLocalStorage } = useHandlePlayMusic();
+  const handlePlayMusicItemSlider = (encodeId: string) => {
+    handlePlayMusic(encodeId, index, playlist);
+    handleSaveMusicLocalStorage(data, playlist, encodeId, index);
   };
   return (
     <div className={cx("wrapper-item")}>
@@ -51,7 +35,7 @@ function ItemSlider({ data, NO, playlist, index }: ItemSliderProps) {
         ></Image>
         <button
           id={data?.encodeId}
-          onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+          onClick={(e) => handlePlayMusicItemSlider(e.currentTarget.id)}
           className={cx(
             activePlay && encodeIdSong === data?.encodeId
               ? "show-btn-play"

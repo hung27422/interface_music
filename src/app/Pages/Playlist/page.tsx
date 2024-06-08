@@ -21,20 +21,20 @@ import { InfoSong } from "@/Interfaces/Interface";
 import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 interface PlaylistData {
-  data: any[]; // Định nghĩa kiểu cho thuộc tính data
-  // Thêm các thuộc tính khác nếu cần
+  data: any[];
 }
 function Playlist() {
   const { user } = useAuth0();
   const { handlePlayMusic, handleSaveMusicLocalStorage } = useHandlePlayMusic();
+  const { dataPlaylist, deletePlaylist } = useGetDataPlaylist();
   const { activePlay, idPlaylistLocal, setIdPlaylistLocal } =
     useContext(MusicContext);
-  const { dataPlaylist, deletePlaylist } = useGetDataPlaylist();
 
   const [showAction, setShowAction] = useState("");
   const [dataPlaylistLocal, setDataPlaylistLocal] =
     useState<PlaylistData | null>(null);
 
+  // Lấy data Playlist từ Local Storage
   const playlistLocal =
     typeof localStorage !== "undefined"
       ? localStorage.getItem("playlist1")
@@ -51,6 +51,7 @@ function Playlist() {
   }, [playlistLocal]);
 
   if (!playlistLocal) {
+    //Nếu không có playlist Local thì sẽ dataPlaylistItems sẽ lấy dataPlaylistItem
     return null;
   }
   const dataPlaylistItem = dataPlaylist?.data.map((item: any) => {
@@ -59,10 +60,11 @@ function Playlist() {
   const dataPlaylistItems = dataPlaylistLocal
     ? dataPlaylistLocal.data
     : dataPlaylistItem;
-
+  // Show action của playlist
   const handleClickShowPlaylist = (id: string) => {
     setIdPlaylistLocal(id);
   };
+  // Phát nhạc
   const handlePlayMusicPlaylist = (value: InfoSong[], id: string) => {
     if (!value) return;
     const encodeId = value[0].encodeId;
@@ -72,6 +74,7 @@ function Playlist() {
     handlePlayMusic(encodeId, 0, value);
     handleSaveMusicLocalStorage(currentSong, value, encodeId, 0);
   };
+  // Xóa playlist
   const handleRemovePlaylist = (id: string) => {
     deletePlaylist(id);
   };

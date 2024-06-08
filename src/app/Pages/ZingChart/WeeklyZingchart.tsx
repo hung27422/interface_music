@@ -18,18 +18,10 @@ interface IResult {
 function WeeklyZingchart() {
   const { data } = useDataChartHome();
   const { handleSaveMusicLocalStorage, handlePlayMusic } = useHandlePlayMusic();
-  const {
-    setTypeWeekly,
-    indexSong,
-    setEncodeIdSong,
-    setActivePlay,
-    activePlay,
-    setActivePlaylist,
-    setIndexSong,
-    setPlaylistContext,
-  } = useContext(MusicContext);
+  const { setTypeWeekly } = useContext(MusicContext);
   const weekly = data?.data.weekChart;
 
+  // Đưa dữ liêu weekly vào mảng mới
   const result: IResult[] = [];
   for (let i = 0; i < 3; i++) {
     if (weekly) {
@@ -49,13 +41,7 @@ function WeeklyZingchart() {
     if (!value || value.length === 0) return;
     const encodeId = value[0].encodeId;
     const currentSong = value[0];
-    setEncodeIdSong(encodeId);
-    setActivePlay(!activePlay);
-    setActivePlaylist(false);
-    setIndexSong(0);
-    setPlaylistContext(value ?? []);
-    // handlePlayMusic(encodeId,indexSong ? indexSong : 0, value, currentSong);
-    //Lưu thông tin lên local
+    handlePlayMusic(encodeId, 0, value);
     handleSaveMusicLocalStorage(currentSong, value, encodeId, 0);
   };
   return (

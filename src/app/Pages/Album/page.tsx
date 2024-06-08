@@ -15,37 +15,36 @@ import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import Image from "next/image";
 import useGetDetailPlaylist from "@/hooks/api/useGetDetailPlaylist";
+import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 function Album() {
-  const {
-    setAudioRandomSong,
-    setAudioRepeatSong,
-    setEncodeIdSong,
-    setActivePlay,
-    activePlay,
-    setPlaylistContext,
-  } = useContext(MusicContext);
+  const { setAudioRandomSong, setAudioRepeatSong, activePlay } =
+    useContext(MusicContext);
   const { data: getDataPlaylist, isLoading } = useGetDetailPlaylist();
   const infoPlaylist = getDataPlaylist?.data;
-  const releaseDate = getDataPlaylist?.data?.contentLastUpdate;
-  const contentLastUpdate = useFormatDate(releaseDate || 0);
   const listSong = getDataPlaylist?.data?.song.items;
   const listArtist = getDataPlaylist?.data?.artists;
+  const { handlePlayMusic, handleSaveMusicLocalStorage } = useHandlePlayMusic();
+  // Lấy ngày phát hành
+  const releaseDate = getDataPlaylist?.data?.contentLastUpdate;
+  const contentLastUpdate = useFormatDate(releaseDate || 0);
+  // Lấy tổng thời gian bài hát của album
   const totalDuration = useFormatTime(
     getDataPlaylist?.data.song.totalDuration || 0
   );
+  // Lấy tổng số like Album
   const like = useFormatNumber(infoPlaylist?.like || 0);
-
-  const handlePlayMusic = () => {
+  // Phát nhạc
+  const handlePlayMusicAlbum = () => {
     if (!listSong) return null;
     const nextIndex =
       Math.floor(Math.random() * listSong?.length) % listSong.length;
-    setEncodeIdSong(listSong[nextIndex].encodeId);
-    setPlaylistContext(listSong ?? []);
-    setActivePlay(!activePlay);
+    const encodeId = listSong[nextIndex].encodeId;
+    const currentSong = listSong[nextIndex];
     setAudioRandomSong(true);
     setAudioRepeatSong(false);
-    localStorage.setItem("currentPlaylist", JSON.stringify(listSong));
+    handlePlayMusic(encodeId, nextIndex, listSong);
+    handleSaveMusicLocalStorage(currentSong, listSong, encodeId, nextIndex);
   };
   return (
     <div className={cx("wrapper")}>
@@ -66,7 +65,7 @@ function Album() {
                     ></div>
                     <div className={cx(activePlay ? "show-action" : "action")}>
                       <button
-                        onClick={handlePlayMusic}
+                        onClick={handlePlayMusicAlbum}
                         className={cx("btn-play")}
                       >
                         {activePlay ? (

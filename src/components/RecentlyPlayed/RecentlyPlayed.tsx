@@ -14,6 +14,7 @@ import { title } from "process";
 import useDataHome from "../../hooks/api/useDataHome";
 import useTruncateTitle from "../../hooks/useTruncateTitle";
 import Image from "next/image";
+import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 function RecentlyPlayed() {
   const {
@@ -34,7 +35,8 @@ function RecentlyPlayed() {
     activePlaylist,
     setActivePlaylist,
   } = useContext(MusicContext);
-
+  const { handlePlayMusicPlaylist, handleSaveMusicLocalStorage } =
+    useHandlePlayMusic();
   useEffect(() => {
     if (getDataPlaylist?.data && !isPlaylistSaved) {
       // Lấy danh sách playlist từ local storage
@@ -68,48 +70,40 @@ function RecentlyPlayed() {
     setEncodeIdPlaylist(encodeId);
     localStorage.setItem("encodeIdAlbum", JSON.stringify(encodeId));
   };
-  const handlePlayMusic = (encodeIdPlaylist1: string) => {
+  const handlePlayMusicSectionPlaylist = (encodeIdPlaylist: string) => {
+    if (!getDataPlaylist) return null;
     const playlist = getDataPlaylist?.data?.song?.items;
-    const idPlaylist = getDataPlaylist?.data?.encodeId;
+    const encodeIdPlaylistData = getDataPlaylist?.data?.encodeId;
+    const encodeIdSong = playlist[0]?.encodeId;
     const currentIndex = 0;
-    if (!playlist) {
-      console.error("Playlist is undefined.");
-      return;
-    }
-    const firstSongId = playlist[0]?.encodeId;
-    setActivePlay(false);
-    setEncodeIdPlaylist(encodeIdPlaylist1);
-    //Xử lý phát dừng nhạc, lưu lịch sử phát nhạc
-    if (idPlaylist === encodeIdPlaylist1) {
-      setActivePlaylist(!activePlaylist);
-    } else {
-      setActivePlaylist(true);
-      setIndexSong(currentIndex ?? 0);
-      localStorage.setItem(
-        "currentSong",
-        JSON.stringify(playlist[currentIndex])
-      );
-      localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
-      localStorage.setItem("encodeId", JSON.stringify(firstSongId));
-      localStorage.setItem("indexSong", JSON.stringify(0));
-    }
+    const currentSong = playlist[0];
+    handlePlayMusicPlaylist(
+      encodeIdPlaylist,
+      encodeIdPlaylistData,
+      encodeIdSong,
+      currentIndex,
+      playlist
+    );
+    handleSaveMusicLocalStorage(currentSong, playlist, encodeIdSong, 0);
   };
+
   // Set encodeId Song và encodeId Playlist vào useContext
   useEffect(() => {
     if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
       const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
       const playlist = getDataPlaylist?.data?.song?.items;
+      const currentSong = playlist[0];
+
       if (firstSongId) {
         setEncodeIdSong(firstSongId);
         setPlaylistContext(playlist ?? []);
-        localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
-        localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
-        localStorage.setItem("encodeId", JSON.stringify(firstSongId));
+        handleSaveMusicLocalStorage(currentSong, playlist, firstSongId, 0);
       }
     }
   }, [
     encodeIdPlaylist,
     getDataPlaylist,
+    handleSaveMusicLocalStorage,
     isValidating,
     setEncodeIdSong,
     setPlaylistContext,
@@ -152,7 +146,9 @@ function RecentlyPlayed() {
                         </Tippy>
                         <button
                           id={item.encodeId}
-                          onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+                          onClick={(e) =>
+                            handlePlayMusicSectionPlaylist(e.currentTarget.id)
+                          }
                           className={cx("btn-play")}
                         >
                           {activePlaylist &&
