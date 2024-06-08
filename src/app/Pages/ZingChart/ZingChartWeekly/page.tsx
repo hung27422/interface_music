@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./ZingChartWeekly.module.scss";
-import useDataChartHome from "@/hooks/useDataChartHome";
+import useDataChartHome from "@/hooks/api/useDataChartHome";
 import { useContext, useEffect, useState } from "react";
 import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";

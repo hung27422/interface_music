@@ -1,8 +1,7 @@
 "use client";
 import { useContext } from "react";
 import useSWR from "swr";
-import { MusicContext } from "../components/ContextMusic/ContextMusic";
-import useDebounce from "./useDebounce";
+import { MusicContext } from "../../components/ContextMusic/ContextMusic";
 const fetcher = async (url: string) => {
   const res = await fetch(url);
   if (!res.ok) {
@@ -11,12 +10,12 @@ const fetcher = async (url: string) => {
   const data = await res.json();
   return data;
 };
-function useGetDataSearch() {
-  const { resultSearch } = useContext(MusicContext);
-  const debounceValue = useDebounce(resultSearch, 500);
+function useGetDataSong() {
+  const { encodeIdSong } = useContext(MusicContext);
+
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const { data, isLoading } = useSWR(
-    apiUrl + `/search?keyword=${debounceValue}`,
+    apiUrl + `/song?id=${encodeIdSong}`,
     fetcher,
     {
       revalidateIfStale: false,
@@ -27,4 +26,4 @@ function useGetDataSearch() {
   return { data, isLoading };
 }
 
-export default useGetDataSearch;
+export default useGetDataSong;

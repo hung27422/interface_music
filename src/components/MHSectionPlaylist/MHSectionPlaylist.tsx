@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react";
 import { url } from "inspector";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import Link from "next/link";
-import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
+import useGetDetailPlaylist from "@/hooks/api/useGetDetailPlaylist";
 const cx = classNames.bind(styles);
 interface MHSectionPlaylistProps {
   dataSectionPlaylist: ISectionPlaylist;
@@ -59,6 +59,8 @@ function MHSectionPlaylist({
       setActivePlaylist(true);
     }
     setIndexSong(currentIndex ?? 0);
+    setEncodeIdSong(firstSongId);
+    setPlaylistContext(playlist ?? []);
     localStorage.setItem("currentSong", JSON.stringify(playlist[0]));
     localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
     localStorage.setItem("encodeId", JSON.stringify(firstSongId));

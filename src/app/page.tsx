@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./page.module.scss";
 const cx = classNames.bind(styles);
 
-import useDataHome from "@/hooks/useDataHome";
+import useDataHome from "@/hooks/api/useDataHome";
 import { useContext, useEffect, useRef, useState } from "react";
 import SliderItem from "@/components/Slider/Slider";
 import NewReleaseItem from "@/components/NewReleaseItem/NewReleaseItem";
@@ -20,12 +20,14 @@ import { log } from "console";
 import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import RadioItem from "@/components/RadioItem/RadioItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
+import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
 // import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
 interface IHomeProps {
   items: ITypeNewRelease;
 }
 export default function Home() {
   const { data, isLoading } = useDataHome();
+  const { playlistItemStoredLocal } = useContext(MusicContext);
   //Api
   const newRelease = data?.data.items.filter(
     (item: IHome) => item.sectionType === "new-release"
@@ -50,7 +52,7 @@ export default function Home() {
             <SliderItem></SliderItem>
           </div>
           <div className={cx("container")}>
-            {/* {playlistItemStoredLocal && <RecentlyPlayed />} */}
+            {playlistItemStoredLocal && <RecentlyPlayed />}
             {newRelease?.map((item: IHomeProps, index: number) => (
               <div key={index} className={cx("new-release")}>
                 <NewReleaseItem

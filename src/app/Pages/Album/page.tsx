@@ -6,16 +6,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
 import Tippy from "@tippyjs/react";
 import MediaSong from "@/components/MediaSong/MediaSong";
-import useFormatDate from "@/hooks/useFormatDate";
+import useFormatDate from "@/hooks/format/useFormatDate";
 import { IArtist, ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
-import useFormatTime from "@/hooks/useFormatTime";
-import useFormatNumber from "@/hooks/useFormatNumber";
+import useFormatTime from "@/hooks/format/useFormatTime";
+import useFormatNumber from "@/hooks/format/useFormatNumber";
 import ArtistItems from "@/components/ArtistItems/ArtistItems";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
-import { list } from "postcss";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import Image from "next/image";
-import useGetDetailPlaylist from "@/hooks/useGetDetailPlaylist";
+import useGetDetailPlaylist from "@/hooks/api/useGetDetailPlaylist";
 const cx = classNames.bind(styles);
 function Album() {
   const {
@@ -98,13 +97,13 @@ function Album() {
                   <span className={cx("playlist-left-info-artists")}>
                     {like} người yêu thích
                   </span>
-                  <div className={cx("playlist-left-info-btn-random")}>
+                  {/* <div className={cx("playlist-left-info-btn-random")}>
                     <FontAwesomeIcon
                       className={cx("playlist-left-info-btn-play")}
                       icon={faPlay}
                     ></FontAwesomeIcon>
                     <span>Tiếp tục phát</span>
-                  </div>
+                  </div> */}
                   <div className={cx("playlist-left-info-action")}>
                     <Tippy content="Thêm vào thư viện">
                       <FontAwesomeIcon

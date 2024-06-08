@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./ZingChart.module.scss";
-import useDataChartHome from "@/hooks/useDataChartHome";
+import useDataChartHome from "@/hooks/api/useDataChartHome";
 import { useState } from "react";
 import ZingChartLine from "@/components/ZingChartLine/ZingChartLine";
 import { InfoSong } from "@/Interfaces/Interface";

@@ -5,8 +5,8 @@ import { url } from "inspector";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { IRadio, ISectionPlaylist } from "@/Interfaces/Interface";
-import useFormatTime from "../../hooks/useFormatTime";
-import useFormatDate from "../../hooks/useFormatDate";
+import useFormatTime from "../../hooks/format/useFormatTime";
+import useFormatDate from "../../hooks/format/useFormatDate";
 import { toast } from "react-toastify";
 const cx = classNames.bind(styles);
 interface IRadioProps {

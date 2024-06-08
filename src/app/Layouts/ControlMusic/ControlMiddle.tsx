@@ -12,9 +12,9 @@ import Tippy from "@tippyjs/react";
 import { useContext, useEffect, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import { PauseIcon } from "@/components/Icons/Icons";
-import useGetDataInfoSong from "@/hooks/useGetDataInfoSong";
+import useGetDataInfoSong from "@/hooks/api/useGetDataInfoSong";
 import { toast } from "react-toastify";
-import useFormatDuration from "@/hooks/useFormatDuration";
+import useFormatDuration from "@/hooks/format/useFormatDuration";
 import { InfoSong } from "@/Interfaces/Interface";
 
 const cx = classNames.bind(styles);
@@ -72,6 +72,14 @@ function ControlMiddle() {
     }
   }, []);
   useEffect(() => {
+    if (indexLocal) {
+      console.log("indexLocal", indexLocal);
+    }
+    if (indexSong) {
+      console.log("indexSong", typeof indexSong);
+    }
+  }, [indexLocal, indexSong]);
+  useEffect(() => {
     const storedIndexSong = localStorage.getItem("indexSong");
     if (storedIndexSong) {
       try {
@@ -84,6 +92,7 @@ function ControlMiddle() {
   }, []);
 
   const [history, setHistory] = useState<string[]>([]);
+
   const handlePlayMusic = (encodeId: string) => {
     setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
@@ -101,12 +110,11 @@ function ControlMiddle() {
       nextIndex =
         Math.floor(Math.random() * dataPlaylist.length) % dataPlaylist.length;
     } else {
-      let currentIndex =
-        indexSong !== undefined
-          ? indexSong
-          : indexLocal !== undefined
-          ? indexLocal
-          : 0;
+      let currentIndex = indexSong
+        ? indexSong
+        : indexLocal !== undefined
+        ? indexLocal
+        : 0;
       nextIndex = (currentIndex + 1) % dataPlaylist.length;
     }
     if (nextIndex >= dataPlaylist.length) {

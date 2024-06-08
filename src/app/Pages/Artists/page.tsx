@@ -7,7 +7,7 @@ import { faPlay, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 import { useContext, useEffect } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
-import useGetDataArtist from "@/hooks/useGetDataArtist";
+import useGetDataArtist from "@/hooks/api/useGetDataArtist";
 import { IArtist, ISectionPlaylist, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import ArtistItems from "@/components/ArtistItems/ArtistItems";

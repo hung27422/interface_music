@@ -1,5 +1,5 @@
 import { IChartHome, InfoSong } from "@/Interfaces/Interface";
-import useDataChartHome from "../../hooks/useDataChartHome";
+import useDataChartHome from "../../hooks/api/useDataChartHome";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { CategoryScale, ChartOptions, plugins } from "chart.js";

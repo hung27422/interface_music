@@ -2,7 +2,7 @@
 import classNames from "classnames/bind";
 import styles from "./Hub.module.scss";
 import { ISectionPlaylist } from "@/Interfaces/Interface";
-import useDataHome from "@/hooks/useDataHome";
+import useDataHome from "@/hooks/api/useDataHome";
 import MHSectionPlaylist from "@/components/MHSectionPlaylist/MHSectionPlaylist";
 import HubHotItem from "@/components/HubHotItem/HubHotItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";

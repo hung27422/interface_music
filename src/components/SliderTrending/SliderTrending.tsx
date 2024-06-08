@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 import styles from "./SliderTrending.module.scss";
 import ItemSlider from "./ItemSlider";
-import useDataHome from "../../hooks/useDataHome";
+import useDataHome from "../../hooks/api/useDataHome";
 import { ITrending } from "@/Interfaces/Interface";
 import { useEffect } from "react";
 

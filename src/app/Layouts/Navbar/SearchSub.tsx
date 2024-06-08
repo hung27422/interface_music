@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
-import useGetDataSearch from "@/hooks/useGetDataSearch";
+import useGetDataSearch from "@/hooks/api/useGetDataSearch";
 import { InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
 import Link from "next/link";

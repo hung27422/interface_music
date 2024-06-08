@@ -3,7 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./ControlMusic.module.scss";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import ControlMiddle from "./ControlMiddle";
-import useGetDataInfoSong from "@/hooks/useGetDataInfoSong";
+import useGetDataInfoSong from "@/hooks/api/useGetDataInfoSong";
 import ControlRight from "./ControlRight";
 import { useContext, useEffect, useState } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";

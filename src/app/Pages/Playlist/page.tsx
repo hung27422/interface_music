@@ -11,34 +11,29 @@ import {
   faPlay,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
+import useGetDataPlaylist from "@/hooks/api/useGetDataPlaylist";
 import { useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import BoxPlaylist from "@/components/BoxPlaylist/BoxPlaylist";
 import { InfoSong } from "@/Interfaces/Interface";
+import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 interface PlaylistData {
   data: any[]; // Định nghĩa kiểu cho thuộc tính data
   // Thêm các thuộc tính khác nếu cần
 }
 function Playlist() {
-  const {
-    setEncodeIdSong,
-    activePlay,
-    setActivePlay,
-    encodeIdSong,
-    setPlaylistContext,
-    setIndexSong,
-    idPlaylistLocal,
-    setIdPlaylistLocal,
-  } = useContext(MusicContext);
+  const { user } = useAuth0();
+  const { handlePlayMusic, handleSaveMusicLocalStorage } = useHandlePlayMusic();
+  const { activePlay, idPlaylistLocal, setIdPlaylistLocal } =
+    useContext(MusicContext);
   const { dataPlaylist, deletePlaylist } = useGetDataPlaylist();
+
   const [showAction, setShowAction] = useState("");
   const [dataPlaylistLocal, setDataPlaylistLocal] =
     useState<PlaylistData | null>(null);
-  const { user } = useAuth0();
 
   const playlistLocal =
     typeof localStorage !== "undefined"
@@ -68,22 +63,14 @@ function Playlist() {
   const handleClickShowPlaylist = (id: string) => {
     setIdPlaylistLocal(id);
   };
-  const handlePlayMusic = (value: any[], id: string) => {
+  const handlePlayMusicPlaylist = (value: InfoSong[], id: string) => {
     if (!value) return;
-    setEncodeIdSong(value[0].encodeId ?? 0);
-    if (value[0].encodeId === encodeIdSong) {
-      setActivePlay(!activePlay);
-    } else {
-      setActivePlay(true);
-    }
-    setIndexSong(0);
-    setPlaylistContext(value);
-    setShowAction(id);
+    const encodeId = value[0].encodeId;
+    const currentSong = value[0];
     setIdPlaylistLocal(id);
-    localStorage.setItem("currentSong", JSON.stringify(value[0]));
-    localStorage.setItem("currentPlaylist", JSON.stringify(value));
-    localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
-    localStorage.setItem("indexSong", JSON.stringify(0));
+    setShowAction(id);
+    handlePlayMusic(encodeId, 0, value);
+    handleSaveMusicLocalStorage(currentSong, value, encodeId, 0);
   };
   const handleRemovePlaylist = (id: string) => {
     deletePlaylist(id);
@@ -166,7 +153,7 @@ function Playlist() {
                   </button>
                 </Tippy>
                 <button
-                  onClick={() => handlePlayMusic(item.songs, item?.id)}
+                  onClick={() => handlePlayMusicPlaylist(item.songs, item?.id)}
                   className={cx("btn-play")}
                 >
                   {showAction === item?.id && activePlay ? (

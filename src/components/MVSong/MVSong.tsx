@@ -10,7 +10,7 @@ import { MVIcon } from "../Icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { InfoSong } from "@/Interfaces/Interface";
-import useGetDataMV from "@/hooks/useGetDataMV";
+import useGetDataMV from "@/hooks/api/useGetDataMV";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 
 const style = {

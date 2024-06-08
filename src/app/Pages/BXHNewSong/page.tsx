@@ -1,7 +1,7 @@
 "use client";
 import classNames from "classnames/bind";
 import styles from "./BXHNewSong.module.scss";
-import useDataTrending from "@/hooks/useDataTrending";
+import useDataTrending from "@/hooks/api/useDataTrending";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { InfoSong } from "@/Interfaces/Interface";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";

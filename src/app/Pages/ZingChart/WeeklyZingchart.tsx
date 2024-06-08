@@ -2,12 +2,13 @@ import classNames from "classnames/bind";
 import styles from "./WeeklyZingchart.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-import useDataChartHome from "@/hooks/useDataChartHome";
+import useDataChartHome from "@/hooks/api/useDataChartHome";
 import { useContext, useEffect } from "react";
 import { IChartHome, InfoSong } from "@/Interfaces/Interface";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import Link from "next/link";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
+import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 interface IResult {
   items: InfoSong[];
@@ -16,8 +17,10 @@ interface IResult {
 }
 function WeeklyZingchart() {
   const { data } = useDataChartHome();
+  const { handleSaveMusicLocalStorage, handlePlayMusic } = useHandlePlayMusic();
   const {
     setTypeWeekly,
+    indexSong,
     setEncodeIdSong,
     setActivePlay,
     activePlay,
@@ -26,7 +29,6 @@ function WeeklyZingchart() {
     setPlaylistContext,
   } = useContext(MusicContext);
   const weekly = data?.data.weekChart;
-  // console.log("weekly", weekly);
 
   const result: IResult[] = [];
   for (let i = 0; i < 3; i++) {
@@ -39,22 +41,22 @@ function WeeklyZingchart() {
       });
     }
   }
-  // console.log("result", result);
 
   const handleGetDataWeekly = (id: string) => {
     setTypeWeekly(id);
   };
   const handlePlayMusicPlaylist = (value: InfoSong[]) => {
     if (!value || value.length === 0) return;
-    setEncodeIdSong(value[0].encodeId);
+    const encodeId = value[0].encodeId;
+    const currentSong = value[0];
+    setEncodeIdSong(encodeId);
     setActivePlay(!activePlay);
     setActivePlaylist(false);
     setIndexSong(0);
     setPlaylistContext(value ?? []);
-    localStorage.setItem("currentSong", JSON.stringify(value[0]));
-    localStorage.setItem("currentPlaylist", JSON.stringify(value));
-    localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
-    localStorage.setItem("indexSong", JSON.stringify(0));
+    // handlePlayMusic(encodeId,indexSong ? indexSong : 0, value, currentSong);
+    //Lưu thông tin lên local
+    handleSaveMusicLocalStorage(currentSong, value, encodeId, 0);
   };
   return (
     <div className={cx("wrapper")}>

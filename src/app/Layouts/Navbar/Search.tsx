@@ -7,7 +7,7 @@ import TippyHeadless from "@tippyjs/react/headless";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import React, { useContext, useState } from "react";
-import useGetDataSearch from "@/hooks/useGetDataSearch";
+import useGetDataSearch from "@/hooks/api/useGetDataSearch";
 import MediaSong from "@/components/MediaSong/MediaSong";
 import { InfoSong } from "@/Interfaces/Interface";
 import Link from "next/link";

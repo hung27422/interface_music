@@ -7,11 +7,11 @@ import Link from "next/link";
 import Tippy from "@tippyjs/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
-import useGetDetailPlaylist from "../../hooks/useGetDetailPlaylist";
+import useGetDetailPlaylist from "../../hooks/api/useGetDetailPlaylist";
 import { log } from "console";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { title } from "process";
-import useDataHome from "../../hooks/useDataHome";
+import useDataHome from "../../hooks/api/useDataHome";
 import useTruncateTitle from "../../hooks/useTruncateTitle";
 import Image from "next/image";
 const cx = classNames.bind(styles);
@@ -91,8 +91,7 @@ function RecentlyPlayed() {
       );
       localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
       localStorage.setItem("encodeId", JSON.stringify(firstSongId));
-    localStorage.setItem("indexSong", JSON.stringify(0));
-
+      localStorage.setItem("indexSong", JSON.stringify(0));
     }
   };
   // Set encodeId Song và encodeId Playlist vào useContext

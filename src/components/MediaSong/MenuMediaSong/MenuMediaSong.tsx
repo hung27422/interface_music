@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
-import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
+import useGetDataPlaylist from "@/hooks/api/useGetDataPlaylist";
 import BoxPlaylist from "@/components/BoxPlaylist/BoxPlaylist";
 import { useContext } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";

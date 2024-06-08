@@ -10,7 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { ILyric, InfoSong } from "@/Interfaces/Interface";
 import Image from "next/image";
-import useGetDataLyric from "../../hooks/useGetDataLyric";
+import useGetDataLyric from "../../hooks/api/useGetDataLyric";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { words } from "lodash";
 import ControlMiddle from "@/app/Layouts/ControlMusic/ControlMiddle";

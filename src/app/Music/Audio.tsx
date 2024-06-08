@@ -1,7 +1,7 @@
 "use client";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
-import useGetDataInfoSong from "@/hooks/useGetDataInfoSong";
-import useGetDataSong from "@/hooks/useGetDataSong";
+import useGetDataInfoSong from "@/hooks/api/useGetDataInfoSong";
+import useGetDataSong from "@/hooks/api/useGetDataSong";
 import { useCallback, useContext, useEffect, useRef } from "react";
 
 function Audio() {

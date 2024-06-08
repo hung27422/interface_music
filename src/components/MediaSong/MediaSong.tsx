@@ -11,10 +11,11 @@ import {
 import Tippy from "@tippyjs/react";
 import { InfoSong } from "../../Interfaces/Interface";
 import { useContext, useEffect, useRef, useState } from "react";
-import useFormatDuration from "../../hooks/useFormatDuration";
+import useFormatDuration from "../../hooks/format/useFormatDuration";
 import { MusicContext } from "../ContextMusic/ContextMusic";
 import { toast } from "react-toastify";
 import MenuMediaSong from "./MenuMediaSong/MenuMediaSong";
+import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 interface MediaSongProps {
   data: InfoSong;
@@ -38,7 +39,6 @@ function MediaSong({
   playlist,
   releaseDate,
   search,
-  removePlaylist,
 }: MediaSongProps) {
   const notify = (title: string) =>
     toast(
@@ -50,7 +50,7 @@ function MediaSong({
         nhé ^.^
       </>
     );
-
+  const { handlePlayMusic, handleSaveMusicLocalStorage } = useHandlePlayMusic();
   const duration = useFormatDuration(data?.duration);
   const {
     encodeIdSong,
@@ -61,24 +61,12 @@ function MediaSong({
     setPlaylistContext,
     setActivePlaylist,
   } = useContext(MusicContext);
-  const handlePlayMusic = (encodeId: string) => {
+  const handlePlayMusicMedia = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
       notify(data?.title);
     }
-    setEncodeIdSong(encodeId);
-    if (encodeId === encodeIdSong) {
-      setActivePlay(!activePlay);
-    } else {
-      setEncodeIdSong(encodeId);
-      setActivePlay(true);
-    }
-    setActivePlaylist(false);
-    setIndexSong(index ?? 0);
-    setPlaylistContext(playlist ?? []);
-    localStorage.setItem("currentSong", JSON.stringify(data));
-    localStorage.setItem("currentPlaylist", JSON.stringify(playlist));
-    localStorage.setItem("encodeId", JSON.stringify(encodeId));
-    localStorage.setItem("indexSong", JSON.stringify(index));
+    handlePlayMusic(encodeId, index, playlist);
+    handleSaveMusicLocalStorage(data, playlist, encodeId, index);
   };
 
   return (
@@ -112,7 +100,7 @@ function MediaSong({
           {!control && (
             <div
               id={data?.encodeId}
-              onClick={(e) => handlePlayMusic(e.currentTarget.id)}
+              onClick={(e) => handlePlayMusicMedia(e.currentTarget.id)}
               className={cx(
                 "btn-icon-play",
                 { control },

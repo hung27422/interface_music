@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 
 import classNames from "classnames/bind";
 import styles from "./BoxPlaylist.module.scss";
-import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
+import useGetDataPlaylist from "@/hooks/api/useGetDataPlaylist";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
