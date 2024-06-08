@@ -122,7 +122,9 @@ function ContextMusic({ children }: Props) {
   const [audioVolume, setAudioVolume] = useState<number>(1);
   const [audioMute, setAudioMute] = useState<boolean>(false);
   const [dataStorage, setDataStorage] = useState<{}>({});
-  const [playlistItemStoredLocal, setPlaylistStoredLocal] = useState<any>([]);
+  const [playlistItemStoredLocal, setPlaylistStoredLocal] = useState<
+    any | undefined
+  >([]);
   const [activePlaylist, setActivePlaylist] = useState<boolean>(false);
   const [playlistHub, setPlaylistHub] = useState<string>("");
   const [idPlaylistLocal, setIdPlaylistLocal] = useState<string>("1");

@@ -255,9 +255,7 @@ function ControlMiddle() {
           value={audioSeek}
           onChange={(e) => handleChangeSeek(parseFloat(e.target.value))}
         />
-        <span className={cx("time-end")}>
-          {dataSong?.duration ? duration : "0:00"}
-        </span>
+        <span className={cx("time-end")}>{duration}</span>
       </div>
     </div>
   );

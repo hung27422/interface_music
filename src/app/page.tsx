@@ -41,7 +41,6 @@ export default function Home() {
   const rtChart = data?.data.items.filter(
     (item: ITrending) => item.sectionType === "RTChart"
   );
-  const playlistItem = localStorage.getItem("playlists");
 
   return (
     <div className={cx("wrapper")}>
@@ -53,7 +52,7 @@ export default function Home() {
             <SliderItem></SliderItem>
           </div>
           <div className={cx("container")}>
-            {playlistItemStoredLocal && playlistItem && <RecentlyPlayed />}
+            {playlistItemStoredLocal && <RecentlyPlayed />}
             {newRelease?.map((item: IHomeProps, index: number) => (
               <div key={index} className={cx("new-release")}>
                 <NewReleaseItem
