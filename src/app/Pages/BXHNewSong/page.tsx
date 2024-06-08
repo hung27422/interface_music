@@ -44,6 +44,7 @@ function Top100() {
                       <MediaSong
                         key={index}
                         trending={true}
+                        index={index}
                         data={item}
                         playlist={dataTrending?.data.items}
                       />

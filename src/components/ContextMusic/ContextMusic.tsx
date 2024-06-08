@@ -25,8 +25,8 @@ interface MusicContextType {
   setEncodeIdSong: React.Dispatch<React.SetStateAction<string>>;
   activePlay: boolean;
   setActivePlay: React.Dispatch<React.SetStateAction<boolean>>;
-  indexSong: number;
-  setIndexSong: React.Dispatch<React.SetStateAction<number>>;
+  indexSong: number | undefined;
+  setIndexSong: React.Dispatch<React.SetStateAction<number | undefined>>;
   playlistContext: InfoSong[];
   setPlaylistContext: React.Dispatch<React.SetStateAction<any[]>>;
   audioCurrentTime: number;
@@ -112,7 +112,7 @@ function ContextMusic({ children }: Props) {
   const [resultSearch, setResultSearch] = useState<string>("");
   const [encodeIdSong, setEncodeIdSong] = useState<string>("");
   const [activePlay, setActivePlay] = useState<boolean>(false);
-  const [indexSong, setIndexSong] = useState<number>(undefined ?? 0);
+  const [indexSong, setIndexSong] = useState<number | undefined>(undefined);
   const [playlistContext, setPlaylistContext] = useState<any>([]);
   const [audioCurrentTime, setAudioCurrentTime] = useState<number>(0);
   const [audioDuration, setAudioDuration] = useState<number>(0);

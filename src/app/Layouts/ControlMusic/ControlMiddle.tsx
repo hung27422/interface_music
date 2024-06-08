@@ -98,22 +98,26 @@ function ControlMiddle() {
       console.error("dataPlaylist rỗng");
       return;
     }
+
     let nextIndex = 0;
     if (audioRandomSong) {
       nextIndex =
         Math.floor(Math.random() * dataPlaylist.length) % dataPlaylist.length;
     } else {
-      let currentIndex = indexSong
-        ? indexSong
-        : indexLocal !== undefined
-        ? indexLocal
-        : 0;
+      let currentIndex =
+        indexSong !== null && indexSong !== undefined
+          ? indexSong
+          : indexLocal
+          ? indexLocal
+          : 0;
       nextIndex = (currentIndex + 1) % dataPlaylist.length;
     }
     if (nextIndex >= dataPlaylist.length) {
       nextIndex = 0;
     }
-    setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
+    if (indexSong) {
+      setHistory((prev) => [...prev, dataPlaylist[indexSong]?.encodeId]);
+    }
     setEncodeIdSong(dataPlaylist[nextIndex]?.encodeId);
     setIndexSong(nextIndex);
     setActivePlay(true);
@@ -130,6 +134,7 @@ function ControlMiddle() {
   };
   const handlePrevSong = () => {
     if (!dataPlaylist) return;
+    if (!indexSong) return;
     if (history.length > 0 && audioRandomSong) {
       const prevEncodeId = history[history.length - 1];
       setHistory((prev) => prev.slice(0, -1));
@@ -250,7 +255,9 @@ function ControlMiddle() {
           value={audioSeek}
           onChange={(e) => handleChangeSeek(parseFloat(e.target.value))}
         />
-        <span className={cx("time-end")}>{duration}</span>
+        <span className={cx("time-end")}>
+          {dataSong?.duration ? duration : "0:00"}
+        </span>
       </div>
     </div>
   );
