@@ -5,7 +5,12 @@ import TitlePage from "@/components/TitlePage/TitlePage";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Tippy from "@tippyjs/react";
-import { faEllipsis, faHeart, faPlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsis,
+  faHeart,
+  faPlay,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import useGetDataPlaylist from "@/hooks/useGetDataPlaylist";
 import { useContext, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -29,7 +34,7 @@ function Playlist() {
     idPlaylistLocal,
     setIdPlaylistLocal,
   } = useContext(MusicContext);
-  const { dataPlaylist } = useGetDataPlaylist();
+  const { dataPlaylist, deletePlaylist } = useGetDataPlaylist();
   const [showAction, setShowAction] = useState("");
   const [dataPlaylistLocal, setDataPlaylistLocal] =
     useState<PlaylistData | null>(null);
@@ -79,6 +84,9 @@ function Playlist() {
     localStorage.setItem("currentPlaylist", JSON.stringify(value));
     localStorage.setItem("encodeId", JSON.stringify(value[0].encodeId));
     localStorage.setItem("indexSong", JSON.stringify(0));
+  };
+  const handleRemovePlaylist = (id: string) => {
+    deletePlaylist(id);
   };
   return (
     <div className={cx("wrapper")}>
@@ -173,9 +181,12 @@ function Playlist() {
                     <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
                   )}
                 </button>
-                <Tippy content="Khác">
-                  <button className={cx("btn-menu", "btn-icon")}>
-                    <FontAwesomeIcon icon={faEllipsis}></FontAwesomeIcon>
+                <Tippy content="Xóa Playlist này">
+                  <button
+                    onClick={() => handleRemovePlaylist(item?.id)}
+                    className={cx("btn-menu", "btn-icon")}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </Tippy>
               </div>

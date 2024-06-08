@@ -96,10 +96,17 @@ function useGetDataPlaylist() {
       id: newId,
       songs: [],
     };
-
-    // Cập nhật state và local storage
     setDataPlaylist((prevData: { data: any }) => {
       const updatedData = { data: [...prevData.data, newPlaylist] };
+      localStorage.setItem("playlist1", JSON.stringify(updatedData));
+      return updatedData;
+    });
+  };
+  const deletePlaylist = (id: string) => {
+    setDataPlaylist((prevData: { data: any }) => {
+      const updatedData = {
+        data: prevData.data.filter((playlist: any) => playlist.id !== id),
+      };
       localStorage.setItem("playlist1", JSON.stringify(updatedData));
       return updatedData;
     });
@@ -111,7 +118,6 @@ function useGetDataPlaylist() {
         (existingSong: any) => existingSong.encodeId === song.encodeId
       )
     );
-
     // Nếu không phát hiện bài hát trùng lặp, thêm bài hát mới vào playlist
     if (!isDuplicate) {
       setDataPlaylist((prevData: { data: any }) => {
@@ -156,6 +162,7 @@ function useGetDataPlaylist() {
   return {
     dataPlaylist,
     addPlaylist,
+    deletePlaylist,
     addSongToPlaylist,
     removeSongFromPlaylist,
   };
