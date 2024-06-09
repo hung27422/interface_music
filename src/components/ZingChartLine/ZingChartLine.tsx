@@ -152,6 +152,7 @@ function ZingChartLine() {
               }}
             >
               <MediaSong
+                search
                 data={item}
                 zingChart="zingChart"
                 playlist={listSong}

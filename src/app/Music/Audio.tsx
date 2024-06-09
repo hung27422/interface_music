@@ -9,7 +9,6 @@ function Audio() {
   const audioPlay = data?.data?.["128"];
   const {
     activePlay,
-    setActivePlay,
     audioCurrentTime,
     setAudioCurrentTime,
     audioDuration,

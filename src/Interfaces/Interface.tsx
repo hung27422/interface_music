@@ -13,6 +13,8 @@ export interface InfoSong {
   streamingStatus: number;
   releaseDate: number;
   listen: number;
+  isWorldWide: boolean;
+  downloadPrivileges: number[];
 }
 export interface ITypeNewRelease {
   items?: any;

@@ -37,7 +37,6 @@ function ControlMiddle() {
   const {
     activePlay,
     setActivePlay,
-    encodeIdSong,
     setEncodeIdSong,
     indexSong,
     setIndexSong,
@@ -183,15 +182,21 @@ function ControlMiddle() {
     setAudioRepeatSong(false);
   };
   useEffect(() => {
-    if (data?.data?.streamingStatus === 2) {
-      notify(data?.data?.title);
-      const next = setTimeout(() => {
-        handleNextSong();
-      }, 3000);
+    if (data?.data) {
+      if (
+        (data?.data?.streamingStatus === 2 &&
+          !data?.data?.downloadPrivileges) ||
+        !data?.data?.isWorldWide
+      ) {
+        notify(data?.data?.title);
+        const next = setTimeout(() => {
+          handleNextSong();
+        }, 3000);
 
-      return () => clearTimeout(next);
+        return () => clearTimeout(next);
+      }
     }
-  }, [data?.data?.streamingStatus, encodeIdSong]); //
+  }, [data?.data?.streamingStatus]);
   return (
     <div className={cx("control-middle")}>
       <div className={cx("control-btn")}>
