@@ -47,8 +47,8 @@ function MHSectionPlaylist({
   };
 
   const handlePlayMusicSectionPlaylist = (encodeIdPlaylist: string) => {
-    if (!getDataPlaylist) return null;
     const playlist = getDataPlaylist?.data?.song?.items;
+    if (!playlist) return null;
     const encodeIdPlaylistData = getDataPlaylist?.data?.encodeId;
     const encodeIdSong = playlist[0]?.encodeId;
     const currentIndex = 0;
