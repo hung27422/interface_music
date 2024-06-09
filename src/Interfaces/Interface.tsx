@@ -54,6 +54,8 @@ export interface ITrending {
   duration: number;
   streamingStatus: number;
   listen: number;
+  isWorldWide: boolean;
+  downloadPrivileges: number[];
 }
 export interface IChartHome {
   hour: number;
