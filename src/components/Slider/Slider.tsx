@@ -41,9 +41,9 @@ function SliderItem() {
 
   const handlePlayMusicSlider = (
     encodeId: string,
-    playlist: InfoSong[],
-    index: number,
-    type: number
+    playlist?: InfoSong[],
+    index?: number,
+    type?: number
   ) => {
     if (type === 4) return null;
     if (!dataSong) return null;
