@@ -64,7 +64,8 @@ function MHSectionPlaylist({
     handleSaveMusicLocalStorage(currentSong, playlist, encodeIdSong, 0);
   };
 
-  // Set encodeId Song và encodeId Playlist vào useContext
+  // Khi ở local mới được sử dụng nhạc không bị dính bản quyền
+  // Set encodeId Song và encodeId Playlist vào useContext ở local
   // useEffect(() => {
   //   if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
   //     const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
