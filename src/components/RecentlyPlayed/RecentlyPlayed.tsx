@@ -81,26 +81,26 @@ function RecentlyPlayed() {
   };
 
   // Set encodeId Song và encodeId Playlist vào useContext
-  useEffect(() => {
-    if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
-      const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
-      const playlist = getDataPlaylist?.data?.song?.items;
-      const currentSong = playlist[0];
+  // useEffect(() => {
+  //   if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
+  //     const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
+  //     const playlist = getDataPlaylist?.data?.song?.items;
+  //     const currentSong = playlist[0];
 
-      if (firstSongId) {
-        setEncodeIdSong(firstSongId);
-        setPlaylistContext(playlist ?? []);
-        handleSaveMusicLocalStorage(currentSong, playlist, firstSongId, 0);
-      }
-    }
-  }, [
-    encodeIdPlaylist,
-    getDataPlaylist,
-    handleSaveMusicLocalStorage,
-    isValidating,
-    setEncodeIdSong,
-    setPlaylistContext,
-  ]);
+  //     if (firstSongId) {
+  //       setEncodeIdSong(firstSongId);
+  //       setPlaylistContext(playlist ?? []);
+  //       handleSaveMusicLocalStorage(currentSong, playlist, firstSongId, 0);
+  //     }
+  //   }
+  // }, [
+  //   encodeIdPlaylist,
+  //   getDataPlaylist,
+  //   handleSaveMusicLocalStorage,
+  //   isValidating,
+  //   setEncodeIdSong,
+  //   setPlaylistContext,
+  // ]);
   return (
     <>
       {playlistItemStoredLocal.length > 0 && (
@@ -139,9 +139,7 @@ function RecentlyPlayed() {
                         </Tippy>
                         <button
                           id={item.encodeId}
-                          onClick={(e) =>
-                            handlePlayMusicSectionPlaylist(e.currentTarget.id)
-                          }
+                          onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
                           className={cx("btn-play")}
                         >
                           {activePlaylist &&

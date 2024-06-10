@@ -47,6 +47,7 @@ function MHSectionPlaylist({
   };
 
   const handlePlayMusicSectionPlaylist = (encodeIdPlaylist: string) => {
+    // Handle play song in playlist
     const playlist = getDataPlaylist?.data?.song?.items;
     if (!playlist) return null;
     const encodeIdPlaylistData = getDataPlaylist?.data?.encodeId;
@@ -64,26 +65,26 @@ function MHSectionPlaylist({
   };
 
   // Set encodeId Song và encodeId Playlist vào useContext
-  useEffect(() => {
-    if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
-      const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
-      const playlist = getDataPlaylist?.data?.song?.items;
-      const currentSong = playlist[0];
+  // useEffect(() => {
+  //   if (encodeIdPlaylist && getDataPlaylist && !isValidating) {
+  //     const firstSongId = getDataPlaylist?.data?.song?.items[0]?.encodeId;
+  //     const playlist = getDataPlaylist?.data?.song?.items;
+  //     const currentSong = playlist[0];
 
-      if (firstSongId) {
-        setEncodeIdSong(firstSongId);
-        setPlaylistContext(playlist ?? []);
-        handleSaveMusicLocalStorage(currentSong, playlist, firstSongId, 0);
-      }
-    }
-  }, [
-    encodeIdPlaylist,
-    getDataPlaylist,
-    handleSaveMusicLocalStorage,
-    isValidating,
-    setEncodeIdSong,
-    setPlaylistContext,
-  ]);
+  //     if (firstSongId) {
+  //       setEncodeIdSong(firstSongId);
+  //       setPlaylistContext(playlist ?? []);
+  //       handleSaveMusicLocalStorage(currentSong, playlist, firstSongId, 0);
+  //     }
+  //   }
+  // }, [
+  //   encodeIdPlaylist,
+  //   getDataPlaylist,
+  //   handleSaveMusicLocalStorage,
+  //   isValidating,
+  //   setEncodeIdSong,
+  //   setPlaylistContext,
+  // ]);
   const handleChangPageHub = (value: string) => {
     setPlaylistHub(value);
   };
@@ -137,11 +138,10 @@ function MHSectionPlaylist({
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                           </button>
                         </Tippy>
-                        <button
+                        <Link
+                          href={"Pages/Album"}
                           id={item.encodeId}
-                          onClick={(e) =>
-                            handlePlayMusicSectionPlaylist(e.currentTarget.id)
-                          }
+                          onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
                           className={cx("btn-play")}
                         >
                           {activePlaylist &&
@@ -156,7 +156,7 @@ function MHSectionPlaylist({
                           ) : (
                             <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
                           )}
-                        </button>
+                        </Link>
                         <Tippy content="Khác">
                           <button className={cx("btn-menu", "btn-icon")}>
                             <FontAwesomeIcon
@@ -214,11 +214,10 @@ function MHSectionPlaylist({
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                           </button>
                         </Tippy>
-                        <button
+                        <Link
+                          href={"Pages/Album"}
                           id={item.encodeId}
-                          onClick={(e) =>
-                            handlePlayMusicSectionPlaylist(e.currentTarget.id)
-                          }
+                          onClick={(e) => handleGetEncodeId(e.currentTarget.id)}
                           className={cx("btn-play")}
                         >
                           {activePlaylist &&
@@ -233,7 +232,7 @@ function MHSectionPlaylist({
                           ) : (
                             <FontAwesomeIcon icon={faPlay}></FontAwesomeIcon>
                           )}
-                        </button>
+                        </Link>
                         <Tippy content="Khác">
                           <button className={cx("btn-menu", "btn-icon")}>
                             <FontAwesomeIcon

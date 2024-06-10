@@ -122,6 +122,9 @@
 }
 //ActionButton
 .btn-play {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
   width: 45px !important;
   height: 45px !important;
   border-radius: 50%;
