@@ -14,6 +14,7 @@ import { isEmpty } from "lodash";
 const cx = classNames.bind(styles);
 function ControlMusic() {
   const { data } = useGetDataInfoSong();
+
   const { dataStorage, setDataStorage } = useContext(MusicContext);
   useEffect(() => {
     const storedData = localStorage.getItem("currentSong");

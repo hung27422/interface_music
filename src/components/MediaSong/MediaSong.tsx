@@ -39,6 +39,7 @@ function MediaSong({
   playlist,
   releaseDate,
   search,
+  removePlaylist,
 }: MediaSongProps) {
   const notify = (title: string) =>
     toast(
@@ -171,7 +172,7 @@ function MediaSong({
             )}
             <Tippy content="Khác">
               <>
-                <MenuMediaSong data={data} />
+                <MenuMediaSong removePlaylist={removePlaylist} data={data} />
               </>
             </Tippy>
           </div>
@@ -183,7 +184,7 @@ function MediaSong({
           </Tippy>
           <Tippy content="Khác">
             <>
-              <MenuMediaSong data={data} />
+              <MenuMediaSong removePlaylist={removePlaylist} data={data} />
             </>
           </Tippy>
         </div>

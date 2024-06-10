@@ -50,6 +50,7 @@ function NewRelease({ dataAll, dataVietnamese, dataOthers }: ITypeNewRelease) {
               return (
                 <div key={index}>
                   <MediaSong
+                    removePlaylist={false}
                     releaseDate
                     data={item}
                     index={index}

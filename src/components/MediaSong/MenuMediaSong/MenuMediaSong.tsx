@@ -19,8 +19,9 @@ import { useContext } from "react";
 import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 interface MenuMediaSongProps {
   data: InfoSong;
+  removePlaylist?: boolean;
 }
-function MenuMediaSong({ data }: MenuMediaSongProps) {
+function MenuMediaSong({ data, removePlaylist }: MenuMediaSongProps) {
   const { dataPlaylist, addSongToPlaylist, removeSongFromPlaylist } =
     useGetDataPlaylist();
   const { idPlaylistLocal } = useContext(MusicContext);
@@ -91,15 +92,17 @@ function MenuMediaSong({ data }: MenuMediaSongProps) {
             </span>
             <span className={cx("item-select-title")}>Xem lời bài hát</span>
           </li>
-          <li
-            onClick={() => handleRemoveSongFromPlaylist()}
-            className={cx("item-selection", "remove-song")}
-          >
-            <span className={cx("item-select-icon")}>
-              <FontAwesomeIcon icon={faTrashAlt} />
-            </span>
-            <span className={cx("item-select-title")}>Xóa khỏi Playlist</span>
-          </li>
+          {removePlaylist && (
+            <li
+              onClick={() => handleRemoveSongFromPlaylist()}
+              className={cx("item-selection", "remove-song")}
+            >
+              <span className={cx("item-select-icon")}>
+                <FontAwesomeIcon icon={faTrashAlt} />
+              </span>
+              <span className={cx("item-select-title")}>Xóa khỏi Playlist</span>
+            </li>
+          )}
         </ul>
       </div>
     );
@@ -110,7 +113,7 @@ function MenuMediaSong({ data }: MenuMediaSongProps) {
       render={MenuTippy}
       offset={[0, 0]}
       interactive
-      placement="bottom-end"
+      placement="top-end"
       popperOptions={{
         modifiers: [
           {

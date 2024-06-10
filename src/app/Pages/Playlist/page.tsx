@@ -201,6 +201,7 @@ function Playlist() {
                         return (
                           <MediaSong
                             trending
+                            removePlaylist
                             key={result.encodeId}
                             data={result}
                             index={subIndex}

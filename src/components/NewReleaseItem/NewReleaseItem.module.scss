@@ -1,5 +1,6 @@
 .wrapper {
   margin-top: 48px;
+  width: 100%;
 }
 .title {
   margin-bottom: 20px;
@@ -46,6 +47,7 @@
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tạo ra 3 cột bằng nhau */
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 12px;
 }

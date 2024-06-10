@@ -3,6 +3,7 @@
   height: max-content;
   background-color: var(--white);
   padding: 6px 12px;
+  border-radius: 8px;
 }
 .header {
   display: flex;
@@ -72,8 +73,8 @@
 .box-playlist {
   display: none;
   position: absolute;
-  width: 250px;
-  left: -168px;
+  width: fit-content;
+  left: -116px;
   background-color: var(--white);
   border-radius: 4px;
   padding: 4px 8px;
@@ -89,6 +90,7 @@
   margin-top: 4px;
   padding: 2px 4px;
   border-radius: 2px;
+  width: fit-content;
 }
 .item-playlist-icon {
   width: 20px;

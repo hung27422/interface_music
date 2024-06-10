@@ -191,7 +191,7 @@ function ControlMiddle() {
         notify(data?.data?.title);
         const next = setTimeout(() => {
           handleNextSong();
-        }, 3000);
+        }, 5000);
 
         return () => clearTimeout(next);
       }
@@ -260,7 +260,9 @@ function ControlMiddle() {
           value={audioSeek}
           onChange={(e) => handleChangeSeek(parseFloat(e.target.value))}
         />
-        <span className={cx("time-end")}>{duration}</span>
+        <span className={cx("time-end")}>
+          {dataSong?.duration ? duration : "0:00"}
+        </span>
       </div>
     </div>
   );
