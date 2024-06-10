@@ -15,7 +15,7 @@ export interface InfoSong {
   listen: number;
   isWorldWide: boolean;
   downloadPrivileges: number[];
-  items: [];
+  items?: [];
 }
 export interface ITypeNewRelease {
   items?: any;
