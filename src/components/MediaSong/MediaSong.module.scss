@@ -1,3 +1,9 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
 .wrapper {
   display: flex;
   align-items: center;
@@ -7,6 +13,9 @@
   width: 376px;
   margin-bottom: 4px;
   border: 1px solid var(--text-color);
+  @include desktop-14() {
+    width: 318px;
+  }
 }
 .wrapper.zingChart {
   width: fit-content !important;
@@ -14,6 +23,9 @@
   position: relative;
 }
 .wrapper.weekly {
+  @include desktop-14() {
+    width: 249px !important;
+  }
   width: 300px !important;
 }
 .wrapper.trending {
@@ -84,6 +96,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 200px;
+  @include desktop-14() {
+    max-width: 140px;
+  }
 }
 .media-left.weekly {
   width: 80% !important;
@@ -103,6 +118,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100px;
+  @include desktop-14() {
+    max-width: 50px;
+  }
 }
 .media-left.control {
   width: fit-content !important;

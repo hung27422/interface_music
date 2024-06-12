@@ -78,6 +78,7 @@ function Artists() {
                       return (
                         <div key={index}>
                           <MediaSong
+                            search
                             index={index}
                             data={item}
                             playlist={data?.items}

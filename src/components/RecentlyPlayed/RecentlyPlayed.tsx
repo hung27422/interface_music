@@ -17,15 +17,12 @@ import Image from "next/image";
 import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
 const cx = classNames.bind(styles);
 function RecentlyPlayed() {
-  const { data: getDataPlaylist, isValidating } = useGetDetailPlaylist();
+  const { data: getDataPlaylist } = useGetDetailPlaylist();
   const [isPlaylistSaved, setIsPlaylistSaved] = useState(false);
   const {
     playlistItemStoredLocal,
     setPlaylistStoredLocal,
     setEncodeIdPlaylist,
-    encodeIdPlaylist,
-    setEncodeIdSong,
-    setPlaylistContext,
     activePlaylist,
   } = useContext(MusicContext);
   const { handlePlayMusicPlaylist, handleSaveMusicLocalStorage } =

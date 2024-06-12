@@ -1,6 +1,14 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
+$width-item-14: 150px;
 .wrapper {
   margin: 10px auto 0 auto;
   text-align: center;
+  width: 100%;
 }
 
 .body {
@@ -17,6 +25,9 @@
   margin: auto;
   border: 4px solid #dc143c;
   z-index: 1;
+  @include desktop-14() {
+    width: $width-item-14;
+  }
 }
 
 .img-hover {
@@ -33,6 +44,10 @@
   height: 180px;
   overflow: hidden;
   border-radius: 4px;
+  @include desktop-14() {
+    width: $width-item-14;
+    height: $width-item-14;
+  }
 }
 .avatar {
   display: block;

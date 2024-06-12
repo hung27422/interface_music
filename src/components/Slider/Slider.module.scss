@@ -1,10 +1,20 @@
-.wrapper{
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
+.wrapper {
   border: none;
   outline: none;
 }
 .image-slider {
   border-radius: 12px;
   margin: auto;
+  @include desktop-14() {
+    width: 316px;
+    height: 178px;
+  }
 }
 .slider-item {
   border: none;

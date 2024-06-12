@@ -1,12 +1,21 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
+$width-item: 320px;
 .wrapper {
   text-align: center;
 }
-
 .item-slider {
   border-radius: 12px;
   width: 366px !important;
   height: 150px;
   margin: 0 auto;
+  @include desktop-14() {
+    width: $width-item !important;
+  }
 }
 .wrapper-item {
   position: relative;
@@ -17,6 +26,9 @@
   align-items: center;
   border-radius: 8px;
   cursor: pointer;
+  @include desktop-14() {
+    width: $width-item;
+  }
 }
 .wrapper-item:hover .btn-play {
   display: block;

@@ -189,6 +189,7 @@ function ControlMiddle() {
         !data?.data?.isWorldWide
       ) {
         notify(data?.data?.title);
+        setEncodeIdSong(data?.data?.encodeId);
         const next = setTimeout(() => {
           handleNextSong();
         }, 5000);

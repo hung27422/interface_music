@@ -1,3 +1,11 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
+$width-item: 190px;
+
 .artist-list-info {
   background: rgb(165, 130, 111);
   background: radial-gradient(
@@ -144,6 +152,10 @@
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Tạo ra 3 cột bằng nhau */
+  grid-template-columns: repeat(5, 1fr);
   grid-gap: 20px;
+  @include desktop-14() {
+    width: $width-item;
+    grid-gap: 10px;
+  }
 }

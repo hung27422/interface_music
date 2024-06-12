@@ -1,3 +1,11 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
+$width-item: 190px;
+
 .size-image {
   overflow: hidden;
   border-radius: 4px;
@@ -6,6 +14,9 @@
   height: 215px;
   border-radius: 50%;
   margin: 0 auto;
+  @include desktop-14() {
+    width: $width-item;
+  }
 }
 .avatar {
   display: block;
@@ -19,6 +30,10 @@
   transition-delay: 0s;
   transition-property: transform;
   border-radius: 50%;
+  @include desktop-14() {
+    width: $width-item;
+    padding-top: 190px;
+  }
 }
 .img-hover {
   position: relative;

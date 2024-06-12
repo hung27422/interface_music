@@ -1,3 +1,9 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 - 1px} ) {
+    @content;
+  }
+}
 .title {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -11,8 +17,11 @@
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Tạo ra 7 cột bằng nhau */
+  grid-template-columns: repeat(7, 1fr);
   grid-gap: 20px;
+  @include desktop-14() {
+    grid-template-columns: repeat(6, 1fr);
+  }
 }
 .list-recently {
   position: relative;

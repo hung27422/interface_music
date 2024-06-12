@@ -1,4 +1,11 @@
+$desktop-width-14: 1366px;
+@mixin desktop-14 {
+  @media (max-width: #{$desktop-width-14 + 1px} ) {
+    @content;
+  }
+}
 .wrapper {
+  width: 100%;
 }
 .weekly-title {
   width: fit-content;
@@ -16,6 +23,9 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
+  @include desktop-14() {
+    width: 328px;
+  }
 }
 .weekly-content {
   display: flex;
@@ -29,6 +39,9 @@
   border-radius: 12px;
   padding: 10px;
   background-color: hsla(0, 46%, 28%, 0.102);
+  @include desktop-14() {
+    width: 328px;
+  }
 }
 .weekly-content-item {
   display: flex;
