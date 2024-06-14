@@ -44,8 +44,9 @@ export default function Notification() {
           </span>
           <br />
           <span style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
-            (Due to copyright reasons, the songs are currently unavailable!!!. I
-            hope you understand)
+            (This is a personal project so the reason is because of the
+            copyright of ZingMp3 articles Music cannot be heard right now!!!!!!.
+            I hope you understand)
           </span>
         </Box>
       </Modal>
