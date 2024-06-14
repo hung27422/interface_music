@@ -54,21 +54,19 @@ export default function Home() {
           <div className={cx("container")}>
             {playlistItemStoredLocal && <RecentlyPlayed />}
             {newRelease?.map((item: IHomeProps, index: number) => (
-              <div key={index} className={cx("new-release")}>
-                <NewReleaseItem
-                  dataAll={item.items?.all}
-                  dataVietnamese={item.items?.vPop}
-                  dataOthers={item.items?.others}
-                />
-              </div>
+              <NewReleaseItem
+                key={index}
+                dataAll={item.items?.all}
+                dataVietnamese={item.items?.vPop}
+                dataOthers={item.items?.others}
+              />
             ))}
             {playlist?.map((item: ISectionPlaylist, index: number) => (
-              <div key={index} className={cx("mh-section-playlist")}>
-                <MHSectionPlaylist
-                  playlist={playlist}
-                  dataSectionPlaylist={item}
-                />
-              </div>
+              <MHSectionPlaylist
+                key={index}
+                playlist={playlist}
+                dataSectionPlaylist={item}
+              />
             ))}
             <div className={cx("top-5-bxh")}>
               <h2 className={cx("mh-top-title", "mh-top5-title")}>Top 5 BXH</h2>

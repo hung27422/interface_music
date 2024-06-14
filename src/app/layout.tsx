@@ -28,7 +28,9 @@ export default function RootLayout({
             <div className={cx("layout")}>
               <Navbar />
               <div className={cx("content")}>
-                <Sidebar></Sidebar>
+                <div className={cx("side-bar")}>
+                  <Sidebar></Sidebar>
+                </div>
                 <div className={cx("homepage")}>{children}</div>
               </div>
               <ControlMusic></ControlMusic>

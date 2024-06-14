@@ -8,6 +8,7 @@ $width-item: 190px;
 .wrapper {
   margin-top: 20px;
   margin-bottom: 48px;
+  width: 100%;
 }
 .mh-section-header {
   display: flex;
@@ -34,24 +35,13 @@ $width-item: 190px;
   font-size: 2rem;
   font-weight: 700;
 }
-.mh-container {
-  display: flex;
-  flex-wrap: wrap;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 20px;
-  @include desktop-14() {
-    grid-gap: 10px;
-    width: $width-item;
-  }
-  width: 214px;
-}
+
 .body {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 214px;
+  max-width: 100%;
   padding: 0 12px 0 12px;
   cursor: pointer;
   @include desktop-14() {
@@ -59,6 +49,12 @@ $width-item: 190px;
     padding: 0 4px 0 4px;
   }
   border-radius: 10px;
+}
+.mh-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 20px;
+  width: 100%;
 }
 .img-hover {
   &:hover .action {
@@ -101,6 +97,7 @@ $width-item: 190px;
 }
 .avatar {
   display: block;
+  width: 100%;
   padding-top: 100%;
   background-repeat: no-repeat;
   background-size: contain;
@@ -113,7 +110,7 @@ $width-item: 190px;
   border-radius: 4px;
   @include desktop-14() {
     width: $width-item;
-    padding-top: 200px;
+    padding-top: 190px;
   }
 }
 

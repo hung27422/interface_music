@@ -2,16 +2,19 @@
   display: flex;
   flex-direction: column;
 }
+.side-bar {
+  width: 240px;
+  overflow: hidden;
+  margin-top: 76px;
+}
 .content {
   display: flex;
-  margin-top: 76px;
-  padding: 0 60px;
-  padding-bottom: 100px;
-  background-color: var(--bg-homepage);
-  margin-left: 240px;
-  width: calc(100% - 240px);
 }
 .homepage {
-  width: 100%;
+  margin-top: 76px;
   overflow: hidden;
+  width: calc(100% - 240px);
+  padding: 0 60px;
+  background-color: var(--bg-homepage);
+  padding-bottom: 100px;
 }

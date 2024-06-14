@@ -10,12 +10,13 @@ $desktop-width-14: 1366px;
   justify-content: space-between;
   padding: 6px 8px;
   border-radius: 4px;
-  width: 376px;
+  max-width: 100%;
+  min-width: 120px;
   margin-bottom: 4px;
   border: 1px solid var(--text-color);
-  @include desktop-14() {
-    width: 318px;
-  }
+  // @include desktop-14() {
+  //   width: 318px;
+  // }
 }
 .wrapper.zingChart {
   width: fit-content !important;

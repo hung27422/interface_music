@@ -10,7 +10,8 @@ $width-item: 320px;
 }
 .item-slider {
   border-radius: 12px;
-  width: 366px !important;
+  width: 100%;
+  max-width: 100%;
   height: 150px;
   margin: 0 auto;
   @include desktop-14() {
@@ -20,11 +21,11 @@ $width-item: 320px;
 .wrapper-item {
   position: relative;
   background-color: hsla(0, 69%, 24%, 0.1);
-  width: 366px;
   height: 150px;
   display: flex;
   align-items: center;
   border-radius: 8px;
+  margin: 0 12px;
   cursor: pointer;
   @include desktop-14() {
     width: $width-item;
@@ -74,7 +75,6 @@ $width-item: 320px;
 }
 .info-des-song {
   display: flex;
-  //   align-items: center;
   justify-content: space-between;
 }
 .info-top-song {

@@ -21,10 +21,10 @@ $desktop-width-14: 1366px;
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 10px;
   @include desktop-14() {
-    width: 328px;
+    width: 100%;
   }
 }
 .weekly-content {
@@ -39,6 +39,7 @@ $desktop-width-14: 1366px;
   border-radius: 12px;
   padding: 10px;
   background-color: hsla(0, 46%, 28%, 0.102);
+  max-width: 100%;
   @include desktop-14() {
     width: 328px;
   }
