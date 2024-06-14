@@ -35,7 +35,8 @@ export default function Notification() {
       >
         <Box sx={style}>
           <span style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
-            Vì lý do bản quyền nên các bài nhạc hiện đang không nghe được!!!
+            Đây là dự án cá nhân nên vì lý do bản quyền của ZingMp3 nên các bài
+            nhạc hiện đang không nghe được!!!
           </span>
           <br />
           <span style={{ fontSize: "20px", color: "red", textAlign: "center" }}>
