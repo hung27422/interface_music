@@ -21,6 +21,7 @@ import SliderTrending from "@/components/SliderTrending/SliderTrending";
 import RadioItem from "@/components/RadioItem/RadioItem";
 import SpinnerLoading from "@/components/SpinnerLoading/SpinnerLoading";
 import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
+import Notification from "@/components/Notification/Notification";
 // import RecentlyPlayed from "@/components/RecentlyPlayed/RecentlyPlayed";
 interface IHomeProps {
   items: ITypeNewRelease;
@@ -48,6 +49,7 @@ export default function Home() {
         <SpinnerLoading />
       ) : (
         <>
+          <Notification />
           <div className={cx("slider")}>
             <SliderItem></SliderItem>
           </div>

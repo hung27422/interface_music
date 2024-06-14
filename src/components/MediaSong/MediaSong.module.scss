@@ -14,9 +14,6 @@ $desktop-width-14: 1366px;
   min-width: 120px;
   margin-bottom: 4px;
   border: 1px solid var(--text-color);
-  // @include desktop-14() {
-  //   width: 318px;
-  // }
 }
 .wrapper.zingChart {
   width: fit-content !important;
@@ -90,6 +87,7 @@ $desktop-width-14: 1366px;
 .media-left {
   display: flex;
   align-items: center;
+  width: 400px;
 }
 .media-left .name-song,
 .name-singer {
