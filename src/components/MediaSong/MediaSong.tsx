@@ -65,14 +65,15 @@ function MediaSong({
   const duration = useFormatDuration(data?.duration);
   const { encodeIdSong, activePlay } = useContext(MusicContext);
   const handlePlayMusicMedia = (encodeId: string) => {
-    if (data?.streamingStatus === 2) {
-      notify(data?.title);
-    }
     if (
       dataAudio?.msg === "Nội dung này không tải được cho quốc gia của bạn!"
     ) {
       notifyAudio(dataAudio?.msg);
     }
+    if (data?.streamingStatus === 2) {
+      notify(data?.title);
+    }
+
     handlePlayMusic(encodeId, index, playlist);
     handleSaveMusicLocalStorage(data, playlist, encodeId, index);
   };
