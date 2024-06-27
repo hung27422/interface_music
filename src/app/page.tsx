@@ -49,7 +49,6 @@ export default function Home() {
         <SpinnerLoading />
       ) : (
         <>
-          <Notification />
           <div className={cx("slider")}>
             <SliderItem></SliderItem>
           </div>

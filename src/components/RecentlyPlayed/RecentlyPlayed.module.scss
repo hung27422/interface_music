@@ -4,6 +4,10 @@ $desktop-width-14: 1366px;
     @content;
   }
 }
+.wrapper {
+  width: 100%;
+  overflow: hidden;
+}
 .title {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -17,8 +21,9 @@ $desktop-width-14: 1366px;
   display: flex;
   flex-wrap: wrap;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 2fr));
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   grid-gap: 20px;
+  grid-column: 1;
   @include desktop-14() {
     grid-template-columns: repeat(6, 1fr);
   }

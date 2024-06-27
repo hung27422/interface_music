@@ -3,10 +3,10 @@ import { MusicContext } from "@/components/ContextMusic/ContextMusic";
 import useGetDataInfoSong from "@/hooks/api/useGetDataInfoSong";
 import useGetDataSong from "@/hooks/api/useGetDataSong";
 import { useCallback, useContext, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 
 function Audio() {
   const { data } = useGetDataSong();
-  const audioPlay = data?.data?.["128"];
   const {
     activePlay,
     audioCurrentTime,
@@ -23,6 +23,15 @@ function Audio() {
     activePlaylist,
     setActivePlaylist,
   } = useContext(MusicContext);
+  const audioPlay = data?.data?.["128"];
+  const notify = (title: string) =>
+    toast(
+      <>
+        <span style={{ color: "var(--text-color)", fontWeight: "700" }}>
+          {title}. Vì lý do bản quyền ^.^
+        </span>
+      </>
+    );
   //Handle Play, Pause Song
   useEffect(() => {
     if (audioRef.current && audioPlay) {
@@ -45,6 +54,7 @@ function Audio() {
       }
     }
   }, [audioMute, audioRef, audioVolume, setAudioVolume]);
+
   // Handle Repeat Song
   const handleEnded = () => {
     if (audioRepeatSong) {
@@ -60,6 +70,10 @@ function Audio() {
     const percent = Math.floor((audioCurrentTime / audioDuration) * 100);
     setAudioSeek(percent);
   };
+  if (!data) return null;
+  if (data?.msg === "Nội dung này không tải được cho quốc gia của bạn!") {
+    notify(data?.msg);
+  }
   return (
     <div>
       <audio

@@ -55,10 +55,7 @@ function MediaSong({
   const duration = useFormatDuration(data?.duration);
   const { encodeIdSong, activePlay } = useContext(MusicContext);
   const handlePlayMusicMedia = (encodeId: string) => {
-    if (
-      (data?.streamingStatus === 2 && !data?.downloadPrivileges) ||
-      !data?.isWorldWide
-    ) {
+    if (data?.streamingStatus === 2) {
       notify(data?.title);
     }
     handlePlayMusic(encodeId, index, playlist);
@@ -123,10 +120,9 @@ function MediaSong({
         <div className={cx("media-info")}>
           <div className={cx("premium")}>
             <div className={cx("name-song")}>{data?.title}</div>
-            {(data?.streamingStatus === 2 && !data?.downloadPrivileges) ||
-              (!data?.isWorldWide && (
-                <span className={cx("premium-name")}>PREMIUM</span>
-              ))}
+            {data?.streamingStatus === 2 && (
+              <span className={cx("premium-name")}>PREMIUM</span>
+            )}
           </div>
           <span className={cx("name-singer", weekly && "hide")}>
             {data?.artistsNames}

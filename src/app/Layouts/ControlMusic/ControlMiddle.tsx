@@ -183,11 +183,7 @@ function ControlMiddle() {
   };
   useEffect(() => {
     if (data?.data) {
-      if (
-        (data?.data?.streamingStatus === 2 &&
-          !data?.data?.downloadPrivileges) ||
-        !data?.data?.isWorldWide
-      ) {
+      if (data?.data?.streamingStatus === 2) {
         notify(data?.data?.title);
         setEncodeIdSong(data?.data?.encodeId);
         const next = setTimeout(() => {
