@@ -24,14 +24,7 @@ function Audio() {
     setActivePlaylist,
   } = useContext(MusicContext);
   const audioPlay = data?.data?.["128"];
-  const notify = (title: string) =>
-    toast(
-      <>
-        <span style={{ color: "var(--text-color)", fontWeight: "700" }}>
-          {title}. Vì lý do bản quyền ^.^
-        </span>
-      </>
-    );
+
   //Handle Play, Pause Song
   useEffect(() => {
     if (audioRef.current && audioPlay) {
@@ -71,9 +64,7 @@ function Audio() {
     setAudioSeek(percent);
   };
   if (!data) return null;
-  if (data?.msg === "Nội dung này không tải được cho quốc gia của bạn!") {
-    notify(data?.msg);
-  }
+
   return (
     <div>
       <audio

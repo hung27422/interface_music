@@ -16,6 +16,7 @@ import { MusicContext } from "../ContextMusic/ContextMusic";
 import { toast } from "react-toastify";
 import MenuMediaSong from "./MenuMediaSong/MenuMediaSong";
 import useHandlePlayMusic from "@/hooks/handle/useHandlePlayMusic";
+import useGetDataSong from "@/hooks/api/useGetDataSong";
 const cx = classNames.bind(styles);
 interface MediaSongProps {
   data: InfoSong;
@@ -41,6 +42,15 @@ function MediaSong({
   search,
   removePlaylist,
 }: MediaSongProps) {
+  const { data: dataAudio } = useGetDataSong();
+  const notifyAudio = (title: string) =>
+    toast(
+      <>
+        <span style={{ color: "var(--text-color)", fontWeight: "700" }}>
+          {title}. Vì lý do bản quyền ^.^
+        </span>
+      </>
+    );
   const notify = (title: string) =>
     toast(
       <>
@@ -57,6 +67,11 @@ function MediaSong({
   const handlePlayMusicMedia = (encodeId: string) => {
     if (data?.streamingStatus === 2) {
       notify(data?.title);
+    }
+    if (
+      dataAudio?.msg === "Nội dung này không tải được cho quốc gia của bạn!"
+    ) {
+      notifyAudio(dataAudio?.msg);
     }
     handlePlayMusic(encodeId, index, playlist);
     handleSaveMusicLocalStorage(data, playlist, encodeId, index);
