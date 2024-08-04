@@ -28,7 +28,7 @@ const nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "https://api-zingmp3-vercel-sigma.vercel.app/:path*",
+        destination: "https://api-zingmp3-vercel-sigma.vercel.app/api/:path*",
       },
     ];
   },
