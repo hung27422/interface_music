@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const { createProxyMiddleware } = require("http-proxy-middleware");
 const nextConfig = {
   images: {
     remotePatterns: [
@@ -26,8 +27,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/path*",
-        destination: "https://api-zingmp3-vercel-sigma.vercel.app/path*",
+        source: "/api/:path*",
+        destination: "https://api-zingmp3-vercel-sigma.vercel.app/:path*",
       },
     ];
   },
