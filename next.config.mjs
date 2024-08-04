@@ -23,6 +23,14 @@ const nextConfig = {
     ],
     domains: ["lh3.googleusercontent.com"],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/api/path*",
+        destination: "https://api-zingmp3-vercel-sigma.vercel.app/path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
