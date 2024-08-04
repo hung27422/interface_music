@@ -1,3 +1,9 @@
+$mobile-width: 480px;
+@mixin mobile {
+  @media (max-width: #{$mobile-width - 1px}) {
+    @content;
+  }
+}
 .layout {
   display: flex;
   flex-direction: column;
@@ -6,6 +12,9 @@
   width: 240px;
   overflow: hidden;
   margin-top: 76px;
+  @include mobile() {
+    width: 0;
+  }
 }
 .content {
   display: flex;
@@ -18,4 +27,7 @@
   padding: 0 60px;
   background-color: var(--bg-homepage);
   padding-bottom: 100px;
+  @include mobile() {
+    width: 100%;
+  }
 }

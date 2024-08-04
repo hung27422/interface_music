@@ -54,14 +54,16 @@ export default function Home() {
           </div>
           <div className={cx("container")}>
             {playlistItemStoredLocal && <RecentlyPlayed />}
-            {newRelease?.map((item: IHomeProps, index: number) => (
-              <NewReleaseItem
-                key={index}
-                dataAll={item.items?.all}
-                dataVietnamese={item.items?.vPop}
-                dataOthers={item.items?.others}
-              />
-            ))}
+            <div>
+              {newRelease?.map((item: IHomeProps, index: number) => (
+                <NewReleaseItem
+                  key={index}
+                  dataAll={item.items?.all}
+                  dataVietnamese={item.items?.vPop}
+                  dataOthers={item.items?.others}
+                />
+              ))}
+            </div>
             {playlist?.map((item: ISectionPlaylist, index: number) => (
               <MHSectionPlaylist
                 key={index}

@@ -1,3 +1,9 @@
+$mobile-width: 480px;
+@mixin mobile {
+  @media (max-width: #{$mobile-width - 1px}) {
+    @content;
+  }
+}
 .wrapper {
   z-index: 10;
   position: fixed;
@@ -8,6 +14,9 @@
   margin-top: -76px;
   height: calc(100vh - 90px);
   background-color: var(--bg-side-bar);
+  @include mobile() {
+    display: none;
+  }
 }
 .logo {
   position: absolute;
